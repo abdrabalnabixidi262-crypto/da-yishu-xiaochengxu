@@ -25,7 +25,7 @@
   --shadow: 0 24px 60px rgba(22, 34, 29, 0.18);
   --soft-shadow: 0 12px 32px rgba(22, 34, 29, 0.1);
   --font-brand: "SF Pro Display", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei UI", system-ui, sans-serif;
-  --font-title: "Ma Shan Zheng Local", "ZCOOL KuaiLe Local", "YouYuan", "STHupo", "PingFang SC", "Microsoft YaHei UI", system-ui, sans-serif;
+  --font-title: "ZCOOL KuaiLe Local", "Ma Shan Zheng Local", "YouYuan", "STHupo", "PingFang SC", "Microsoft YaHei UI", system-ui, sans-serif;
 }
 
 * {
