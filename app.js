@@ -105,6 +105,174 @@ const villages = {
   },
 };
 
+const villageMapGuides = {
+  gaoqiao: {
+    eyebrow: "宠物友好村落导览",
+    title: "带它去村里路线",
+    route: "M9 70 C18 54 29 54 38 44 C47 34 51 20 65 24 C78 28 80 43 70 53 C61 62 55 72 66 80 C76 87 87 82 92 68",
+    terrain: "田野水网、猫岛、植物美学与良渚记忆被压进一张可遛、可停、可打卡的村内地图。",
+    photoLabel: "猫岛 / 知物堂 / 田野步道",
+    words: ["宠", "友", "田", "创"],
+    points: [
+      {
+        title: "猫岛人宠空间",
+        label: "人宠共享",
+        x: 18,
+        y: 62,
+        icon: "🐾",
+        action: "领取宠物友好贴纸",
+        text: "从老旧甲鱼塘转化而来的宠物友好场景，适合做路线起点和第一枚打卡章。",
+      },
+      {
+        title: "知物堂植物美学",
+        label: "植物工坊",
+        x: 38,
+        y: 43,
+        icon: "✿",
+        action: "生成植物纹样卡",
+        text: "把废弃厂房变成绿意流动的美学空间，观众可以采集叶形纹样。",
+      },
+      {
+        title: "青年市集口袋",
+        label: "乡创摊位",
+        x: 64,
+        y: 25,
+        icon: "✦",
+        action: "点亮青年摊位",
+        text: "展示高桥村青年创业、宠物周边和乡村生活方式的轻量市集。",
+      },
+      {
+        title: "田野慢行线",
+        label: "遛村步道",
+        x: 70,
+        y: 56,
+        icon: "↝",
+        action: "开启慢行计步",
+        text: "沿田埂和水线慢行，把城边生活与田野呼吸连接起来。",
+      },
+      {
+        title: "良渚记忆点",
+        label: "文化锚点",
+        x: 84,
+        y: 75,
+        icon: "◆",
+        action: "收集玉色碎片",
+        text: "用玉色、纹样和故事卡提示高桥与良渚文化的地域联系。",
+      },
+    ],
+  },
+  yaoli: {
+    eyebrow: "儿童友好艺术村导览",
+    title: "追云研学路线",
+    route: "M10 66 C19 44 31 47 37 31 C45 13 62 18 62 36 C62 48 74 42 84 50 C94 58 89 78 72 78 C56 78 49 67 36 75 C25 82 16 78 10 66",
+    terrain: "云朵书吧、等云坡、窑文化馆和艺术空间构成儿童视角的水乡探索地图。",
+    photoLabel: "云朵书吧 / 等云坡 / 窑文化馆",
+    words: ["云", "窑", "童", "艺"],
+    points: [
+      {
+        title: "云朵书吧",
+        label: "互动书屋",
+        x: 22,
+        y: 58,
+        icon: "☁",
+        action: "翻开云朵书页",
+        text: "点开后云朵字卡会飘起，像孩子在书屋里收集村庄关键词。",
+      },
+      {
+        title: "等云坡",
+        label: "草坡游乐",
+        x: 38,
+        y: 33,
+        icon: "⛰",
+        action: "滑下云坡",
+        text: "草地、秋千和攀爬坡组成户外成长空间，适合亲子研学任务。",
+      },
+      {
+        title: "窑文化馆",
+        label: "陶艺体验",
+        x: 61,
+        y: 41,
+        icon: "◒",
+        action: "烧制陶泥徽章",
+        text: "由旧空间微改造而来，陶艺制作、上色和烧制可以变成小游戏任务。",
+      },
+      {
+        title: "云朵栖息地",
+        label: "咖啡休憩",
+        x: 78,
+        y: 58,
+        icon: "☕",
+        action: "盖一枚云咖啡章",
+        text: "咖啡、白墙黛瓦和云朵 IP 形成更轻松的停留点。",
+      },
+      {
+        title: "云集艺术空间",
+        label: "共创展览",
+        x: 56,
+        y: 77,
+        icon: "✺",
+        action: "拼一块艺术墙",
+        text: "青年艺术家和孩子的创作可以变成可拖拽、可点亮的艺术碎片。",
+      },
+    ],
+  },
+  jinxing: {
+    eyebrow: "共富金星村落导览",
+    title: "金叶茶乡共富线",
+    route: "M11 75 C22 62 26 43 41 42 C55 41 56 22 70 24 C83 26 90 40 82 53 C75 64 86 69 82 82 C76 93 57 86 45 80 C31 73 22 86 11 75",
+    terrain: "古银杏、龙顶茶、民宿农家乐与共富工坊串成一条从生态资源到村民增收的故事线。",
+    photoLabel: "古银杏 / 龙顶茶 / 共富工坊",
+    words: ["金", "茶", "富", "兴"],
+    points: [
+      {
+        title: "银杏古树",
+        label: "金叶记忆",
+        x: 18,
+        y: 68,
+        icon: "🍂",
+        action: "摇落金叶字卡",
+        text: "一棵古树带出村庄年代感，也适合作为金色视觉纹样的核心来源。",
+      },
+      {
+        title: "龙顶茶园",
+        label: "茶乡体验",
+        x: 42,
+        y: 43,
+        icon: "茶",
+        action: "采一枚茶芽",
+        text: "把茶芽、茶篓和包装样机做成可收集的村庄礼物。",
+      },
+      {
+        title: "红色研学点",
+        label: "红课堂",
+        x: 69,
+        y: 26,
+        icon: "★",
+        action: "点亮红课堂",
+        text: "以党建和研学为入口，让共富故事有更清晰的叙事支点。",
+      },
+      {
+        title: "民宿农家乐",
+        label: "美丽经济",
+        x: 80,
+        y: 56,
+        icon: "⌂",
+        action: "预览一间民宿",
+        text: "游客停留、餐饮和民宿共同构成金星村的美丽经济动线。",
+      },
+      {
+        title: "共富工坊",
+        label: "两有金星",
+        x: 56,
+        y: 81,
+        icon: "✦",
+        action: "合成共富徽章",
+        text: "把“人人有事做，家家有收入”转化为可点击、可理解的互动节点。",
+      },
+    ],
+  },
+};
+
 const app = document.querySelector("#app");
 const dockItems = Array.from(document.querySelectorAll(".dock-item"));
 
@@ -419,18 +587,30 @@ function detailView() {
     ["map", "地图"],
     ["materials", "周边"],
   ];
+  const hero =
+    state.tab === "map"
+      ? `<section class="detail-map-head">
+          <button class="back" data-go="villages">‹</button>
+          <div>
+            <p class="eyebrow">${village.type}</p>
+            <h1>${village.name}地图</h1>
+            <p>${village.title} · ${village.subtitle}</p>
+          </div>
+          <span class="mini-pill">村落导览</span>
+        </section>`
+      : `<section class="detail-hero" style="background-image:url('${village.cover}')">
+          <div class="top-row">
+            <button class="back" data-go="villages">‹</button>
+            <span class="mini-pill">村志详情</span>
+          </div>
+          <div>
+            <p class="eyebrow">${village.type}</p>
+            <h1>${village.name}</h1>
+            <p>${village.title} · ${village.subtitle}</p>
+          </div>
+        </section>`;
   return shell(`
-    <section class="detail-hero" style="background-image:url('${village.cover}')">
-      <div class="top-row">
-        <button class="back" data-go="villages">‹</button>
-        <span class="mini-pill">村志详情</span>
-      </div>
-      <div>
-        <p class="eyebrow">${village.type}</p>
-        <h1>${village.name}</h1>
-        <p>${village.title} · ${village.subtitle}</p>
-      </div>
-    </section>
+    ${hero}
 
     <section class="segmented">
       ${tabs
@@ -496,82 +676,113 @@ function storyPanel(village) {
 }
 
 function mapPanel(village) {
-  const points = [
-    [18, 64, 11],
-    [48, 25, 22],
-    [73, 39, 33],
-    [58, 71, 44],
-    [26, 82, 55],
-  ];
+  const guide = villageMapGuides[village.id];
   const focusIndex = village.mapFocus ?? 0;
-  const activeIndex = village.nodes[state.selectedMapNode] ? state.selectedMapNode : focusIndex;
-  const activeNode = village.nodes[activeIndex] || village.nodes[0];
-  const realMap = window.realMapData;
+  const activeIndex = guide?.points?.[state.selectedMapNode] ? state.selectedMapNode : focusIndex;
+  const activePoint = guide?.points?.[activeIndex] || guide?.points?.[0];
+  const routeD = guide?.route || "M12 70 C28 45 45 43 58 30 C72 17 91 36 78 54 C69 68 83 77 65 84 C48 91 32 70 12 70";
   return `
     <section class="map-stage">
       <div class="map-stage-head">
         <div>
-          <p class="context-label">可视化立体地图</p>
-          <h2>真实地图发光模型</h2>
-          <p class="map-caption">基于浙江真实边界绘制，点击地图点位可直接切换村志。</p>
+          <p class="context-label">${guide?.eyebrow || "村落导览地图"}</p>
+          <h2>${guide?.title || `${village.name}导览路线`}</h2>
+          <p class="map-caption">${guide?.terrain || "点击地图上的游玩项目，查看对应故事与互动任务。"}</p>
         </div>
-        <span class="mini-pill">${village.name}</span>
+        <span class="mini-pill">${activeIndex + 1}/${guide?.points?.length || village.nodes.length}</span>
       </div>
-      <section class="geo-map-shell" style="--village:${village.color}">
-        <div class="geo-map-glow"></div>
-        <div class="geo-map-radar" aria-hidden="true"></div>
-        <div class="geo-map-orbit orbit-a" aria-hidden="true"></div>
-        <div class="geo-map-orbit orbit-b" aria-hidden="true"></div>
-        <div class="geo-map-board">
-          ${
-            realMap
-              ? `<svg class="real-map-svg" viewBox="${realMap.viewBox}" role="img" aria-label="浙江三村立体地图">
-                  <defs>
-                    <filter id="mapBlueGlow" x="-30%" y="-30%" width="160%" height="160%">
-                      <feDropShadow dx="0" dy="10" stdDeviation="5" flood-color="#0aa8ff" flood-opacity="0.72" />
-                      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#b7efff" flood-opacity="0.92" />
-                    </filter>
-                    <linearGradient id="regionFill" x1="0" x2="1" y1="0" y2="1">
-                      <stop offset="0%" stop-color="#1fc6ff" stop-opacity="0.82" />
-                      <stop offset="54%" stop-color="#0974b7" stop-opacity="0.7" />
-                      <stop offset="100%" stop-color="#042b55" stop-opacity="0.78" />
-                    </linearGradient>
-                    <linearGradient id="regionHot" x1="0" x2="1" y1="0" y2="1">
-                      <stop offset="0%" stop-color="#7df7ff" stop-opacity="0.95" />
-                      <stop offset="62%" stop-color="${village.color}" stop-opacity="0.9" />
-                      <stop offset="100%" stop-color="#0b315f" stop-opacity="0.86" />
-                    </linearGradient>
-                  </defs>
-                  <g class="real-map-extrude">${realMapFeatures(village.id)}</g>
-                  <g class="real-map-top">${realMapFeatures(village.id)}</g>
-                </svg>`
-              : `<div class="map-fallback">地图正在加载</div>`
-          }
-          <div class="geo-pin-layer">
-            ${realMapPins(village.id)}
+
+      <section class="village-map-shell" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
+        <div class="village-scan-top">
+          <span>${village.name}</span>
+          <strong>${activePoint?.label || village.subtitle}</strong>
+        </div>
+        <div class="art-map village-map" data-village-map="${village.id}">
+          <div class="terrain-grid"></div>
+          <div class="terrain-fog"></div>
+          <div class="scan-beam"></div>
+          <div class="map-ridge ridge-1"></div>
+          <div class="map-ridge ridge-2"></div>
+          <svg class="village-route-svg" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <filter id="routeGlow-${village.id}" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="0" stdDeviation="2.2" flood-color="#ffffff" flood-opacity="0.82" />
+                <feDropShadow dx="0" dy="8" stdDeviation="4" flood-color="${village.color}" flood-opacity="0.46" />
+              </filter>
+            </defs>
+            <path class="village-route-shadow" d="${routeD}"></path>
+            <path class="village-route-main" d="${routeD}" style="filter:url(#routeGlow-${village.id})"></path>
+          </svg>
+          ${guide.points
+            .map(
+              (point, index) => `
+                <button
+                  class="map-dot village-map-dot ${activeIndex === index ? "is-active" : ""}"
+                  data-map-node="${index}"
+                  data-map-play="${index}"
+                  style="left:${point.x}%; top:${point.y}%; background:linear-gradient(145deg, ${village.color}, #13231d); animation-delay:${index * 70}ms"
+                >
+                  <strong>${point.icon}</strong>
+                  <span>${point.title}</span>
+                </button>
+              `,
+            )
+            .join("")}
+          <div class="map-photo-panel">
+            <figure class="map-photo" style="background-image:url('${village.photos[activeIndex % village.photos.length]}')"></figure>
+            <span>${guide.photoLabel}</span>
+          </div>
+          <div class="map-overlay-card village-active-card">
+            <em>${activePoint?.label || "游玩项目"}</em>
+            <strong>${activePoint?.title || village.nodes[0][0]}</strong>
+            <span>${activePoint?.text || village.nodes[0][1]}</span>
           </div>
         </div>
-        <div class="geo-info-card">
-          <span class="geo-kicker">${village.type}</span>
-          <strong>${village.name} · ${village.location}</strong>
-          <span>${activeNode[1]}</span>
+
+        <div class="map-action-dock">
+          <button class="map-action-primary" data-map-play="${activeIndex}">
+            <span>开始互动</span>
+            <strong>${activePoint?.action || "点亮这个点位"}</strong>
+          </button>
+          <button class="map-action-secondary" data-map-node-go="materials">
+            <span>关联物料</span>
+            <strong>查看可带走设计</strong>
+          </button>
         </div>
       </section>
+
       <section class="node-strip">
-        ${points
+        ${guide.points
           .map(
-            (_, index) => `
+            (point, index) => `
               <button
                 class="map-node-pill ${activeIndex === index ? "is-active" : ""}"
                 data-map-node="${index}"
                 style="--pill:${village.color}; animation-delay:${index * 60}ms"
               >
-                <span>0${index + 1}</span>${village.nodes[index][0]}
+                <span>0${index + 1}</span>${point.title}
               </button>
             `,
           )
           .join("")}
       </section>
+
+      <section class="word-play-panel">
+        <div>
+          <p class="context-label">村字收集</p>
+          <h3>点击字卡，拼出${village.name}的记忆词</h3>
+        </div>
+        <div class="word-cloud" style="--village:${village.color}">
+          ${guide.words
+            .map(
+              (word, index) => `
+                <button class="word-chip" data-word-chip="${word}" style="animation-delay:${index * 110}ms">${word}</button>
+              `,
+            )
+            .join("")}
+        </div>
+      </section>
+
       <section class="map-actions">
         <button class="map-action-card" data-map-node-go="story">
           <strong>看这个点位的故事</strong>
@@ -898,6 +1109,27 @@ function attachHandlers() {
         tab: "map",
         selectedMapNode: Number(button.dataset.mapNode),
       });
+    });
+  });
+
+  app.querySelectorAll("[data-map-play]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.mapPlay);
+      const village = villages[state.village] || villages.yaoli;
+      const point = villageMapGuides[village.id]?.points?.[index];
+      state.selectedMapNode = Number.isFinite(index) ? index : state.selectedMapNode;
+      showToast(point?.action || "已点亮这个地图点位");
+      button.classList.add("just-played");
+      setTimeout(() => button.classList.remove("just-played"), 700);
+      vibrate(18);
+    });
+  });
+
+  app.querySelectorAll("[data-word-chip]").forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("is-collected");
+      showToast(`收集到「${button.dataset.wordChip}」字`);
+      vibrate(14);
     });
   });
 
