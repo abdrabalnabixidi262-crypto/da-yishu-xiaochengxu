@@ -321,6 +321,135 @@ const state = {
 
 const gameOrder = ["gaoqiao", "yaoli", "jinxing"];
 
+const nodePlayScenes = {
+  gaoqiao: [
+    {
+      type: "paw",
+      title: "友好足迹",
+      verb: "跟着足迹进村",
+      hint: "轻触开始，宠物脚印会沿着田野路线跑向第一个休憩点。",
+      button: "放出友好足迹",
+      steps: ["脚印出现", "穿过水线", "抵达猫岛"],
+    },
+    {
+      type: "leaf",
+      title: "植物纹样",
+      verb: "生成叶片卡",
+      hint: "叶片会在屏幕里展开，变成一张可以带走的植物纹样。",
+      button: "吹开叶片",
+      steps: ["采一片叶", "描出叶脉", "合成纹样"],
+    },
+    {
+      type: "market",
+      title: "青年摊位",
+      verb: "点亮市集灯",
+      hint: "灯串会依次亮起，像傍晚的乡创市集慢慢开场。",
+      button: "点亮摊位",
+      steps: ["支起小摊", "亮起灯串", "出现徽章"],
+    },
+    {
+      type: "walk",
+      title: "田野慢行",
+      verb: "开启慢行计步",
+      hint: "一条发光路线会从脚下延伸，记录田埂上的慢行节奏。",
+      button: "开始慢行",
+      steps: ["迈出第一步", "经过田埂", "收集风声"],
+    },
+    {
+      type: "jade",
+      title: "良渚碎片",
+      verb: "拼合玉色纹样",
+      hint: "玉色碎片会旋转合拢，形成高桥的文化记忆章。",
+      button: "拼合碎片",
+      steps: ["找到碎片", "旋转对位", "点亮玉色"],
+    },
+  ],
+  yaoli: [
+    {
+      type: "book",
+      title: "云朵书页",
+      verb: "翻开云朵书页",
+      hint: "书页翻动时，村里的关键词会像云一样从书屋里飘出来。",
+      button: "翻开书页",
+      steps: ["打开书屋", "云字浮起", "收进护照"],
+    },
+    {
+      type: "slope",
+      title: "等云坡滑行",
+      verb: "滑下云坡",
+      hint: "小小的云朵滑板会沿着草坡下滑，经过光点后冲到终点。",
+      button: "开始滑坡",
+      steps: ["站上云坡", "顺坡滑下", "冲过云门"],
+    },
+    {
+      type: "clay",
+      title: "陶泥徽章",
+      verb: "烧制陶泥徽章",
+      hint: "陶泥会被压印、旋转、上色，最后烧成一枚窑里徽章。",
+      button: "开始烧制",
+      steps: ["揉开陶泥", "压下印章", "窑火上色"],
+    },
+    {
+      type: "coffee",
+      title: "云咖啡章",
+      verb: "盖一枚云咖啡章",
+      hint: "杯口升起云朵热气，最后落成一枚柔软的咖啡章。",
+      button: "盖下咖啡章",
+      steps: ["热气升起", "云朵成形", "盖章完成"],
+    },
+    {
+      type: "mosaic",
+      title: "艺术碎片墙",
+      verb: "拼一块艺术墙",
+      hint: "散落的色块会聚拢成一面共创墙，点亮孩子的作品。",
+      button: "拼合色块",
+      steps: ["拾起色块", "贴上墙面", "展墙发光"],
+    },
+  ],
+  jinxing: [
+    {
+      type: "ginkgo",
+      title: "金叶字卡",
+      verb: "摇落金叶字卡",
+      hint: "银杏叶会从树冠落下，收集成金星村的金色记忆。",
+      button: "摇落金叶",
+      steps: ["叶片落下", "金光聚拢", "字卡出现"],
+    },
+    {
+      type: "tea",
+      title: "龙顶茶芽",
+      verb: "采一枚茶芽",
+      hint: "茶芽从山线里冒出，被轻轻采下后装进茶乡礼盒。",
+      button: "采下茶芽",
+      steps: ["山线苏醒", "茶芽生长", "装入礼盒"],
+    },
+    {
+      type: "star",
+      title: "红课堂星火",
+      verb: "点亮红课堂",
+      hint: "星火从讲台亮起，沿着研学路线传到下一站。",
+      button: "点亮星火",
+      steps: ["星火点燃", "路线发光", "课堂开启"],
+    },
+    {
+      type: "home",
+      title: "民宿灯窗",
+      verb: "预览一间民宿",
+      hint: "小屋的窗灯会一格格亮起，展示游客停留的夜晚。",
+      button: "亮起窗灯",
+      steps: ["推开院门", "窗灯亮起", "夜色停留"],
+    },
+    {
+      type: "workshop",
+      title: "共富徽章",
+      verb: "合成共富徽章",
+      hint: "工坊里的齿轮、茶叶和金色叶片会合成一枚共富徽章。",
+      button: "合成徽章",
+      steps: ["工坊运转", "产业合流", "徽章完成"],
+    },
+  ],
+};
+
 function vibrate(ms = 12) {
   try {
     navigator.vibrate?.(ms);
@@ -342,13 +471,13 @@ function readRoute() {
     const node = selectedNode ?? fallbackNode;
     return { route: "detail", village, tab: tab || "map", selectedMapNode: node, selectedStoryNode: node };
   }
-  if (route && ["home", "villages", "game", "scan", "exhibit"].includes(route)) {
+  if (route && ["home", "villages", "game", "play", "scan", "exhibit"].includes(route)) {
     const nextVillage = village && villages[village] ? village : state.village;
     return {
       route,
       village: nextVillage,
       tab: tab || state.tab,
-      gameVillage: route === "game" ? nextVillage : state.gameVillage,
+      gameVillage: route === "game" || route === "play" ? nextVillage : state.gameVillage,
       gameActiveNode: selectedNode ?? state.gameActiveNode,
     };
   }
@@ -368,7 +497,7 @@ function syncUrl() {
       url.searchParams.set("village", state.village);
       url.searchParams.set("tab", state.tab || "map");
       url.searchParams.set("node", String(state.tab === "story" ? state.selectedStoryNode : state.selectedMapNode));
-    } else if (state.route === "game" && state.gameVillage && villages[state.gameVillage]) {
+    } else if ((state.route === "game" || state.route === "play") && state.gameVillage && villages[state.gameVillage]) {
       url.searchParams.set("village", state.gameVillage);
       url.searchParams.delete("tab");
       url.searchParams.set("node", String(state.gameActiveNode || 0));
@@ -398,6 +527,13 @@ function setRoute(route, extras = {}) {
       typeof extras.selectedStoryNode === "number" ? extras.selectedStoryNode : state.selectedMapNode;
   }
   if (route === "game") {
+    state.gameVillage = extras.gameVillage || extras.village || state.gameVillage || state.village || "yaoli";
+    state.village = state.gameVillage;
+    if (typeof extras.selectedMapNode === "number" && typeof extras.gameActiveNode !== "number") {
+      state.gameActiveNode = extras.selectedMapNode;
+    }
+  }
+  if (route === "play") {
     state.gameVillage = extras.gameVillage || extras.village || state.gameVillage || state.village || "yaoli";
     state.village = state.gameVillage;
     if (typeof extras.selectedMapNode === "number" && typeof extras.gameActiveNode !== "number") {
@@ -1009,6 +1145,158 @@ function gameView() {
   `);
 }
 
+function nodePlayView() {
+  const village = villages[state.gameVillage] || villages.yaoli;
+  const guide = villageMapGuides[village.id];
+  const activeIndex = guide.points[state.gameActiveNode] ? state.gameActiveNode : village.mapFocus ?? 0;
+  const point = guide.points[activeIndex] || guide.points[0];
+  const scene = nodePlayScenes[village.id]?.[activeIndex] || nodePlayScenes.yaoli[1];
+  const collection = getGameCollection(village.id);
+  const done = collection.has(activeIndex);
+  return shell(`
+    <section class="play-head" style="--village:${village.color}">
+      <button class="back" data-play-back>‹</button>
+      <div>
+        <p>${point.label}</p>
+        <h1>${scene.title}</h1>
+        <span>${village.name} · ${point.title}</span>
+      </div>
+      <button class="play-map-jump" data-game-open-map>地图</button>
+    </section>
+
+    <section class="node-play-card play-${scene.type}" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
+      <div class="play-scene">
+        ${playSceneMarkup(scene, point, village)}
+      </div>
+      <div class="play-copy">
+        <span>${scene.verb}</span>
+        <h2>${scene.hint}</h2>
+      </div>
+      <div class="play-steps">
+        ${scene.steps
+          .map(
+            (step, index) => `
+              <span style="animation-delay:${index * 160}ms">
+                <em>${index + 1}</em>${step}
+              </span>
+            `,
+          )
+          .join("")}
+      </div>
+      <button class="play-primary ${done ? "is-done" : ""}" data-play-complete="${activeIndex}">
+        <span>${done ? "已完成" : scene.button}</span>
+        <strong>${done ? "再看一遍动画" : "完成后收进任务地图"}</strong>
+      </button>
+    </section>
+
+    <section class="play-node-switch">
+      ${guide.points
+        .map(
+          (nextPoint, index) => `
+            <button class="${activeIndex === index ? "is-active" : ""}" data-play-node="${index}" style="--village:${village.color}">
+              <span>${nextPoint.icon}</span>
+              <strong>${nodePlayScenes[village.id]?.[index]?.verb || nextPoint.action}</strong>
+            </button>
+          `,
+        )
+        .join("")}
+    </section>
+  `);
+}
+
+function playSceneMarkup(scene, point, village) {
+  const common = `
+    <span class="scene-glow"></span>
+    <span class="scene-label">${point.icon}</span>
+  `;
+  const variants = {
+    slope: `
+      ${common}
+      <div class="slope-hill"></div>
+      <div class="slope-cloud">☁</div>
+      <div class="slope-rider">✦</div>
+      <div class="slope-gate">云门</div>
+      <span class="trail-dot d1"></span><span class="trail-dot d2"></span><span class="trail-dot d3"></span>
+    `,
+    clay: `
+      ${common}
+      <div class="clay-wheel"></div>
+      <div class="clay-disc">窑</div>
+      <div class="clay-stamp">印</div>
+      <div class="kiln-fire"><span></span><span></span><span></span></div>
+    `,
+    book: `
+      ${common}
+      <div class="magic-book"><span></span><span></span></div>
+      <span class="floating-word w1">云</span><span class="floating-word w2">童</span><span class="floating-word w3">艺</span>
+    `,
+    coffee: `
+      ${common}
+      <div class="coffee-cup"></div>
+      <span class="steam st1">☁</span><span class="steam st2">☁</span><span class="stamp-ring">章</span>
+    `,
+    mosaic: `
+      ${common}
+      <div class="mosaic-wall">${["", "", "", "", "", "", "", "", ""].map((_, i) => `<i style="--i:${i}"></i>`).join("")}</div>
+    `,
+    paw: `
+      ${common}
+      <div class="paw-path">${["🐾", "🐾", "🐾", "🐾"].map((paw, i) => `<i style="--i:${i}">${paw}</i>`).join("")}</div>
+      <div class="rest-island">猫岛</div>
+    `,
+    leaf: `
+      ${common}
+      <div class="leaf-card"><i></i><i></i><i></i></div>
+      <span class="leaf-float l1">叶</span><span class="leaf-float l2">纹</span>
+    `,
+    market: `
+      ${common}
+      <div class="market-stand"><i></i><i></i><i></i></div>
+      <div class="light-string">${["", "", "", "", ""].map((_, i) => `<span style="--i:${i}"></span>`).join("")}</div>
+    `,
+    walk: `
+      ${common}
+      <div class="walk-route"></div>
+      <div class="walker">走</div>
+      <span class="wind-line wl1"></span><span class="wind-line wl2"></span>
+    `,
+    jade: `
+      ${common}
+      <div class="jade-pieces">${["◆", "◇", "◆", "◇"].map((piece, i) => `<span style="--i:${i}">${piece}</span>`).join("")}</div>
+      <div class="jade-core">玉</div>
+    `,
+    ginkgo: `
+      ${common}
+      <div class="ginkgo-tree"></div>
+      ${["金", "叶", "兴", "富"].map((leaf, i) => `<span class="ginkgo-leaf" style="--i:${i}">${leaf}</span>`).join("")}
+    `,
+    tea: `
+      ${common}
+      <div class="tea-mountain"></div>
+      <div class="tea-sprout">茶</div>
+      <div class="tea-box">龙顶</div>
+    `,
+    star: `
+      ${common}
+      <div class="star-classroom"></div>
+      <span class="star-burst">★</span>
+      <span class="star-path p1"></span><span class="star-path p2"></span>
+    `,
+    home: `
+      ${common}
+      <div class="homestay-house">${["", "", "", ""].map((_, i) => `<i style="--i:${i}"></i>`).join("")}</div>
+      <span class="moon-dot">月</span>
+    `,
+    workshop: `
+      ${common}
+      <div class="workshop-gear">⚙</div>
+      <div class="workshop-badge">富</div>
+      <span class="workshop-part a">茶</span><span class="workshop-part b">叶</span><span class="workshop-part c">工</span>
+    `,
+  };
+  return variants[scene.type] || variants.slope;
+}
+
 function scanView() {
   return shell(`
     <section class="scan-panel">
@@ -1114,6 +1402,7 @@ function render() {
     villages: villagesView,
     detail: detailView,
     game: gameView,
+    play: nodePlayView,
     scan: scanView,
     exhibit: exhibitView,
   };
@@ -1296,7 +1585,7 @@ function attachHandlers() {
   app.querySelectorAll("[data-story-open-game]").forEach((button) => {
     button.addEventListener("click", () => {
       const index = Number(button.dataset.storyOpenGame);
-      setRoute("game", {
+      setRoute("play", {
         village: state.village,
         gameVillage: state.village,
         gameActiveNode: index,
@@ -1320,7 +1609,7 @@ function attachHandlers() {
     button.addEventListener("click", () => {
       const index = Number(button.dataset.mapPlay);
       const nextIndex = Number.isFinite(index) ? index : state.selectedMapNode;
-      setRoute("game", {
+      setRoute("play", {
         village: state.village,
         gameVillage: state.village,
         gameActiveNode: nextIndex,
@@ -1393,17 +1682,61 @@ function attachHandlers() {
   app.querySelectorAll("[data-game-collect]").forEach((button) => {
     button.addEventListener("click", () => {
       const village = villages[state.gameVillage] || villages.yaoli;
-      const guide = villageMapGuides[village.id];
       const index = Number(button.dataset.gameCollect);
+      setRoute("play", {
+        village: village.id,
+        gameVillage: village.id,
+        gameActiveNode: index,
+        selectedMapNode: index,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-play-node]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.playNode);
+      setRoute("play", {
+        village: state.gameVillage || state.village,
+        gameVillage: state.gameVillage || state.village,
+        gameActiveNode: index,
+        selectedMapNode: index,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-play-complete]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const village = villages[state.gameVillage] || villages.yaoli;
+      const guide = villageMapGuides[village.id];
+      const index = Number(button.dataset.playComplete);
       const collection = getGameCollection(village.id);
       collection.add(index);
       if (collection.size >= guide.points.length) {
         state.discovered.add(village.id);
         state.score = state.discovered.size;
       }
-      showToast(`${guide.points[index]?.action || "节点"}完成`);
-      render();
+      showToast(`${nodePlayScenes[village.id]?.[index]?.verb || guide.points[index]?.action || "节点"}完成`);
+      button.classList.add("just-completed");
+      setTimeout(() => {
+        setRoute("game", {
+          village: village.id,
+          gameVillage: village.id,
+          gameActiveNode: index,
+          selectedMapNode: index,
+        });
+      }, 520);
       vibrate(18);
+    });
+  });
+
+  app.querySelectorAll("[data-play-back]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setRoute("game", {
+        village: state.gameVillage || state.village,
+        gameVillage: state.gameVillage || state.village,
+        gameActiveNode: state.gameActiveNode,
+        selectedMapNode: state.gameActiveNode,
+      });
     });
   });
 
