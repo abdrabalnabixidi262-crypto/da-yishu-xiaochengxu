@@ -1303,62 +1303,9 @@ function nodePlayView() {
   const activeIndex = guide.points[state.gameActiveNode] ? state.gameActiveNode : village.mapFocus ?? 0;
   const point = guide.points[activeIndex] || guide.points[0];
   const scene = nodePlayScenes[village.id]?.[activeIndex] || nodePlayScenes.yaoli[1];
-  const collection = getGameCollection(village.id);
-  const done = collection.has(activeIndex);
-  const stepCount = scene.steps.length;
-  const progress = state.playSteps.size;
-  const canComplete = done || progress >= stepCount;
   return shell(`
-    <section class="play-head" style="--village:${village.color}">
-      <button class="back" data-play-back>‹</button>
-      <div>
-        <p>${point.label}</p>
-        <h1>${scene.title}</h1>
-        <span>${village.name} · ${point.title}</span>
-      </div>
-      <button class="play-map-jump" data-game-open-map>地图</button>
-    </section>
-
-    <section class="node-play-card play-${scene.type} play-progress-${progress}" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
-      <div class="play-scene">
-        ${playSceneMarkup(scene, point, village)}
-        <div class="interaction-hint">
-          <span>${progress}/${stepCount}</span>
-          <strong>${canComplete ? "可以完成任务" : "按顺序点亮下方步骤"}</strong>
-        </div>
-      </div>
-      <div class="play-copy">
-        <span>${scene.verb}</span>
-        <h2>${scene.hint}</h2>
-      </div>
-      <div class="play-steps">
-        ${scene.steps
-          .map(
-            (step, index) => `
-              <button class="${state.playSteps.has(index) ? "is-done" : ""}" data-play-step="${index}" style="animation-delay:${index * 160}ms">
-                <em>${index + 1}</em>${step}
-              </button>
-            `,
-          )
-          .join("")}
-      </div>
-      <button class="play-primary ${done ? "is-done" : ""} ${canComplete ? "can-complete" : ""}" data-play-complete="${activeIndex}">
-        <span>${done ? "已完成" : canComplete ? scene.button : "先完成互动步骤"}</span>
-        <strong>${done ? "再玩一次也可以" : canComplete ? "完成后收进任务地图" : `还差 ${stepCount - progress} 步`}</strong>
-      </button>
-    </section>
-
-    <section class="play-node-switch">
-      ${guide.points
-        .map(
-          (nextPoint, index) => `
-            <button class="${activeIndex === index ? "is-active" : ""}" data-play-node="${index}" style="--village:${village.color}">
-              <span>${nextPoint.icon}</span>
-              <strong>${nodePlayScenes[village.id]?.[index]?.verb || nextPoint.action}</strong>
-            </button>
-          `,
-        )
-        .join("")}
+    <section class="play-3d-page" data-play-3d-page data-play-village="${village.id}" data-node="${activeIndex}" data-scene="${scene.type}" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
+      <div class="play-3d-root" data-play-3d-root></div>
     </section>
   `);
 }
@@ -1562,6 +1509,7 @@ function exhibitView() {
 
 function render() {
   syncDock();
+  app.classList.toggle("is-play", state.route === "play");
   const views = {
     home: homeView,
     villages: villagesView,
@@ -1575,6 +1523,11 @@ function render() {
   };
   app.innerHTML = views[state.route]() ;
   attachHandlers();
+  if (state.route === "play") {
+    window.play3d?.mount?.();
+  } else {
+    window.play3d?.dispose?.();
+  }
 }
 
 function attachTapEffects() {
@@ -2054,6 +2007,16 @@ dockItems.forEach((button) => {
 
 const initial = readRoute();
 Object.assign(state, initial);
+
+Object.assign(window, {
+  villages,
+  villageMapGuides,
+  nodePlayScenes,
+  state,
+  setRoute,
+  showToast,
+  getGameCollection,
+});
 
 if (window.location.hash === "#all") {
   state.discovered = new Set(gameOrder);
