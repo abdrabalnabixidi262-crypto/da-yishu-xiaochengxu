@@ -69,38 +69,38 @@ const villages = {
       ["./assets/real/yaoli-wall.jpg", "水漾窑里书签", "把水乡气质做成柔和、轻巧的可带走物。", "square"],
     ],
   },
-  qingshan: {
-    id: "qingshan",
-    name: "青山村",
-    title: "一滴水长出的艺术村",
-    subtitle: "生态共生地图",
-    type: "生态艺术乡建村 / 自然教育",
-    location: "杭州市 · 余杭区",
-    regionKey: "杭州市",
-    cover: "./assets/premium-qingshan.png",
+  jinxing: {
+    id: "jinxing",
+    name: "金星村",
+    title: "人人有事做，家家有收入",
+    subtitle: "共富金星地图",
+    type: "千万工程典型案例 / 共同富裕样板村",
+    location: "衢州市 · 开化县",
+    regionKey: "衢州市",
+    cover: "./assets/premium-jinxing.png",
     photos: [
-      "./assets/real/qingshan-panorama.jpg",
-      "./assets/real/qingshan-house.jpg",
-      "./assets/premium-qingshan.png",
+      "./assets/real/jinxing-panorama.jpg",
+      "./assets/real/jinxing-village.jpg",
+      "./assets/premium-jinxing.png",
     ],
-    mapFocus: 3,
-    color: "#4d9f9b",
-    map: { a: "#d8eeeb", b: "#bbded9" },
-    tags: ["水源", "竹艺", "低碳生活"],
+    mapFocus: 4,
+    color: "#d7a849",
+    map: { a: "#f7e6ae", b: "#b9d989" },
+    tags: ["共富工坊", "龙顶茶", "银杏古树"],
     story:
-      "青山村的乡村振兴不是从流量开始，而是从一滴水、一片竹林、一堂自然课开始。小程序将水源保护、竹艺手作、自然教育和艺术乡建转化为可识别、可参与的生态视觉系统。",
+      "金星村把钱江源生态、银杏古树、龙顶茶、红色研学与共富工坊串联成一张可走、可听、可收集的共富地图。观众不只是在看乡村风景，也能看见村民增收、产业协作和山区村庄现代化的真实路径。",
     nodes: [
-      ["水源地", "展示生态保护作为村庄价值的起点。"],
-      ["竹林", "连接竹艺、材料与自然教育。"],
-      ["自然学校", "承接观众参与和低碳知识入口。"],
-      ["设计图书馆", "让艺术乡建有更具体的文化场景。"],
-      ["低碳生活点", "对应环保袋、提示牌和行动贴纸。"],
+      ["银杏古树", "以金色叶脉作为村庄记忆和视觉纹样的起点。"],
+      ["龙顶茶园", "连接茶产业、包装样机和乡村增收故事。"],
+      ["红色研学点", "承接红课堂学习卡与现场研学路线。"],
+      ["金星供销社", "展示农产品、故事卡和可带走的村庄礼物。"],
+      ["共富工坊", "把人人参与、家家增收转化成可扫码理解的共富节点。"],
     ],
     materials: [
-      ["./assets/real/qingshan-panorama.jpg", "自然观察卡", "记录水源、竹林与动植物观察。", "wide"],
-      ["./assets/real/qingshan-house.jpg", "水源守护书签", "把生态价值做成轻物料，适合现场领取。", "square"],
-      ["./assets/premium-qingshan.png", "竹编纹样杯垫", "从竹艺与材料纹理里提取图形语言。", "square"],
-      ["./assets/real/qingshan-panorama.jpg", "环保袋样机", "对应低碳生活点和展区陈列。", "tall"],
+      ["./assets/real/jinxing-panorama.jpg", "金星龙顶茶包装", "把茶园、茶芽和共富叙事做成可陈列的包装样机。", "wide"],
+      ["./assets/real/jinxing-village.jpg", "银杏故事书签", "用金色叶片记录村庄年代感和乡土记忆。", "square"],
+      ["./assets/premium-jinxing.png", "红课堂学习卡", "对应红色研学点，适合展板旁扫码领取。", "square"],
+      ["./assets/real/jinxing-panorama.jpg", "共富工坊徽章", "把村民协作、产业增收和共同富裕做成轻量识别。", "tall"],
     ],
   },
 };
@@ -124,11 +124,11 @@ const posterItems = [
     glyph: "☁",
   },
   {
-    id: "qingshan",
-    name: "青山村",
-    line: "生态共生地图 / 一滴水长出的艺术村",
-    accent: "Water Memory",
-    glyph: "◆",
+    id: "jinxing",
+    name: "金星村",
+    line: "共富金星地图 / 人人有事做，家家有收入",
+    accent: "Golden Co-op",
+    glyph: "✺",
   },
 ];
 
@@ -143,7 +143,7 @@ const state = {
   toastTimer: null,
 };
 
-const gameOrder = ["gaoqiao", "yaoli", "qingshan"];
+const gameOrder = ["gaoqiao", "yaoli", "jinxing"];
 
 function vibrate(ms = 12) {
   try {
@@ -343,7 +343,7 @@ function homeView() {
     <section class="section-head">
       <div>
         <h2>三村样本</h2>
-        <p>高桥的友好、窑里的云、水源里的青山，在一条旅线里展开。</p>
+        <p>高桥的友好、窑里的云、金星的共富故事，在一条旅线里展开。</p>
       </div>
       <span class="mini-pill">${state.discovered.size}/3 已收集</span>
     </section>
@@ -643,7 +643,7 @@ function gameView() {
         <div class="progress-track"><div class="progress-fill" style="--progress:${state.score / 3 * 100}%"></div></div>
         <div class="score-num">${state.score} / 3</div>
       </div>
-      <p class="game-hint">轻触发光碎片，高桥、窑里、青山会依次被点亮。</p>
+      <p class="game-hint">轻触发光碎片，高桥、窑里、金星会依次被点亮。</p>
       <div class="game-stage">
         <span class="game-spark s1">✦</span>
         <span class="game-spark s2">◇</span>
@@ -739,7 +739,7 @@ function exhibitView() {
 
     <section class="exhibit-steps">
       ${[
-        ["三张展板", "高桥、窑里、青山轮流出现，形成连续视觉冲击。"],
+        ["三张展板", "高桥、窑里、金星轮流出现，形成连续视觉冲击。"],
         ["桌面样本", "卡片、贴纸、路线卡、周边和二维码集中陈列。"],
         ["循环视频", "画面可以离线播放，适合展厅角落持续运行。"],
         ["互动白板", "观众可以把自己最想带走的乡村体验贴出来。"],
