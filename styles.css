@@ -3017,6 +3017,180 @@ p {
   animation: completePop 1.4s ease-in-out infinite;
 }
 
+.village-scene-context {
+  left: 16px;
+  top: 16px;
+  z-index: 7;
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  color: #fff;
+  background: rgba(15, 26, 22, 0.58);
+  backdrop-filter: blur(18px);
+}
+
+.village-scene-context strong {
+  font-family: var(--font-title);
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.village-scene-context span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.stage-layers {
+  left: 16px;
+  right: 16px;
+  bottom: 86px;
+  z-index: 8;
+  display: grid;
+  gap: 8px;
+}
+
+.stage-layer {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 9px 12px 9px 34px;
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.62);
+  background: rgba(15, 26, 22, 0.34);
+  backdrop-filter: blur(16px);
+  font-size: 11px;
+  font-weight: 900;
+  transform: translateX(-6px);
+  opacity: 0.58;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    background 220ms ease,
+    color 220ms ease;
+}
+
+.stage-layer::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.44);
+  transform: translateY(-50%);
+}
+
+.play-progress-1 .layer-1,
+.play-progress-2 .layer-1,
+.play-progress-2 .layer-2,
+.play-progress-3 .layer-1,
+.play-progress-3 .layer-2,
+.play-progress-3 .layer-3 {
+  opacity: 1;
+  color: #fff;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--village) 66%, rgba(15, 26, 22, 0.8)), rgba(15, 26, 22, 0.78));
+  transform: translateX(0);
+}
+
+.play-progress-1 .layer-1::before,
+.play-progress-2 .layer-1::before,
+.play-progress-2 .layer-2::before,
+.play-progress-3 .layer-1::before,
+.play-progress-3 .layer-2::before,
+.play-progress-3 .layer-3::before {
+  background: #fff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.7);
+}
+
+.play-progress-1 .slope-hill,
+.play-progress-1 .magic-book,
+.play-progress-1 .clay-wheel,
+.play-progress-1 .coffee-cup,
+.play-progress-1 .paw-path,
+.play-progress-1 .leaf-card,
+.play-progress-1 .market-stand,
+.play-progress-1 .walk-route,
+.play-progress-1 .jade-pieces,
+.play-progress-1 .ginkgo-tree,
+.play-progress-1 .tea-mountain,
+.play-progress-1 .star-classroom,
+.play-progress-1 .homestay-house,
+.play-progress-1 .workshop-gear {
+  filter: saturate(1.15) brightness(1.05);
+}
+
+.play-progress-2 .slope-rider,
+.play-progress-2 .floating-word,
+.play-progress-2 .clay-stamp,
+.play-progress-2 .steam,
+.play-progress-2 .mosaic-wall i,
+.play-progress-2 .paw-path i,
+.play-progress-2 .leaf-float,
+.play-progress-2 .light-string span,
+.play-progress-2 .walker,
+.play-progress-2 .jade-core,
+.play-progress-2 .ginkgo-leaf,
+.play-progress-2 .tea-sprout,
+.play-progress-2 .star-burst,
+.play-progress-2 .homestay-house i,
+.play-progress-2 .workshop-part {
+  filter: saturate(1.25) brightness(1.12);
+}
+
+.play-progress-3 .slope-gate,
+.play-progress-3 .stamp-ring,
+.play-progress-3 .kiln-fire,
+.play-progress-3 .tea-box,
+.play-progress-3 .workshop-badge,
+.play-progress-3 .rest-island {
+  animation: completePop 1.6s ease-in-out infinite;
+}
+
+.play-progress-0 .slope-rider,
+.play-progress-0 .floating-word,
+.play-progress-0 .clay-stamp,
+.play-progress-0 .steam,
+.play-progress-0 .mosaic-wall i,
+.play-progress-0 .paw-path i,
+.play-progress-0 .leaf-float,
+.play-progress-0 .light-string span,
+.play-progress-0 .walker,
+.play-progress-0 .jade-core,
+.play-progress-0 .ginkgo-leaf,
+.play-progress-0 .tea-sprout,
+.play-progress-0 .star-burst,
+.play-progress-0 .homestay-house i,
+.play-progress-0 .workshop-part,
+.play-progress-0 .slope-gate,
+.play-progress-0 .stamp-ring,
+.play-progress-0 .tea-box,
+.play-progress-0 .workshop-badge,
+.play-progress-0 .rest-island {
+  opacity: 0.26;
+  animation-play-state: paused;
+}
+
+.play-progress-1 .slope-rider,
+.play-progress-1 .floating-word,
+.play-progress-1 .clay-stamp,
+.play-progress-1 .steam,
+.play-progress-1 .mosaic-wall i,
+.play-progress-1 .paw-path i,
+.play-progress-1 .leaf-float,
+.play-progress-1 .light-string span,
+.play-progress-1 .walker,
+.play-progress-1 .jade-core,
+.play-progress-1 .ginkgo-leaf,
+.play-progress-1 .tea-sprout,
+.play-progress-1 .star-burst,
+.play-progress-1 .homestay-house i,
+.play-progress-1 .workshop-part {
+  opacity: 0.52;
+}
+
 .play-copy {
   padding: 2px 4px 0;
 }

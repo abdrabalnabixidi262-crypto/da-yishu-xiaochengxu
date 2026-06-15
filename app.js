@@ -362,6 +362,7 @@ const nodePlayScenes = {
       hint: "轻触开始，宠物脚印会沿着田野路线跑向第一个休憩点。",
       button: "放出友好足迹",
       steps: ["脚印出现", "穿过水线", "抵达猫岛"],
+      layers: ["高桥宠物友好入口", "田野水线亮起", "猫岛休憩点解锁"],
     },
     {
       type: "leaf",
@@ -370,6 +371,7 @@ const nodePlayScenes = {
       hint: "叶片会在屏幕里展开，变成一张可以带走的植物纹样。",
       button: "吹开叶片",
       steps: ["采一片叶", "描出叶脉", "合成纹样"],
+      layers: ["知物堂叶片采集", "叶脉纹样描摹", "植物美学卡完成"],
     },
     {
       type: "market",
@@ -378,6 +380,7 @@ const nodePlayScenes = {
       hint: "灯串会依次亮起，像傍晚的乡创市集慢慢开场。",
       button: "点亮摊位",
       steps: ["支起小摊", "亮起灯串", "出现徽章"],
+      layers: ["青年市集摊位展开", "高桥夜灯亮起", "乡创徽章出现"],
     },
     {
       type: "walk",
@@ -386,6 +389,7 @@ const nodePlayScenes = {
       hint: "一条发光路线会从脚下延伸，记录田埂上的慢行节奏。",
       button: "开始慢行",
       steps: ["迈出第一步", "经过田埂", "收集风声"],
+      layers: ["田野入口定位", "慢行路线延伸", "风声步数收集"],
     },
     {
       type: "jade",
@@ -394,6 +398,7 @@ const nodePlayScenes = {
       hint: "玉色碎片会旋转合拢，形成高桥的文化记忆章。",
       button: "拼合碎片",
       steps: ["找到碎片", "旋转对位", "点亮玉色"],
+      layers: ["良渚记忆碎片", "玉色纹样对位", "文化锚点点亮"],
     },
   ],
   yaoli: [
@@ -404,6 +409,7 @@ const nodePlayScenes = {
       hint: "书页翻动时，村里的关键词会像云一样从书屋里飘出来。",
       button: "翻开书页",
       steps: ["打开书屋", "云字浮起", "收进护照"],
+      layers: ["云朵书吧门牌出现", "云 / 童 / 艺 字卡飘出", "窑里研学护照盖章"],
     },
     {
       type: "slope",
@@ -412,6 +418,7 @@ const nodePlayScenes = {
       hint: "小小的云朵滑板会沿着草坡下滑，经过光点后冲到终点。",
       button: "开始滑坡",
       steps: ["站上云坡", "顺坡滑下", "冲过云门"],
+      layers: ["等云坡坡顶准备", "草坡滑行轨迹亮起", "云门终点打卡"],
     },
     {
       type: "clay",
@@ -420,6 +427,7 @@ const nodePlayScenes = {
       hint: "陶泥会被压印、旋转、上色，最后烧成一枚窑里徽章。",
       button: "开始烧制",
       steps: ["揉开陶泥", "压下印章", "窑火上色"],
+      layers: ["窑文化馆陶泥坯", "窑里云纹印章压下", "陶艺徽章烧成"],
     },
     {
       type: "coffee",
@@ -428,6 +436,7 @@ const nodePlayScenes = {
       hint: "杯口升起云朵热气，最后落成一枚柔软的咖啡章。",
       button: "盖下咖啡章",
       steps: ["热气升起", "云朵成形", "盖章完成"],
+      layers: ["云朵栖息地咖啡杯", "白墙水乡热气成云", "云咖啡章落下"],
     },
     {
       type: "mosaic",
@@ -436,6 +445,7 @@ const nodePlayScenes = {
       hint: "散落的色块会聚拢成一面共创墙，点亮孩子的作品。",
       button: "拼合色块",
       steps: ["拾起色块", "贴上墙面", "展墙发光"],
+      layers: ["云集艺术空间色块", "儿童共创墙拼贴", "艺术展墙点亮"],
     },
   ],
   jinxing: [
@@ -446,6 +456,7 @@ const nodePlayScenes = {
       hint: "银杏叶会从树冠落下，收集成金星村的金色记忆。",
       button: "摇落金叶",
       steps: ["叶片落下", "金光聚拢", "字卡出现"],
+      layers: ["金星银杏古树", "金叶光点聚拢", "金叶记忆字卡"],
     },
     {
       type: "tea",
@@ -454,6 +465,7 @@ const nodePlayScenes = {
       hint: "茶芽从山线里冒出，被轻轻采下后装进茶乡礼盒。",
       button: "采下茶芽",
       steps: ["山线苏醒", "茶芽生长", "装入礼盒"],
+      layers: ["龙顶茶园山线苏醒", "茶芽从垄间冒出", "龙顶茶礼盒装入"],
     },
     {
       type: "star",
@@ -462,6 +474,7 @@ const nodePlayScenes = {
       hint: "星火从讲台亮起，沿着研学路线传到下一站。",
       button: "点亮星火",
       steps: ["星火点燃", "路线发光", "课堂开启"],
+      layers: ["红色研学点讲台", "星火沿路线传递", "红课堂学习卡开启"],
     },
     {
       type: "home",
@@ -470,6 +483,7 @@ const nodePlayScenes = {
       hint: "小屋的窗灯会一格格亮起，展示游客停留的夜晚。",
       button: "亮起窗灯",
       steps: ["推开院门", "窗灯亮起", "夜色停留"],
+      layers: ["金星民宿院门", "窗灯逐格亮起", "农家乐夜晚停留"],
     },
     {
       type: "workshop",
@@ -478,6 +492,7 @@ const nodePlayScenes = {
       hint: "工坊里的齿轮、茶叶和金色叶片会合成一枚共富徽章。",
       button: "合成徽章",
       steps: ["工坊运转", "产业合流", "徽章完成"],
+      layers: ["共富工坊开始运转", "茶叶与金叶合流", "两有金星徽章完成"],
     },
   ],
 };
@@ -1349,9 +1364,15 @@ function nodePlayView() {
 }
 
 function playSceneMarkup(scene, point, village) {
+  const layers = (scene.layers || scene.steps).map((layer, index) => `<span class="stage-layer layer-${index + 1}">${layer}</span>`).join("");
   const common = `
     <span class="scene-glow"></span>
     <span class="scene-label">${point.icon}</span>
+    <div class="village-scene-context">
+      <strong>${village.name}</strong>
+      <span>${point.title}</span>
+    </div>
+    <div class="stage-layers">${layers}</div>
   `;
   const variants = {
     slope: `
