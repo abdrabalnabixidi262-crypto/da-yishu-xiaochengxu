@@ -307,6 +307,14 @@ const state = {
   score: 0,
   posterIndex: 0,
   selectedMapNode: 0,
+  selectedStoryNode: 0,
+  gameVillage: "yaoli",
+  gameActiveNode: 0,
+  gameCollected: {
+    gaoqiao: new Set(),
+    yaoli: new Set(),
+    jinxing: new Set(),
+  },
   discovered: new Set(),
   toastTimer: null,
 };
@@ -326,11 +334,23 @@ function readRoute() {
   const route = url.searchParams.get("route");
   const village = url.searchParams.get("village");
   const tab = url.searchParams.get("tab");
+  const nodeRaw = url.searchParams.get("node");
+  const nodeParam = nodeRaw === null ? NaN : Number(nodeRaw);
+  const selectedNode = Number.isFinite(nodeParam) ? nodeParam : null;
   if (route === "detail" && village && villages[village]) {
-    return { route: "detail", village, tab: tab || "map", selectedMapNode: villages[village].mapFocus ?? 0 };
+    const fallbackNode = villages[village].mapFocus ?? 0;
+    const node = selectedNode ?? fallbackNode;
+    return { route: "detail", village, tab: tab || "map", selectedMapNode: node, selectedStoryNode: node };
   }
   if (route && ["home", "villages", "game", "scan", "exhibit"].includes(route)) {
-    return { route, village: village && villages[village] ? village : state.village, tab: tab || state.tab };
+    const nextVillage = village && villages[village] ? village : state.village;
+    return {
+      route,
+      village: nextVillage,
+      tab: tab || state.tab,
+      gameVillage: route === "game" ? nextVillage : state.gameVillage,
+      gameActiveNode: selectedNode ?? state.gameActiveNode,
+    };
   }
   return {};
 }
@@ -341,14 +361,21 @@ function syncUrl() {
     url.searchParams.delete("route");
     url.searchParams.delete("village");
     url.searchParams.delete("tab");
+    url.searchParams.delete("node");
   } else {
     url.searchParams.set("route", state.route);
     if (state.route === "detail" && state.village && villages[state.village]) {
       url.searchParams.set("village", state.village);
       url.searchParams.set("tab", state.tab || "map");
+      url.searchParams.set("node", String(state.tab === "story" ? state.selectedStoryNode : state.selectedMapNode));
+    } else if (state.route === "game" && state.gameVillage && villages[state.gameVillage]) {
+      url.searchParams.set("village", state.gameVillage);
+      url.searchParams.delete("tab");
+      url.searchParams.set("node", String(state.gameActiveNode || 0));
     } else {
       url.searchParams.delete("village");
       url.searchParams.delete("tab");
+      url.searchParams.delete("node");
     }
   }
   history.replaceState({}, "", url);
@@ -359,11 +386,23 @@ function setRoute(route, extras = {}) {
   if (extras.village) state.village = extras.village;
   if (extras.tab) state.tab = extras.tab;
   if (typeof extras.selectedMapNode === "number") state.selectedMapNode = extras.selectedMapNode;
+  if (typeof extras.selectedStoryNode === "number") state.selectedStoryNode = extras.selectedStoryNode;
+  if (extras.gameVillage) state.gameVillage = extras.gameVillage;
+  if (typeof extras.gameActiveNode === "number") state.gameActiveNode = extras.gameActiveNode;
   if (route === "detail") {
     const village = villages[state.village] || villages.yaoli;
     state.tab = extras.tab || "map";
     state.selectedMapNode =
       typeof extras.selectedMapNode === "number" ? extras.selectedMapNode : village.mapFocus ?? 0;
+    state.selectedStoryNode =
+      typeof extras.selectedStoryNode === "number" ? extras.selectedStoryNode : state.selectedMapNode;
+  }
+  if (route === "game") {
+    state.gameVillage = extras.gameVillage || extras.village || state.gameVillage || state.village || "yaoli";
+    state.village = state.gameVillage;
+    if (typeof extras.selectedMapNode === "number" && typeof extras.gameActiveNode !== "number") {
+      state.gameActiveNode = extras.selectedMapNode;
+    }
   }
   syncUrl();
   render();
@@ -393,6 +432,13 @@ function showToast(text) {
 
 function villageTagList(village) {
   return village.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+}
+
+function getGameCollection(villageId) {
+  if (!state.gameCollected[villageId]) {
+    state.gameCollected[villageId] = new Set();
+  }
+  return state.gameCollected[villageId];
 }
 
 function scenicRibbon(village) {
@@ -633,6 +679,13 @@ function detailView() {
 }
 
 function storyPanel(village) {
+  const guide = villageMapGuides[village.id];
+  const activeIndex = village.nodes[state.selectedStoryNode] ? state.selectedStoryNode : 0;
+  const activeNode = village.nodes[activeIndex] || village.nodes[0];
+  const activePoint = guide?.points?.[activeIndex] || guide?.points?.[0];
+  const activePhoto = village.photos[activeIndex % village.photos.length];
+  const collection = getGameCollection(village.id);
+  const collected = collection.has(activeIndex);
   return `
     <section class="story-copy">
       <h2>${village.title}</h2>
@@ -664,13 +717,40 @@ function storyPanel(village) {
       ${village.nodes
         .map(
           ([title, text], index) => `
-            <article class="node-card">
+            <button class="node-card ${activeIndex === index ? "is-active" : ""}" data-story-node="${index}">
               <span class="node-index" style="background:${village.color}">${index + 1}</span>
               <div><strong>${title}</strong><span>${text}</span></div>
-            </article>
+            </button>
           `,
         )
         .join("")}
+    </section>
+
+    <section class="story-detail-panel" style="--village:${village.color}">
+      <figure class="story-detail-photo" style="background-image:url('${activePhoto}')">
+        <span>${activePoint?.label || "故事现场"}</span>
+      </figure>
+      <div class="story-detail-copy">
+        <p class="context-label">节点 ${activeIndex + 1}</p>
+        <h3>${activePoint?.title || activeNode[0]}</h3>
+        <p>${activePoint?.text || activeNode[1]}</p>
+        <div class="story-detail-tags">
+          ${(guide?.words || village.tags)
+            .slice(0, 4)
+            .map((word, index) => `<span style="animation-delay:${index * 70}ms">${word}</span>`)
+            .join("")}
+        </div>
+      </div>
+      <div class="story-detail-actions">
+        <button class="story-action dark" data-story-open-map="${activeIndex}">
+          <span>地图定位</span>
+          <strong>看这个点在哪里</strong>
+        </button>
+        <button class="story-action ${collected ? "is-done" : ""}" data-story-open-game="${activeIndex}">
+          <span>${collected ? "已收集" : "互动任务"}</span>
+          <strong>${activePoint?.action || "进入小游戏"}</strong>
+        </button>
+      </div>
     </section>
   `;
 }
@@ -719,7 +799,6 @@ function mapPanel(village) {
                 <button
                   class="map-dot village-map-dot ${activeIndex === index ? "is-active" : ""}"
                   data-map-node="${index}"
-                  data-map-play="${index}"
                   style="left:${point.x}%; top:${point.y}%; background:linear-gradient(145deg, ${village.color}, #13231d); animation-delay:${index * 70}ms"
                 >
                   <strong>${point.icon}</strong>
@@ -732,11 +811,15 @@ function mapPanel(village) {
             <figure class="map-photo" style="background-image:url('${village.photos[activeIndex % village.photos.length]}')"></figure>
             <span>${guide.photoLabel}</span>
           </div>
-          <div class="map-overlay-card village-active-card">
+        </div>
+
+        <div class="village-active-card">
+          <div>
             <em>${activePoint?.label || "游玩项目"}</em>
             <strong>${activePoint?.title || village.nodes[0][0]}</strong>
             <span>${activePoint?.text || village.nodes[0][1]}</span>
           </div>
+          <button data-map-play="${activeIndex}" aria-label="进入${activePoint?.title || "互动"}小游戏">✦</button>
         </div>
 
         <div class="map-action-dock">
@@ -826,46 +909,101 @@ function materialsPanel(village) {
 }
 
 function gameView() {
-  const stageTokens = Object.values(villages)
-    .map((v, index) => {
-      const left = [13, 51, 68][index] || 24;
-      const top = [27, 18, 56][index] || 45;
-      const collected = state.discovered.has(v.id);
+  const village = villages[state.gameVillage] || villages.yaoli;
+  const guide = villageMapGuides[village.id];
+  const collection = getGameCollection(village.id);
+  const activeIndex = guide.points[state.gameActiveNode] ? state.gameActiveNode : 0;
+  const activePoint = guide.points[activeIndex];
+  const progress = Math.round((collection.size / guide.points.length) * 100);
+  const complete = collection.size >= guide.points.length;
+  const stageTokens = guide.points
+    .map((point, index) => {
+      const collected = collection.has(index);
       return `
-        <button class="game-token ${collected ? "collected" : ""}" data-token="${v.id}" style="left:${left}%; top:${top}%; background:${v.color}">
-          <span class="token-number">${index + 1}</span>
-          <span class="token-name">${v.name}</span>
+        <button
+          class="game-token node-token ${collected ? "collected" : ""} ${activeIndex === index ? "is-active" : ""}"
+          data-game-node="${index}"
+          style="left:${point.x}%; top:${point.y}%; background:linear-gradient(145deg, ${village.color}, #14231e)"
+        >
+          <span class="token-number">${point.icon}</span>
+          <span class="token-name">${point.title}</span>
         </button>
       `;
     })
     .join("");
   return shell(`
-    <section class="page-title">
+    <section class="page-title game-title">
       <div>
-        <p>互动收集</p>
-        <h1>收集三村记忆</h1>
-        <p>三枚发光碎片藏在地图里，集齐后点亮一份完整的乡村记忆。</p>
+        <p>互动小游戏</p>
+        <h1>${village.name}任务地图</h1>
+        <p>沿着村内路线寻找线索，点亮每个游玩项目，合成一枚专属村志徽章。</p>
       </div>
-      <span class="mini-pill">${state.score}/3</span>
+      <span class="mini-pill">${collection.size}/${guide.points.length}</span>
     </section>
 
-    <section class="game-panel">
-      <div class="score-card">
-        <div class="progress-track"><div class="progress-fill" style="--progress:${state.score / 3 * 100}%"></div></div>
-        <div class="score-num">${state.score} / 3</div>
+    <section class="game-village-switch" aria-label="选择村落">
+      ${Object.values(villages)
+        .map(
+          (v) => `
+            <button class="${v.id === village.id ? "is-active" : ""}" data-game-village="${v.id}" style="--village:${v.color}">
+              <span>${v.name.slice(0, 2)}</span>
+              <strong>${v.name}</strong>
+            </button>
+          `,
+        )
+        .join("")}
+    </section>
+
+    <section class="game-panel mission-game" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
+      <div class="score-card mission-score">
+        <div>
+          <span>探索进度</span>
+          <strong>${progress}%</strong>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="--progress:${progress}%"></div></div>
       </div>
-      <p class="game-hint">轻触发光碎片，高桥、窑里、金星会依次被点亮。</p>
-      <div class="game-stage">
-        <span class="game-spark s1">✦</span>
-        <span class="game-spark s2">◇</span>
-        <span class="game-spark s3">✺</span>
+
+      <div class="game-stage mission-stage">
+        <svg class="game-route-svg" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="${guide.route}"></path>
+        </svg>
+        <span class="game-spark s1">${guide.words[0]}</span>
+        <span class="game-spark s2">${guide.words[1]}</span>
+        <span class="game-spark s3">${guide.words[2]}</span>
         ${stageTokens}
         ${
-          state.score >= 3
-            ? `<div class="game-complete"><strong>三村记忆已集齐</strong><span>可以回到村志页查看完整故事、地图和周边。</span></div>`
+          complete
+            ? `<div class="game-complete"><strong>${village.name}村志徽章已合成</strong><span>所有节点都已点亮，可以回到地图查看完整路线。</span></div>`
             : ""
         }
-        <div class="toast"></div>
+      </div>
+
+      <section class="mission-console">
+        <div class="mission-focus">
+          <span>${activePoint.label}</span>
+          <h2>${activePoint.title}</h2>
+          <p>${activePoint.text}</p>
+          <button class="mission-collect ${collection.has(activeIndex) ? "is-collected" : ""}" data-game-collect="${activeIndex}">
+            ${collection.has(activeIndex) ? "已点亮这个节点" : activePoint.action}
+          </button>
+        </div>
+        <div class="inventory-grid">
+          ${guide.points
+            .map(
+              (point, index) => `
+                <button class="inventory-slot ${collection.has(index) ? "is-filled" : ""}" data-game-node="${index}">
+                  <span>${collection.has(index) ? point.icon : index + 1}</span>
+                  <strong>${point.label}</strong>
+                </button>
+              `,
+            )
+            .join("")}
+        </div>
+      </section>
+
+      <div class="game-final-actions">
+        <button data-game-reset>重新探索</button>
+        <button data-game-open-map>回到村落地图</button>
       </div>
     </section>
   `);
@@ -1002,11 +1140,15 @@ function attachDragStrips() {
     let isDown = false;
     let startX = 0;
     let startScroll = 0;
+    let hasDragged = false;
+    let startVillageCard = null;
 
     strip.addEventListener("pointerdown", (event) => {
       isDown = true;
       startX = event.clientX;
       startScroll = strip.scrollLeft;
+      hasDragged = false;
+      startVillageCard = event.target.closest("[data-village]");
       strip.classList.add("is-dragging");
       strip.setPointerCapture?.(event.pointerId);
     });
@@ -1015,13 +1157,32 @@ function attachDragStrips() {
       if (!isDown) return;
       const walk = event.clientX - startX;
       if (Math.abs(walk) > 4) {
+        hasDragged = true;
         strip.scrollLeft = startScroll - walk;
       }
     });
 
-    ["pointerup", "pointercancel", "pointerleave"].forEach((type) => {
+    strip.addEventListener("pointerup", () => {
+      if (!isDown) return;
+      const villageId = startVillageCard?.dataset.village;
+      isDown = false;
+      strip.classList.remove("is-dragging");
+      if (!hasDragged && villageId && villages[villageId]) {
+        setRoute("detail", {
+          village: villageId,
+          tab: "map",
+          selectedMapNode: villages[villageId]?.mapFocus ?? 0,
+          selectedStoryNode: villages[villageId]?.mapFocus ?? 0,
+        });
+      }
+      startVillageCard = null;
+    });
+
+    ["pointercancel", "pointerleave"].forEach((type) => {
       strip.addEventListener(type, () => {
         isDown = false;
+        hasDragged = false;
+        startVillageCard = null;
         strip.classList.remove("is-dragging");
       });
     });
@@ -1069,7 +1230,11 @@ function attachHandlers() {
       const shortcut = button.dataset.shortcut;
       const villageId = button.dataset.village || state.village || "yaoli";
       if (shortcut === "game") {
-        setRoute("game");
+        setRoute("game", {
+          village: villageId,
+          gameVillage: villageId,
+          gameActiveNode: villages[villageId]?.mapFocus ?? 0,
+        });
         return;
       }
       if (shortcut === "map" || shortcut === "materials") {
@@ -1082,12 +1247,13 @@ function attachHandlers() {
     });
   });
 
-  app.querySelectorAll("[data-village]").forEach((button) => {
+  app.querySelectorAll("[data-village]:not([data-shortcut])").forEach((button) => {
     button.addEventListener("click", () =>
       setRoute("detail", {
         village: button.dataset.village,
         tab: "map",
         selectedMapNode: villages[button.dataset.village]?.mapFocus ?? 0,
+        selectedStoryNode: villages[button.dataset.village]?.mapFocus ?? 0,
       }),
     );
   });
@@ -1098,6 +1264,43 @@ function attachHandlers() {
         village: state.village,
         tab: button.dataset.tab,
         selectedMapNode: state.selectedMapNode,
+        selectedStoryNode: state.selectedMapNode,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-story-node]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.storyNode);
+      setRoute("detail", {
+        village: state.village,
+        tab: "story",
+        selectedStoryNode: index,
+        selectedMapNode: index,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-story-open-map]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.storyOpenMap);
+      setRoute("detail", {
+        village: state.village,
+        tab: "map",
+        selectedMapNode: index,
+        selectedStoryNode: index,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-story-open-game]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.storyOpenGame);
+      setRoute("game", {
+        village: state.village,
+        gameVillage: state.village,
+        gameActiveNode: index,
+        selectedMapNode: index,
       });
     });
   });
@@ -1108,6 +1311,7 @@ function attachHandlers() {
         village: state.village,
         tab: "map",
         selectedMapNode: Number(button.dataset.mapNode),
+        selectedStoryNode: Number(button.dataset.mapNode),
       });
     });
   });
@@ -1115,13 +1319,13 @@ function attachHandlers() {
   app.querySelectorAll("[data-map-play]").forEach((button) => {
     button.addEventListener("click", () => {
       const index = Number(button.dataset.mapPlay);
-      const village = villages[state.village] || villages.yaoli;
-      const point = villageMapGuides[village.id]?.points?.[index];
-      state.selectedMapNode = Number.isFinite(index) ? index : state.selectedMapNode;
-      showToast(point?.action || "已点亮这个地图点位");
-      button.classList.add("just-played");
-      setTimeout(() => button.classList.remove("just-played"), 700);
-      vibrate(18);
+      const nextIndex = Number.isFinite(index) ? index : state.selectedMapNode;
+      setRoute("game", {
+        village: state.village,
+        gameVillage: state.village,
+        gameActiveNode: nextIndex,
+        selectedMapNode: nextIndex,
+      });
     });
   });
 
@@ -1150,6 +1354,7 @@ function attachHandlers() {
         village: state.village,
         tab: button.dataset.mapNodeGo,
         selectedMapNode: state.selectedMapNode,
+        selectedStoryNode: state.selectedMapNode,
       });
     });
   });
@@ -1163,6 +1368,65 @@ function attachHandlers() {
       state.posterIndex = Number(button.dataset.posterDot);
       render();
       vibrate(8);
+    });
+  });
+
+  app.querySelectorAll("[data-game-village]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const villageId = button.dataset.gameVillage;
+      setRoute("game", {
+        village: villageId,
+        gameVillage: villageId,
+        gameActiveNode: villages[villageId]?.mapFocus ?? 0,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-game-node]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.gameActiveNode = Number(button.dataset.gameNode);
+      render();
+      vibrate(10);
+    });
+  });
+
+  app.querySelectorAll("[data-game-collect]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const village = villages[state.gameVillage] || villages.yaoli;
+      const guide = villageMapGuides[village.id];
+      const index = Number(button.dataset.gameCollect);
+      const collection = getGameCollection(village.id);
+      collection.add(index);
+      if (collection.size >= guide.points.length) {
+        state.discovered.add(village.id);
+        state.score = state.discovered.size;
+      }
+      showToast(`${guide.points[index]?.action || "节点"}完成`);
+      render();
+      vibrate(18);
+    });
+  });
+
+  app.querySelectorAll("[data-game-reset]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const villageId = state.gameVillage || "yaoli";
+      state.gameCollected[villageId] = new Set();
+      state.discovered.delete(villageId);
+      state.score = state.discovered.size;
+      state.gameActiveNode = villages[villageId]?.mapFocus ?? 0;
+      showToast("已重新开始探索");
+      render();
+    });
+  });
+
+  app.querySelectorAll("[data-game-open-map]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setRoute("detail", {
+        village: state.gameVillage || state.village,
+        tab: "map",
+        selectedMapNode: state.gameActiveNode,
+        selectedStoryNode: state.gameActiveNode,
+      });
     });
   });
 
