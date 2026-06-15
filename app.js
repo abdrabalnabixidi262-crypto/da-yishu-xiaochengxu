@@ -308,8 +308,10 @@ const state = {
   posterIndex: 0,
   selectedMapNode: 0,
   selectedStoryNode: 0,
+  impression: "map",
   gameVillage: "yaoli",
   gameActiveNode: 0,
+  playSteps: new Set(),
   gameCollected: {
     gaoqiao: new Set(),
     yaoli: new Set(),
@@ -320,6 +322,36 @@ const state = {
 };
 
 const gameOrder = ["gaoqiao", "yaoli", "jinxing"];
+
+const impressionDetails = {
+  map: {
+    icon: "✦",
+    title: "艺术地图",
+    subtitle: "把村庄变成可游览的视觉路线",
+    text: "三维扫描感地图把村口、书屋、茶园、工坊和展览点串成一条可点击的游览动线。观众不需要先读说明，只要点亮地图上的项目，就能进入对应故事和互动小游戏。",
+    action: "打开窑里村地图",
+    route: "detail",
+    tab: "map",
+  },
+  materials: {
+    icon: "▧",
+    title: "带走物料",
+    subtitle: "贴纸、卡片、书签与村庄记忆",
+    text: "物料区把实拍图、贴纸、卡片、书签、徽章和包装样机做成瀑布流展柜。它像一张可以翻动的样本桌，让观众看到每个村的视觉语言可以怎样被带走。",
+    action: "进入物料展柜",
+    route: "detail",
+    tab: "materials",
+  },
+  game: {
+    icon: "☁",
+    title: "互动收集",
+    subtitle: "让观众在触碰里完成一次探索",
+    text: "互动区不只是播放动画，而是让观众完成节点任务：点击步骤、触发场景、点亮进度，最后把每个村的五个项目合成为一枚村志徽章。",
+    action: "进入任务地图",
+    route: "game",
+    tab: "map",
+  },
+};
 
 const nodePlayScenes = {
   gaoqiao: [
@@ -463,6 +495,7 @@ function readRoute() {
   const route = url.searchParams.get("route");
   const village = url.searchParams.get("village");
   const tab = url.searchParams.get("tab");
+  const impression = url.searchParams.get("impression");
   const nodeRaw = url.searchParams.get("node");
   const nodeParam = nodeRaw === null ? NaN : Number(nodeRaw);
   const selectedNode = Number.isFinite(nodeParam) ? nodeParam : null;
@@ -471,12 +504,13 @@ function readRoute() {
     const node = selectedNode ?? fallbackNode;
     return { route: "detail", village, tab: tab || "map", selectedMapNode: node, selectedStoryNode: node };
   }
-  if (route && ["home", "villages", "game", "play", "scan", "exhibit"].includes(route)) {
+  if (route && ["home", "villages", "profile", "impression", "game", "play", "scan", "exhibit"].includes(route)) {
     const nextVillage = village && villages[village] ? village : state.village;
     return {
       route,
       village: nextVillage,
       tab: tab || state.tab,
+      impression: impressionDetails[impression] ? impression : state.impression,
       gameVillage: route === "game" || route === "play" ? nextVillage : state.gameVillage,
       gameActiveNode: selectedNode ?? state.gameActiveNode,
     };
@@ -491,20 +525,34 @@ function syncUrl() {
     url.searchParams.delete("village");
     url.searchParams.delete("tab");
     url.searchParams.delete("node");
+    url.searchParams.delete("impression");
   } else {
     url.searchParams.set("route", state.route);
     if (state.route === "detail" && state.village && villages[state.village]) {
       url.searchParams.set("village", state.village);
       url.searchParams.set("tab", state.tab || "map");
       url.searchParams.set("node", String(state.tab === "story" ? state.selectedStoryNode : state.selectedMapNode));
+      url.searchParams.delete("impression");
+    } else if (state.route === "profile" && state.village && villages[state.village]) {
+      url.searchParams.set("village", state.village);
+      url.searchParams.delete("tab");
+      url.searchParams.delete("node");
+      url.searchParams.delete("impression");
+    } else if (state.route === "impression") {
+      url.searchParams.set("impression", state.impression || "map");
+      url.searchParams.delete("village");
+      url.searchParams.delete("tab");
+      url.searchParams.delete("node");
     } else if ((state.route === "game" || state.route === "play") && state.gameVillage && villages[state.gameVillage]) {
       url.searchParams.set("village", state.gameVillage);
       url.searchParams.delete("tab");
       url.searchParams.set("node", String(state.gameActiveNode || 0));
+      url.searchParams.delete("impression");
     } else {
       url.searchParams.delete("village");
       url.searchParams.delete("tab");
       url.searchParams.delete("node");
+      url.searchParams.delete("impression");
     }
   }
   history.replaceState({}, "", url);
@@ -516,6 +564,7 @@ function setRoute(route, extras = {}) {
   if (extras.tab) state.tab = extras.tab;
   if (typeof extras.selectedMapNode === "number") state.selectedMapNode = extras.selectedMapNode;
   if (typeof extras.selectedStoryNode === "number") state.selectedStoryNode = extras.selectedStoryNode;
+  if (extras.impression && impressionDetails[extras.impression]) state.impression = extras.impression;
   if (extras.gameVillage) state.gameVillage = extras.gameVillage;
   if (typeof extras.gameActiveNode === "number") state.gameActiveNode = extras.gameActiveNode;
   if (route === "detail") {
@@ -536,6 +585,7 @@ function setRoute(route, extras = {}) {
   if (route === "play") {
     state.gameVillage = extras.gameVillage || extras.village || state.gameVillage || state.village || "yaoli";
     state.village = state.gameVillage;
+    state.playSteps = new Set();
     if (typeof extras.selectedMapNode === "number" && typeof extras.gameActiveNode !== "number") {
       state.gameActiveNode = extras.selectedMapNode;
     }
@@ -710,7 +760,7 @@ function homeView() {
                 <p>${v.subtitle}</p>
                 <div class="tag-row">${villageTagList(v)}</div>
               </div>
-              <span class="glass-button">看地图</span>
+              <span class="glass-button" data-village-profile="${v.id}">村志详情</span>
             </button>
           `,
         )
@@ -725,9 +775,15 @@ function homeView() {
     </section>
 
     <section class="memory-ribbon">
-      <article><span>✦</span><strong>艺术地图</strong><small>把村庄变成可游览的视觉路线</small></article>
-      <article><span>▧</span><strong>带走物料</strong><small>贴纸、卡片、书签与村庄记忆</small></article>
-      <article><span>☁</span><strong>互动收集</strong><small>让观众在触碰里完成一次探索</small></article>
+      ${Object.entries(impressionDetails)
+        .map(
+          ([key, item]) => `
+            <button class="memory-ribbon-item" data-impression="${key}">
+              <span>${item.icon}</span><strong>${item.title}</strong><small>${item.subtitle}</small>
+            </button>
+          `,
+        )
+        .join("")}
     </section>
   `);
 }
@@ -754,6 +810,87 @@ function villagesView() {
                 <div class="tag-row">${villageTagList(v)}</div>
               </div>
               <span class="glass-button">打开地图</span>
+            </button>
+          `,
+        )
+        .join("")}
+    </section>
+  `);
+}
+
+function profileView() {
+  const village = villages[state.village] || villages.yaoli;
+  const guide = villageMapGuides[village.id];
+  return shell(`
+    <section class="profile-hero" style="--village:${village.color}; background-image:url('${village.cover}')">
+      <div class="top-row">
+        <button class="back" data-go="villages">‹</button>
+        <span class="mini-pill">村志详情</span>
+      </div>
+      <div class="profile-title">
+        <p>${village.type}</p>
+        <h1>${village.name}</h1>
+        <span>${village.location} · ${village.subtitle}</span>
+      </div>
+    </section>
+
+    <section class="profile-story-card" style="--village:${village.color}">
+      <p class="context-label">村志概览</p>
+      <h2>${village.title}</h2>
+      <p>${village.story}</p>
+      <div class="profile-actions">
+        <button data-profile-open="map">打开村落地图</button>
+        <button data-profile-open="story">查看故事节点</button>
+        <button data-profile-open="materials">浏览带走物料</button>
+      </div>
+    </section>
+
+    <section class="profile-node-wall">
+      ${guide.points
+        .map(
+          (point, index) => `
+            <button class="profile-node-card" data-profile-node="${index}" style="--village:${village.color}; background-image:url('${village.photos[index % village.photos.length]}')">
+              <span>${point.icon}</span>
+              <strong>${point.title}</strong>
+              <small>${nodePlayScenes[village.id]?.[index]?.verb || point.action}</small>
+            </button>
+          `,
+        )
+        .join("")}
+    </section>
+  `);
+}
+
+function impressionView() {
+  const item = impressionDetails[state.impression] || impressionDetails.map;
+  const activeVillage = villages[state.village] || villages.yaoli;
+  return shell(`
+    <section class="impression-hero" style="--village:${activeVillage.color}">
+      <button class="back" data-go="home">‹</button>
+      <div>
+        <span>${item.icon}</span>
+        <p>现场印象</p>
+        <h1>${item.title}</h1>
+        <small>${item.subtitle}</small>
+      </div>
+    </section>
+
+    <section class="impression-detail" style="--village:${activeVillage.color}">
+      <p>${item.text}</p>
+      <div class="impression-preview">
+        <span></span><span></span><span></span>
+      </div>
+      <button class="impression-action" data-impression-action="${state.impression}">
+        ${item.action}
+      </button>
+    </section>
+
+    <section class="impression-tabs">
+      ${Object.entries(impressionDetails)
+        .map(
+          ([key, next]) => `
+            <button class="${state.impression === key ? "is-active" : ""}" data-impression="${key}">
+              <span>${next.icon}</span>${next.title}
             </button>
           `,
         )
@@ -1153,6 +1290,9 @@ function nodePlayView() {
   const scene = nodePlayScenes[village.id]?.[activeIndex] || nodePlayScenes.yaoli[1];
   const collection = getGameCollection(village.id);
   const done = collection.has(activeIndex);
+  const stepCount = scene.steps.length;
+  const progress = state.playSteps.size;
+  const canComplete = done || progress >= stepCount;
   return shell(`
     <section class="play-head" style="--village:${village.color}">
       <button class="back" data-play-back>‹</button>
@@ -1164,9 +1304,13 @@ function nodePlayView() {
       <button class="play-map-jump" data-game-open-map>地图</button>
     </section>
 
-    <section class="node-play-card play-${scene.type}" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
+    <section class="node-play-card play-${scene.type} play-progress-${progress}" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
       <div class="play-scene">
         ${playSceneMarkup(scene, point, village)}
+        <div class="interaction-hint">
+          <span>${progress}/${stepCount}</span>
+          <strong>${canComplete ? "可以完成任务" : "按顺序点亮下方步骤"}</strong>
+        </div>
       </div>
       <div class="play-copy">
         <span>${scene.verb}</span>
@@ -1176,16 +1320,16 @@ function nodePlayView() {
         ${scene.steps
           .map(
             (step, index) => `
-              <span style="animation-delay:${index * 160}ms">
+              <button class="${state.playSteps.has(index) ? "is-done" : ""}" data-play-step="${index}" style="animation-delay:${index * 160}ms">
                 <em>${index + 1}</em>${step}
-              </span>
+              </button>
             `,
           )
           .join("")}
       </div>
-      <button class="play-primary ${done ? "is-done" : ""}" data-play-complete="${activeIndex}">
-        <span>${done ? "已完成" : scene.button}</span>
-        <strong>${done ? "再看一遍动画" : "完成后收进任务地图"}</strong>
+      <button class="play-primary ${done ? "is-done" : ""} ${canComplete ? "can-complete" : ""}" data-play-complete="${activeIndex}">
+        <span>${done ? "已完成" : canComplete ? scene.button : "先完成互动步骤"}</span>
+        <strong>${done ? "再玩一次也可以" : canComplete ? "完成后收进任务地图" : `还差 ${stepCount - progress} 步`}</strong>
       </button>
     </section>
 
@@ -1400,6 +1544,8 @@ function render() {
   const views = {
     home: homeView,
     villages: villagesView,
+    profile: profileView,
+    impression: impressionView,
     detail: detailView,
     game: gameView,
     play: nodePlayView,
@@ -1431,12 +1577,14 @@ function attachDragStrips() {
     let startScroll = 0;
     let hasDragged = false;
     let startVillageCard = null;
+    let startProfileButton = null;
 
     strip.addEventListener("pointerdown", (event) => {
       isDown = true;
       startX = event.clientX;
       startScroll = strip.scrollLeft;
       hasDragged = false;
+      startProfileButton = event.target.closest("[data-village-profile]");
       startVillageCard = event.target.closest("[data-village]");
       strip.classList.add("is-dragging");
       strip.setPointerCapture?.(event.pointerId);
@@ -1453,9 +1601,18 @@ function attachDragStrips() {
 
     strip.addEventListener("pointerup", () => {
       if (!isDown) return;
+      const profileId = startProfileButton?.dataset.villageProfile;
       const villageId = startVillageCard?.dataset.village;
       isDown = false;
       strip.classList.remove("is-dragging");
+      if (!hasDragged && profileId && villages[profileId]) {
+        setRoute("profile", {
+          village: profileId,
+        });
+        startProfileButton = null;
+        startVillageCard = null;
+        return;
+      }
       if (!hasDragged && villageId && villages[villageId]) {
         setRoute("detail", {
           village: villageId,
@@ -1464,6 +1621,7 @@ function attachDragStrips() {
           selectedStoryNode: villages[villageId]?.mapFocus ?? 0,
         });
       }
+      startProfileButton = null;
       startVillageCard = null;
     });
 
@@ -1471,6 +1629,7 @@ function attachDragStrips() {
       strip.addEventListener(type, () => {
         isDown = false;
         hasDragged = false;
+        startProfileButton = null;
         startVillageCard = null;
         strip.classList.remove("is-dragging");
       });
@@ -1508,9 +1667,69 @@ function attachHandlers() {
   app.querySelectorAll("[data-go]").forEach((button) => {
     button.addEventListener("click", () => {
       const dest = button.dataset.go;
-      if (dest === "villages" || dest === "scan" || dest === "game" || dest === "exhibit") {
+      if (dest === "home" || dest === "villages" || dest === "scan" || dest === "game" || dest === "exhibit") {
         setRoute(dest);
       }
+    });
+  });
+
+  app.querySelectorAll("[data-impression]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setRoute("impression", {
+        impression: button.dataset.impression,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-impression-action]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const key = button.dataset.impressionAction;
+      if (key === "game") {
+        setRoute("game", {
+          village: state.village || "yaoli",
+          gameVillage: state.village || "yaoli",
+          gameActiveNode: villages[state.village || "yaoli"]?.mapFocus ?? 0,
+        });
+        return;
+      }
+      const target = impressionDetails[key];
+      setRoute("detail", {
+        village: state.village || "yaoli",
+        tab: target?.tab || "map",
+        selectedMapNode: villages[state.village || "yaoli"]?.mapFocus ?? 0,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-village-profile]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setRoute("profile", {
+        village: button.dataset.villageProfile,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-profile-open]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setRoute("detail", {
+        village: state.village,
+        tab: button.dataset.profileOpen,
+        selectedMapNode: villages[state.village]?.mapFocus ?? 0,
+        selectedStoryNode: villages[state.village]?.mapFocus ?? 0,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-profile-node]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.profileNode);
+      setRoute("play", {
+        village: state.village,
+        gameVillage: state.village,
+        gameActiveNode: index,
+        selectedMapNode: index,
+      });
     });
   });
 
@@ -1704,18 +1923,40 @@ function attachHandlers() {
     });
   });
 
+  app.querySelectorAll("[data-play-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const step = Number(button.dataset.playStep);
+      const village = villages[state.gameVillage] || villages.yaoli;
+      const guide = villageMapGuides[village.id];
+      const index = guide.points[state.gameActiveNode] ? state.gameActiveNode : 0;
+      const scene = nodePlayScenes[village.id]?.[index] || nodePlayScenes.yaoli[1];
+      state.playSteps.add(step);
+      showToast(`${scene.steps[step]} 已触发`);
+      render();
+      vibrate(12);
+    });
+  });
+
   app.querySelectorAll("[data-play-complete]").forEach((button) => {
     button.addEventListener("click", () => {
       const village = villages[state.gameVillage] || villages.yaoli;
       const guide = villageMapGuides[village.id];
       const index = Number(button.dataset.playComplete);
+      const scene = nodePlayScenes[village.id]?.[index] || nodePlayScenes.yaoli[1];
+      if (state.playSteps.size < scene.steps.length && !getGameCollection(village.id).has(index)) {
+        showToast(`还需要点亮 ${scene.steps.length - state.playSteps.size} 个互动步骤`);
+        button.classList.add("needs-steps");
+        setTimeout(() => button.classList.remove("needs-steps"), 520);
+        vibrate(18);
+        return;
+      }
       const collection = getGameCollection(village.id);
       collection.add(index);
       if (collection.size >= guide.points.length) {
         state.discovered.add(village.id);
         state.score = state.discovered.size;
       }
-      showToast(`${nodePlayScenes[village.id]?.[index]?.verb || guide.points[index]?.action || "节点"}完成`);
+      showToast(`${scene.verb || guide.points[index]?.action || "节点"}完成`);
       button.classList.add("just-completed");
       setTimeout(() => {
         setRoute("game", {
