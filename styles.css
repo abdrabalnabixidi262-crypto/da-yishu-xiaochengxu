@@ -300,7 +300,9 @@ button.is-tapping::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(8, 18, 15, 0.74) 0%, rgba(8, 18, 15, 0.42) 42%, rgba(8, 18, 15, 0.06) 100%);
+  background:
+    linear-gradient(180deg, transparent 0 63%, #000 63% 100%),
+    linear-gradient(90deg, rgba(8, 18, 15, 0.74) 0%, rgba(8, 18, 15, 0.42) 42%, rgba(8, 18, 15, 0.06) 100%);
 }
 
 .hero-decor {
