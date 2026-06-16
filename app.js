@@ -468,6 +468,7 @@ const state = {
   impression: "map",
   gameVillage: "yaoli",
   gameActiveNode: 0,
+  productIndex: 0,
   playSteps: new Set(),
   gameCollected: {
     gaoqiao: new Set(),
@@ -668,15 +669,18 @@ function readRoute() {
   const village = url.searchParams.get("village");
   const tab = url.searchParams.get("tab");
   const impression = url.searchParams.get("impression");
+  const productRaw = url.searchParams.get("product");
   const nodeRaw = url.searchParams.get("node");
   const nodeParam = nodeRaw === null ? NaN : Number(nodeRaw);
   const selectedNode = Number.isFinite(nodeParam) ? nodeParam : null;
+  const productParam = productRaw === null ? NaN : Number(productRaw);
+  const selectedProduct = Number.isFinite(productParam) ? productParam : null;
   if (route === "detail" && village && villages[village]) {
     const fallbackNode = villages[village].mapFocus ?? 0;
     const node = selectedNode ?? fallbackNode;
     return { route: "detail", village, tab: tab || "map", selectedMapNode: node, selectedStoryNode: node };
   }
-  if (route && ["home", "villages", "profile", "impression", "game", "play", "scan", "exhibit"].includes(route)) {
+  if (route && ["home", "villages", "profile", "impression", "game", "play", "scan", "exhibit", "product"].includes(route)) {
     const nextVillage = village && villages[village] ? village : state.village;
     return {
       route,
@@ -685,6 +689,7 @@ function readRoute() {
       impression: impressionDetails[impression] ? impression : state.impression,
       gameVillage: route === "game" || route === "play" ? nextVillage : state.gameVillage,
       gameActiveNode: selectedNode ?? state.gameActiveNode,
+      productIndex: selectedProduct ?? state.productIndex,
     };
   }
   return {};
@@ -697,6 +702,7 @@ function syncUrl() {
     url.searchParams.delete("village");
     url.searchParams.delete("tab");
     url.searchParams.delete("node");
+    url.searchParams.delete("product");
     url.searchParams.delete("impression");
   } else {
     url.searchParams.set("route", state.route);
@@ -704,26 +710,37 @@ function syncUrl() {
       url.searchParams.set("village", state.village);
       url.searchParams.set("tab", state.tab || "map");
       url.searchParams.set("node", String(state.tab === "story" ? state.selectedStoryNode : state.selectedMapNode));
+      url.searchParams.delete("product");
       url.searchParams.delete("impression");
     } else if (state.route === "profile" && state.village && villages[state.village]) {
       url.searchParams.set("village", state.village);
       url.searchParams.delete("tab");
       url.searchParams.delete("node");
+      url.searchParams.delete("product");
       url.searchParams.delete("impression");
     } else if (state.route === "impression") {
       url.searchParams.set("impression", state.impression || "map");
       url.searchParams.delete("village");
       url.searchParams.delete("tab");
       url.searchParams.delete("node");
+      url.searchParams.delete("product");
     } else if ((state.route === "game" || state.route === "play") && state.gameVillage && villages[state.gameVillage]) {
       url.searchParams.set("village", state.gameVillage);
       url.searchParams.delete("tab");
       url.searchParams.set("node", String(state.gameActiveNode || 0));
+      url.searchParams.delete("product");
+      url.searchParams.delete("impression");
+    } else if (state.route === "product" && state.village && villages[state.village]) {
+      url.searchParams.set("village", state.village);
+      url.searchParams.set("product", String(state.productIndex || 0));
+      url.searchParams.delete("tab");
+      url.searchParams.delete("node");
       url.searchParams.delete("impression");
     } else {
       url.searchParams.delete("village");
       url.searchParams.delete("tab");
       url.searchParams.delete("node");
+      url.searchParams.delete("product");
       url.searchParams.delete("impression");
     }
   }
@@ -739,6 +756,7 @@ function setRoute(route, extras = {}) {
   if (extras.impression && impressionDetails[extras.impression]) state.impression = extras.impression;
   if (extras.gameVillage) state.gameVillage = extras.gameVillage;
   if (typeof extras.gameActiveNode === "number") state.gameActiveNode = extras.gameActiveNode;
+  if (typeof extras.productIndex === "number") state.productIndex = extras.productIndex;
   if (route === "detail") {
     const village = villages[state.village] || villages.yaoli;
     state.tab = extras.tab || "map";
@@ -761,6 +779,11 @@ function setRoute(route, extras = {}) {
     if (typeof extras.selectedMapNode === "number" && typeof extras.gameActiveNode !== "number") {
       state.gameActiveNode = extras.selectedMapNode;
     }
+  }
+  if (route === "product") {
+    const show = ipShowcases[state.village];
+    const products = show?.products || [];
+    if (!products[state.productIndex]) state.productIndex = 0;
   }
   syncUrl();
   render();
@@ -1328,7 +1351,21 @@ function mapPanel(village) {
 function ipShowcasePanel(village) {
   const show = ipShowcases[village.id];
   if (!show) return "";
-  const first = show.panels[0];
+  const stagePanels = [
+    ...show.panels,
+    ...(show.emojis?.length
+      ? [
+          {
+            title: "表情包",
+            label: "表情包",
+            image: show.emojis[0].image,
+            copy: "",
+            emoji: true,
+          },
+        ]
+      : []),
+  ];
+  const first = stagePanels[0];
   return `
     <section class="ip-studio" style="--village:${village.color}; --ip-accent:${show.accent}">
       <div class="ip-studio-head">
@@ -1357,12 +1394,13 @@ function ipShowcasePanel(village) {
       </div>
 
       <div class="ip-action-rail" data-drag-strip>
-        ${show.panels
+        ${stagePanels
           .map(
             (panel, index) => `
               <button
                 class="ip-action-card ${index === 0 ? "is-active" : ""}"
                 data-ip-swap
+                data-ip-emoji="${panel.emoji ? "true" : "false"}"
                 data-ip-image="${panel.image}"
                 data-ip-title="${panel.title}"
                 data-ip-label="${panel.label}"
@@ -1403,38 +1441,89 @@ function ipProductRunway(show) {
   const products = show.products || [];
   if (!products.length) return "";
   const first = products[0];
+  const loopProducts = [...products, ...products];
   return `
     <section class="product-runway">
-      <div class="product-focus">
+      <button class="product-focus" data-product-open="0">
         <figure>
           <img src="${first.image}" alt="${first.title}" data-product-main loading="lazy">
         </figure>
         <div>
+          <img class="product-side-thumb" src="${first.image}" alt="" data-product-side loading="lazy">
           <span data-product-type>${first.type}</span>
           <strong data-product-title>${first.title}</strong>
         </div>
-      </div>
-      <div class="product-belt" data-drag-strip>
-        ${products
+      </button>
+      <div class="product-belt">
+        <div class="product-track">
+        ${loopProducts
           .map(
             (product, index) => `
               <button
                 class="product-tile ${index === 0 ? "is-active" : ""}"
                 data-product-focus
+                data-product-open="${index % products.length}"
                 data-product-image="${product.image}"
                 data-product-title="${product.title}"
                 data-product-type="${product.type}"
                 style="--i:${index % 7}"
               >
                 <img src="${product.image}" alt="${product.title}" loading="lazy">
-                <span>${product.type}</span>
+              </button>
+            `,
+          )
+          .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function activeProduct() {
+  const village = villages[state.village] || villages.jinxing;
+  const show = ipShowcases[village.id] || ipShowcases.jinxing;
+  const products = show.products || ipShowcases.jinxing.products || [];
+  const index = products[state.productIndex] ? state.productIndex : 0;
+  return { village, show, products, index, product: products[index] };
+}
+
+function productDetailView() {
+  const { village, products, index, product } = activeProduct();
+  if (!product) {
+    setRoute("detail", { village: village.id, tab: "materials" });
+    return "";
+  }
+  return shell(`
+    <section class="product-detail" style="--village:${village.color}">
+      <div class="product-detail-top">
+        <button class="back" data-go-product-back>‹</button>
+        <div>
+          <p class="context-label">${village.name}周边</p>
+          <h1>${product.title}</h1>
+        </div>
+        <span class="mini-pill">${product.type}</span>
+      </div>
+
+      <figure class="product-detail-image">
+        <img src="${product.image}" alt="${product.title}">
+      </figure>
+
+      <div class="product-detail-strip">
+        ${products
+          .map(
+            (item, nextIndex) => `
+              <button
+                class="product-detail-thumb ${nextIndex === index ? "is-active" : ""}"
+                data-product-detail-index="${nextIndex}"
+              >
+                <img src="${item.image}" alt="${item.title}" loading="lazy">
               </button>
             `,
           )
           .join("")}
       </div>
     </section>
-  `;
+  `);
 }
 
 function materialsPanel(village) {
@@ -1786,6 +1875,7 @@ function render() {
     profile: profileView,
     impression: impressionView,
     detail: detailView,
+    product: productDetailView,
     game: gameView,
     play: nodePlayView,
     scan: scanView,
@@ -2114,19 +2204,22 @@ function attachHandlers() {
   app.querySelectorAll("[data-ip-swap]").forEach((button) => {
     button.addEventListener("click", () => {
       const studio = button.closest(".ip-studio");
+      const frame = studio?.querySelector(".ip-main");
       const main = studio?.querySelector("[data-ip-main]");
       if (!studio || !main) return;
+      const isEmoji = button.dataset.ipEmoji === "true";
       main.classList.remove("is-switching");
       void main.offsetWidth;
       main.classList.add("is-switching");
+      frame?.classList.toggle("is-emoji-mode", isEmoji);
       main.src = button.dataset.ipImage;
       main.alt = button.dataset.ipTitle || "";
       studio.querySelector("[data-ip-title]").textContent = button.dataset.ipTitle || "";
       studio.querySelector("[data-ip-label]").textContent = button.dataset.ipLabel || "";
       studio.querySelector("[data-ip-copy]").textContent = button.dataset.ipCopy || "";
       studio.querySelectorAll("[data-ip-swap]").forEach((next) => next.classList.toggle("is-active", next === button));
+      studio.querySelector(".ip-stage")?.scrollIntoView({ behavior: "smooth", block: "center" });
       window.setTimeout(() => main.classList.remove("is-switching"), 520);
-      showToast(button.dataset.ipLabel || "已切换");
       vibrate(10);
     });
   });
@@ -2148,13 +2241,13 @@ function attachHandlers() {
       window.setTimeout(() => burst.remove(), 1100);
       button.classList.add("just-popped");
       window.setTimeout(() => button.classList.remove("just-popped"), 520);
-      showToast(`${button.dataset.emojiLabel || "表情"}飞出`);
       vibrate(12);
     });
   });
 
   app.querySelectorAll("[data-product-focus]").forEach((button) => {
     button.addEventListener("click", () => {
+      const productIndex = Number(button.dataset.productOpen);
       const runway = button.closest(".product-runway");
       const main = runway?.querySelector("[data-product-main]");
       if (!runway || !main) return;
@@ -2163,12 +2256,50 @@ function attachHandlers() {
       main.classList.add("is-switching");
       main.src = button.dataset.productImage;
       main.alt = button.dataset.productTitle || "";
+      const side = runway.querySelector("[data-product-side]");
+      if (side) side.src = button.dataset.productImage;
       runway.querySelector("[data-product-title]").textContent = button.dataset.productTitle || "";
       runway.querySelector("[data-product-type]").textContent = button.dataset.productType || "";
       runway.querySelectorAll("[data-product-focus]").forEach((next) => next.classList.toggle("is-active", next === button));
       window.setTimeout(() => main.classList.remove("is-switching"), 520);
-      showToast(button.dataset.productType || "物料");
       vibrate(10);
+      if (Number.isFinite(productIndex)) {
+        setTimeout(() => {
+          setRoute("product", {
+            village: state.village,
+            productIndex,
+          });
+        }, 120);
+      }
+    });
+  });
+
+  app.querySelectorAll("[data-product-open]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      if (event.target.closest("[data-product-focus]")) return;
+      const productIndex = Number(button.dataset.productOpen);
+      setRoute("product", {
+        village: state.village,
+        productIndex: Number.isFinite(productIndex) ? productIndex : state.productIndex,
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-product-detail-index]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setRoute("product", {
+        village: state.village,
+        productIndex: Number(button.dataset.productDetailIndex),
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-go-product-back]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setRoute("detail", {
+        village: state.village,
+        tab: "materials",
+      });
     });
   });
 
