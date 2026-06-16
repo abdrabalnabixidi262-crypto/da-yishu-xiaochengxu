@@ -77,11 +77,14 @@ const villages = {
     type: "千万工程典型案例 / 共同富裕样板村",
     location: "衢州市 · 开化县",
     regionKey: "衢州市",
-    cover: "./assets/premium-jinxing.png",
+    cover: "./assets/ip/jinxing/poster.jpg",
     photos: [
-      "./assets/real/jinxing-panorama.jpg",
-      "./assets/real/jinxing-village.jpg",
-      "./assets/premium-jinxing.png",
+      "./assets/ip/jinxing/poster.jpg",
+      "./assets/ip/jinxing/tea-box-1.jpg",
+      "./assets/ip/jinxing/postcard-1.jpg",
+      "./assets/ip/jinxing/sticker-1.jpg",
+      "./assets/ip/jinxing/badge-1.jpg",
+      "./assets/ip/jinxing/around-1.jpg",
     ],
     mapFocus: 4,
     color: "#d7a849",
@@ -97,10 +100,10 @@ const villages = {
       ["共富工坊", "把人人参与、家家增收转化成可扫码理解的共富节点。"],
     ],
     materials: [
-      ["./assets/real/jinxing-panorama.jpg", "金星龙顶茶包装", "把茶园、茶芽和共富叙事做成可陈列的包装样机。", "wide"],
-      ["./assets/real/jinxing-village.jpg", "银杏故事书签", "用金色叶片记录村庄年代感和乡土记忆。", "square"],
-      ["./assets/premium-jinxing.png", "红课堂学习卡", "对应红色研学点，适合展板旁扫码领取。", "square"],
-      ["./assets/real/jinxing-panorama.jpg", "共富工坊徽章", "把村民协作、产业增收和共同富裕做成轻量识别。", "tall"],
+      ["./assets/ip/jinxing/tea-box-1.jpg", "金星龙顶茶包装", "把茶园、茶芽和共富叙事做成可陈列的包装样机。", "wide"],
+      ["./assets/ip/jinxing/postcard-1.jpg", "银杏故事书签", "用金色叶片记录村庄年代感和乡土记忆。", "square"],
+      ["./assets/ip/jinxing/sticker-1.jpg", "红课堂学习卡", "对应红色研学点，适合展板旁扫码领取。", "square"],
+      ["./assets/ip/jinxing/badge-1.jpg", "共富工坊徽章", "把村民协作、产业增收和共同富裕做成轻量识别。", "tall"],
     ],
   },
 };
@@ -139,9 +142,12 @@ const ipShowcases = {
       },
     ],
     emojis: [
-      { image: "./assets/ip/gaoqiao/emoji-4.jpg", label: "高桥贴纸" },
-      { image: "./assets/ip/gaoqiao/action-3.jpg", label: "出发" },
-      { image: "./assets/ip/gaoqiao/action-4.jpg", label: "打卡" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-1.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-2.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-3.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-4.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-5.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-6.jpg", label: "高桥表情" },
     ],
   },
   yaoli: {
@@ -183,11 +189,12 @@ const ipShowcases = {
       },
     ],
     emojis: [
-      { image: "./assets/ip/yaoli/emoji-1.jpg", label: "云朵笑脸" },
-      { image: "./assets/ip/yaoli/emoji-2.jpg", label: "窑里贴纸" },
-      { image: "./assets/ip/yaoli/emoji-3.jpg", label: "云朵提醒" },
-      { image: "./assets/ip/yaoli/emoji-4.jpg", label: "小云朵" },
-      { image: "./assets/ip/yaoli/emoji-6.jpg", label: "完成" },
+      { image: "./assets/ip/yaoli/emoji-pack-1.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-2.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-3.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-4.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-5.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-6.jpg", label: "窑里表情" },
     ],
   },
   jinxing: {
@@ -887,7 +894,7 @@ function realMapPins(activeVillageId) {
 }
 
 function homeView() {
-  const homeVillage = villages.yaoli;
+  const homeVillage = villages.jinxing;
   return shell(`
     <section class="hero">
       <div class="hero-decor" aria-hidden="true">
@@ -1374,7 +1381,7 @@ function ipShowcasePanel(village) {
           <h2>${show.title}</h2>
           <p>${show.copy}</p>
         </div>
-        <span class="ip-mark">${show.mark}</span>
+        <button class="ip-mark" data-ip-mark-open="0">${show.mark}</button>
       </div>
 
       <div class="ip-stage">
@@ -1541,7 +1548,7 @@ function materialsPanel(village) {
       ${cards
         .map(
           ([photo, title, text, size], index) => `
-            <article class="material-card material-card-${size || "square"}">
+            <article class="material-card material-card-${size || "square"} ${photo.includes("/ip/") ? "material-card-product" : ""}">
               <figure class="material-photo" style="background-image:url('${photo}')"></figure>
               <div class="material-copy">
                 <strong>${title}</strong>
@@ -2242,6 +2249,15 @@ function attachHandlers() {
       button.classList.add("just-popped");
       window.setTimeout(() => button.classList.remove("just-popped"), 520);
       vibrate(12);
+    });
+  });
+
+  app.querySelectorAll("[data-ip-mark-open]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setRoute("product", {
+        village: state.village,
+        productIndex: Number(button.dataset.ipMarkOpen) || 0,
+      });
     });
   });
 
