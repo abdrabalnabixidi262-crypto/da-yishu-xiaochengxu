@@ -105,6 +105,163 @@ const villages = {
   },
 };
 
+const ipShowcases = {
+  gaoqiao: {
+    kicker: "人宠探索员",
+    title: "高桥村 IP 动作剧场",
+    copy: "把猫岛、田野步道和宠物友好路线收进一个会动的探索角色。",
+    mark: "Paw Map",
+    accent: "#74c783",
+    panels: [
+      {
+        title: "人宠探索员展板",
+        label: "主视觉",
+        image: "./assets/ip/gaoqiao/board.jpg",
+        copy: "角色、路线和村内宠物友好节点被压进同一张高桥导览展板。",
+      },
+      {
+        title: "三视图设定",
+        label: "角色设定",
+        image: "./assets/ip/gaoqiao/threeview.jpg",
+        copy: "正侧背造型保持清爽，方便延展到导览牌和互动按钮。",
+      },
+      {
+        title: "出发动作",
+        label: "动作延展",
+        image: "./assets/ip/gaoqiao/action-3.jpg",
+        copy: "适合对应田野步道、宠物牵引和村口打卡的轻快状态。",
+      },
+      {
+        title: "打卡动作",
+        label: "动作延展",
+        image: "./assets/ip/gaoqiao/action-4.jpg",
+        copy: "用更明显的姿态回应市集、休憩点和友好商户。",
+      },
+    ],
+    emojis: [
+      { image: "./assets/ip/gaoqiao/emoji-4.jpg", label: "高桥贴纸" },
+      { image: "./assets/ip/gaoqiao/action-3.jpg", label: "出发" },
+      { image: "./assets/ip/gaoqiao/action-4.jpg", label: "打卡" },
+    ],
+  },
+  yaoli: {
+    kicker: "云朵艺术村",
+    title: "窑里村云朵角色剧场",
+    copy: "把云朵书吧、草坡和陶艺体验做成轻盈的儿童艺术角色组。",
+    mark: "Cloud Play",
+    accent: "#7fb7f0",
+    panels: [
+      {
+        title: "云朵场景",
+        label: "场景插画",
+        image: "./assets/ip/yaoli/scene-1.jpg",
+        copy: "云朵、村路和儿童视角形成第一眼就能进入的窑里场景。",
+      },
+      {
+        title: "水乡场景",
+        label: "场景插画",
+        image: "./assets/ip/yaoli/scene-2.jpg",
+        copy: "把水乡、白墙和柔软色彩接到研学动线里。",
+      },
+      {
+        title: "角色展板",
+        label: "主视觉",
+        image: "./assets/ip/yaoli/board.jpg",
+        copy: "古风女孩和云朵小伙伴共同成为窑里故事的入口。",
+      },
+      {
+        title: "角色三视图",
+        label: "角色设定",
+        image: "./assets/ip/yaoli/threeview.jpg",
+        copy: "适合继续扩展到地图按钮、贴纸和任务动画。",
+      },
+      {
+        title: "云坡动作",
+        label: "动作延展",
+        image: "./assets/ip/yaoli/action-8.jpg",
+        copy: "对应滑下云坡、云朵书页和儿童任务完成瞬间。",
+      },
+    ],
+    emojis: [
+      { image: "./assets/ip/yaoli/emoji-1.jpg", label: "云朵笑脸" },
+      { image: "./assets/ip/yaoli/emoji-2.jpg", label: "窑里贴纸" },
+      { image: "./assets/ip/yaoli/emoji-3.jpg", label: "云朵提醒" },
+      { image: "./assets/ip/yaoli/emoji-4.jpg", label: "小云朵" },
+      { image: "./assets/ip/yaoli/emoji-6.jpg", label: "完成" },
+    ],
+  },
+  jinxing: {
+    kicker: "金叶茶礼",
+    title: "金星村 IP 与衍生品展台",
+    copy: "把银杏、龙顶茶和共富工坊变成可收藏、可带走、可互动的金色视觉系统。",
+    mark: "Golden Set",
+    accent: "#e8bb50",
+    panels: [
+      {
+        title: "金星主海报",
+        label: "主视觉",
+        image: "./assets/ip/jinxing/poster.jpg",
+        copy: "金色村落、茶园和银杏意象成为金星村的第一视觉锚点。",
+      },
+      {
+        title: "角色展板",
+        label: "角色设定",
+        image: "./assets/ip/jinxing/board.jpg",
+        copy: "女孩与小精灵形成亲近、明亮的村庄导览角色。",
+      },
+      {
+        title: "茶园动作",
+        label: "动作延展",
+        image: "./assets/ip/jinxing/action-1.jpg",
+        copy: "对应龙顶茶园、采茶和茶礼包装的互动节点。",
+      },
+      {
+        title: "金叶动作",
+        label: "动作延展",
+        image: "./assets/ip/jinxing/action-2.jpg",
+        copy: "银杏叶脉与共富礼物形成可被收集的动态反馈。",
+      },
+      {
+        title: "工坊动作",
+        label: "动作延展",
+        image: "./assets/ip/jinxing/action-3.jpg",
+        copy: "适合连接供销社、共富工坊和村民增收故事。",
+      },
+    ],
+    emojis: [
+      { image: "./assets/ip/jinxing/emoji-2.jpg", label: "金叶表情" },
+      { image: "./assets/ip/jinxing/emoji-3.jpg", label: "茶香表情" },
+      { image: "./assets/ip/jinxing/emoji-5.jpg", label: "小精灵" },
+      { image: "./assets/ip/jinxing/action-2.jpg", label: "金叶" },
+    ],
+    products: [
+      { image: "./assets/ip/jinxing/tea-box-1.jpg", title: "龙顶茶盒 A", type: "茶礼" },
+      { image: "./assets/ip/jinxing/tea-box-2.jpg", title: "龙顶茶盒 B", type: "茶礼" },
+      { image: "./assets/ip/jinxing/tea-box-3.jpg", title: "龙顶茶盒 C", type: "茶礼" },
+      { image: "./assets/ip/jinxing/tea-box-4.jpg", title: "龙顶茶盒 D", type: "茶礼" },
+      { image: "./assets/ip/jinxing/postcard-1.jpg", title: "金星明信片 A", type: "明信片" },
+      { image: "./assets/ip/jinxing/postcard-2.jpg", title: "金星明信片 B", type: "明信片" },
+      { image: "./assets/ip/jinxing/postcard-3.jpg", title: "金星明信片 C", type: "明信片" },
+      { image: "./assets/ip/jinxing/postcard-4.jpg", title: "金星明信片 D", type: "明信片" },
+      { image: "./assets/ip/jinxing/badge-1.jpg", title: "金叶徽章 A", type: "徽章" },
+      { image: "./assets/ip/jinxing/badge-2.jpg", title: "金叶徽章 B", type: "徽章" },
+      { image: "./assets/ip/jinxing/badge-3.jpg", title: "金叶徽章 C", type: "徽章" },
+      { image: "./assets/ip/jinxing/badge-4.jpg", title: "金叶徽章 D", type: "徽章" },
+      { image: "./assets/ip/jinxing/sticker-1.jpg", title: "金星贴纸 A", type: "贴纸" },
+      { image: "./assets/ip/jinxing/sticker-2.jpg", title: "金星贴纸 B", type: "贴纸" },
+      { image: "./assets/ip/jinxing/sticker-3.jpg", title: "金星贴纸 C", type: "贴纸" },
+      { image: "./assets/ip/jinxing/sticker-4.jpg", title: "金星贴纸 D", type: "贴纸" },
+      { image: "./assets/ip/jinxing/around-1.jpg", title: "金星周边 A", type: "周边" },
+      { image: "./assets/ip/jinxing/around-2.jpg", title: "金星周边 B", type: "周边" },
+      { image: "./assets/ip/jinxing/around-3.jpg", title: "金星周边 C", type: "周边" },
+      { image: "./assets/ip/jinxing/around-4.jpg", title: "金星周边 D", type: "周边" },
+      { image: "./assets/ip/jinxing/around-5.jpg", title: "金星周边 E", type: "周边" },
+      { image: "./assets/ip/jinxing/around-6.jpg", title: "金星周边 F", type: "周边" },
+      { image: "./assets/ip/jinxing/around-7.jpg", title: "金星周边 G", type: "周边" },
+    ],
+  },
+};
+
 const villageMapGuides = {
   gaoqiao: {
     eyebrow: "宠物友好村落导览",
@@ -1168,16 +1325,129 @@ function mapPanel(village) {
   `;
 }
 
+function ipShowcasePanel(village) {
+  const show = ipShowcases[village.id];
+  if (!show) return "";
+  const first = show.panels[0];
+  return `
+    <section class="ip-studio" style="--village:${village.color}; --ip-accent:${show.accent}">
+      <div class="ip-studio-head">
+        <div>
+          <p class="context-label">${show.kicker}</p>
+          <h2>${show.title}</h2>
+          <p>${show.copy}</p>
+        </div>
+        <span class="ip-mark">${show.mark}</span>
+      </div>
+
+      <div class="ip-stage">
+        <div class="ip-stage-glow"></div>
+        <figure class="ip-main">
+          <img src="${first.image}" alt="${first.title}" data-ip-main loading="lazy">
+          <figcaption>
+            <em data-ip-label>${first.label}</em>
+            <strong data-ip-title>${first.title}</strong>
+            <span data-ip-copy>${first.copy}</span>
+          </figcaption>
+        </figure>
+        <div class="ip-kinetic-lines" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </div>
+        <div class="emoji-stage" aria-hidden="true"></div>
+      </div>
+
+      <div class="ip-action-rail" data-drag-strip>
+        ${show.panels
+          .map(
+            (panel, index) => `
+              <button
+                class="ip-action-card ${index === 0 ? "is-active" : ""}"
+                data-ip-swap
+                data-ip-image="${panel.image}"
+                data-ip-title="${panel.title}"
+                data-ip-label="${panel.label}"
+                data-ip-copy="${panel.copy}"
+              >
+                <img src="${panel.image}" alt="${panel.title}" loading="lazy">
+                <span>${panel.label}</span>
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+
+      <div class="emoji-wall">
+        ${show.emojis
+          .map(
+            (emoji, index) => `
+              <button
+                class="emoji-chip"
+                data-emoji-pop
+                data-emoji-src="${emoji.image}"
+                data-emoji-label="${emoji.label}"
+                style="--i:${index}"
+              >
+                <img src="${emoji.image}" alt="${emoji.label}" loading="lazy">
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+
+      ${ipProductRunway(show)}
+    </section>
+  `;
+}
+
+function ipProductRunway(show) {
+  const products = show.products || [];
+  if (!products.length) return "";
+  const first = products[0];
+  return `
+    <section class="product-runway">
+      <div class="product-focus">
+        <figure>
+          <img src="${first.image}" alt="${first.title}" data-product-main loading="lazy">
+        </figure>
+        <div>
+          <span data-product-type>${first.type}</span>
+          <strong data-product-title>${first.title}</strong>
+        </div>
+      </div>
+      <div class="product-belt" data-drag-strip>
+        ${products
+          .map(
+            (product, index) => `
+              <button
+                class="product-tile ${index === 0 ? "is-active" : ""}"
+                data-product-focus
+                data-product-image="${product.image}"
+                data-product-title="${product.title}"
+                data-product-type="${product.type}"
+                style="--i:${index % 7}"
+              >
+                <img src="${product.image}" alt="${product.title}" loading="lazy">
+                <span>${product.type}</span>
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
 function materialsPanel(village) {
   const cards = village.materials;
   return `
     <section class="material-intro">
       <div>
         <p class="context-label">物料展陈</p>
-        <h2>实拍物料瀑布流</h2>
-        <p>把三村的照片、卡片、贴纸和样本以更轻快的方式铺开，像在翻一组会呼吸的展板。</p>
+        <h2>IP 物料剧场</h2>
+        <p>角色、表情包、贴纸和村落物料在这里一起流动，形成可以停留、切换和收集的展示面。</p>
       </div>
     </section>
+    ${ipShowcasePanel(village)}
     <section class="material-grid masonry">
       ${cards
         .map(
@@ -1838,6 +2108,67 @@ function attachHandlers() {
         selectedMapNode: state.selectedMapNode,
         selectedStoryNode: state.selectedMapNode,
       });
+    });
+  });
+
+  app.querySelectorAll("[data-ip-swap]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const studio = button.closest(".ip-studio");
+      const main = studio?.querySelector("[data-ip-main]");
+      if (!studio || !main) return;
+      main.classList.remove("is-switching");
+      void main.offsetWidth;
+      main.classList.add("is-switching");
+      main.src = button.dataset.ipImage;
+      main.alt = button.dataset.ipTitle || "";
+      studio.querySelector("[data-ip-title]").textContent = button.dataset.ipTitle || "";
+      studio.querySelector("[data-ip-label]").textContent = button.dataset.ipLabel || "";
+      studio.querySelector("[data-ip-copy]").textContent = button.dataset.ipCopy || "";
+      studio.querySelectorAll("[data-ip-swap]").forEach((next) => next.classList.toggle("is-active", next === button));
+      window.setTimeout(() => main.classList.remove("is-switching"), 520);
+      showToast(button.dataset.ipLabel || "已切换");
+      vibrate(10);
+    });
+  });
+
+  app.querySelectorAll("[data-emoji-pop]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const stage = button.closest(".ip-studio")?.querySelector(".emoji-stage");
+      if (!stage) return;
+      const burst = document.createElement("img");
+      burst.className = "emoji-burst";
+      burst.src = button.dataset.emojiSrc;
+      burst.alt = "";
+      burst.style.setProperty("--tx", `${Math.round(-90 + Math.random() * 180)}px`);
+      burst.style.setProperty("--ty", `${Math.round(-150 - Math.random() * 90)}px`);
+      burst.style.setProperty("--rot", `${Math.round(-22 + Math.random() * 44)}deg`);
+      burst.style.left = `${18 + Math.random() * 64}%`;
+      burst.style.top = `${58 + Math.random() * 24}%`;
+      stage.appendChild(burst);
+      window.setTimeout(() => burst.remove(), 1100);
+      button.classList.add("just-popped");
+      window.setTimeout(() => button.classList.remove("just-popped"), 520);
+      showToast(`${button.dataset.emojiLabel || "表情"}飞出`);
+      vibrate(12);
+    });
+  });
+
+  app.querySelectorAll("[data-product-focus]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const runway = button.closest(".product-runway");
+      const main = runway?.querySelector("[data-product-main]");
+      if (!runway || !main) return;
+      main.classList.remove("is-switching");
+      void main.offsetWidth;
+      main.classList.add("is-switching");
+      main.src = button.dataset.productImage;
+      main.alt = button.dataset.productTitle || "";
+      runway.querySelector("[data-product-title]").textContent = button.dataset.productTitle || "";
+      runway.querySelector("[data-product-type]").textContent = button.dataset.productType || "";
+      runway.querySelectorAll("[data-product-focus]").forEach((next) => next.classList.toggle("is-active", next === button));
+      window.setTimeout(() => main.classList.remove("is-switching"), 520);
+      showToast(button.dataset.productType || "物料");
+      vibrate(10);
     });
   });
 
