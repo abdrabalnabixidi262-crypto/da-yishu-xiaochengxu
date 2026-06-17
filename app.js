@@ -930,7 +930,9 @@ function homeView() {
 
     <section class="quick-grid">
       <button class="glass-card pressable quick-action" data-shortcut="map" data-village="${homeVillage.id}">
-        <div class="orb-icon">⟡</div>
+        <div class="orb-icon quick-asset-icon">
+          <img src="./assets/ui/quick-map.png" alt="" loading="lazy">
+        </div>
         <div class="quick-copy">
           <h3>艺术地图</h3>
           <p>直接进入窑里村的立体地图，点位会实时响应。</p>
@@ -938,7 +940,9 @@ function homeView() {
         <span class="quick-arrow">↗</span>
       </button>
       <button class="glass-card pressable quick-action" data-shortcut="materials" data-village="${homeVillage.id}">
-        <div class="orb-icon" style="background:linear-gradient(145deg,#6f4cc9,#d7a849)">✺</div>
+        <div class="orb-icon quick-asset-icon">
+          <img src="./assets/ui/quick-materials.png" alt="" loading="lazy">
+        </div>
         <div class="quick-copy">
           <h3>带走物料</h3>
           <p>打开三村实拍瀑布流，像翻一本会发光的样本册。</p>
@@ -946,7 +950,9 @@ function homeView() {
         <span class="quick-arrow">↗</span>
       </button>
       <button class="glass-card pressable quick-action feature-wide" data-shortcut="game">
-        <div class="orb-icon" style="background:linear-gradient(145deg,#1f2f3a,#69a0c7)">✦</div>
+        <div class="orb-icon quick-asset-icon">
+          <img src="./assets/ui/quick-game.png" alt="" loading="lazy">
+        </div>
         <div class="quick-copy">
           <h3>互动收集</h3>
           <p>点亮记忆碎片，完成一段轻快的乡村探索。</p>

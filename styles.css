@@ -613,6 +613,22 @@ p {
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.quick-action .quick-asset-icon {
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+}
+
+.quick-asset-icon img {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: -7px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(22, 34, 29, 0.16));
+  pointer-events: none;
+}
+
 .quick-copy h3 {
   margin: 0 0 7px;
   font-size: 22px;
