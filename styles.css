@@ -3676,12 +3676,13 @@ p {
 }
 
 .mission-stage {
-  min-height: 370px;
+  min-height: 392px;
   border-radius: 30px;
   background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 22px),
-    radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.9), transparent 18%),
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.92), transparent 19%),
+    radial-gradient(circle at 78% 72%, color-mix(in srgb, var(--village) 24%, transparent), transparent 28%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.13) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0 1px, transparent 1px 26px),
     linear-gradient(145deg, var(--mapA), var(--mapB));
   transform: perspective(1000px) rotateX(9deg);
   transform-origin: center bottom;
@@ -3703,8 +3704,8 @@ p {
   border-radius: inherit;
   transform: none;
   background:
-    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.34), transparent 22%),
-    linear-gradient(180deg, transparent 0 52%, rgba(255, 255, 255, 0.22));
+    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.28), transparent 22%),
+    linear-gradient(180deg, transparent 0 50%, rgba(255, 255, 255, 0.18));
   animation: none;
 }
 
@@ -3748,16 +3749,19 @@ p {
 }
 
 .node-token {
-  width: 70px;
-  height: 70px;
+  width: 58px;
+  height: 58px;
   z-index: 3;
   transform: translate(-50%, -50%);
   animation: nodeTokenFloat 2.6s ease-in-out infinite alternate;
+  border-radius: 22px;
+  overflow: visible;
+  isolation: isolate;
 }
 
 .node-token.is-active {
   box-shadow:
-    0 0 0 10px rgba(255, 255, 255, 0.22),
+    0 0 0 9px rgba(255, 251, 240, 0.34),
     0 0 30px color-mix(in srgb, var(--village) 50%, transparent),
     0 20px 38px rgba(22, 34, 29, 0.22);
 }
@@ -3765,16 +3769,16 @@ p {
 .game-token.collected {
   opacity: 0.72;
   filter: saturate(0.75);
-  transform: translate(-50%, -50%) scale(0.86);
+  transform: translate(-50%, -50%) scale(0.9);
   box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.42), 0 22px 36px rgba(22, 34, 29, 0.18);
 }
 
 .game-spark {
   position: absolute;
   z-index: 0;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 34px;
-  filter: drop-shadow(0 10px 18px rgba(22, 34, 29, 0.14));
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 30px;
+  filter: drop-shadow(0 10px 18px rgba(22, 34, 29, 0.1));
   animation: glyphFloat 4s ease-in-out infinite alternate;
 }
 
@@ -3796,29 +3800,60 @@ p {
 }
 
 .token-number {
+  position: relative;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   line-height: 1;
+  border-radius: 18px;
+  background: rgba(255, 251, 240, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 251, 240, 0.2);
 }
 
 .token-number img {
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .token-name {
-  margin-top: 5px;
-  width: 64px;
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 7px);
+  width: max-content;
+  min-width: 86px;
+  max-width: 128px;
+  margin-top: 0;
+  padding: 5px 8px 6px;
+  border-radius: 999px;
   overflow: hidden;
-  font-size: 10px;
+  color: #223027;
+  background: rgba(255, 251, 240, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  box-shadow: 0 10px 22px rgba(22, 34, 29, 0.14);
+  font-size: 12px;
   font-weight: 900;
-  line-height: 1.15;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.18;
+  text-align: center;
+  white-space: normal;
+  transform: translateX(-50%);
+  backdrop-filter: blur(10px);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  z-index: 1;
+}
+
+.node-token.is-active .token-name {
+  color: #fff;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--village) 82%, #17231d), #17231d);
+  border-color: rgba(255, 251, 240, 0.45);
+  box-shadow: 0 14px 26px rgba(22, 34, 29, 0.2);
 }
 
 .mission-console {
@@ -6671,13 +6706,32 @@ p {
   }
 
   .mission-stage {
-    min-height: 350px;
+    min-height: 368px;
   }
 
   .node-token {
-    width: 62px;
-    height: 62px;
-    border-radius: 22px;
+    width: 50px;
+    height: 50px;
+    border-radius: 19px;
+  }
+
+  .token-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 16px;
+  }
+
+  .token-number img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .token-name {
+    min-width: 78px;
+    max-width: 104px;
+    padding: 4px 6px 5px;
+    font-size: 11px;
+    line-height: 1.16;
   }
 
   .inventory-grid {

@@ -27,10 +27,11 @@ const villages = {
       ["良渚文化点", "作为高桥村地域记忆的文化锚点。"],
     ],
     materials: [
-      ["./assets/real/gaoqiao-cafe.jpg", "宠物友好贴纸", "贴在故事卡与导览牌上，成为高桥的轻量识别。", "tall"],
-      ["./assets/real/gaoqiao-walk.jpg", "遛村路线卡", "沿田野步道展开，把步行线路做成可收藏卡片。", "wide"],
-      ["./assets/premium-gaoqiao.png", "商户门贴", "咖啡、休憩点与友好商户的门口识别。", "square"],
-      ["./assets/real/gaoqiao-cafe.jpg", "带它去村里明信片", "把宠物友好的瞬间做成可带走的村庄记忆。", "tall"],
+      ["./assets/ip/gaoqiao/product-pet-stickers.jpg", "宠物友好贴纸组", "贴在故事卡与导览牌上，成为高桥的轻量识别。", "wide"],
+      ["./assets/ip/gaoqiao/product-route-card.jpg", "高桥遛村路线卡", "沿田野步道展开，把步行线路做成可收藏卡片。", "wide"],
+      ["./assets/ip/gaoqiao/product-shop-sign.jpg", "友好商户门贴", "咖啡、休憩点与友好商户的门口识别。", "wide"],
+      ["./assets/ip/gaoqiao/product-summary-board.jpg", "高桥村三产品汇总", "把贴纸、路线卡和门贴合成一组完整的高桥周边方案。", "wide"],
+      ["./assets/ip/gaoqiao/product-theme-board.jpg", "高桥村主题展板", "将角色、地图和产品应用集中呈现为高桥村的主视觉展板。", "tall"],
     ],
   },
   yaoli: {
@@ -132,6 +133,18 @@ const ipShowcases = {
         copy: "正侧背造型保持清爽，方便延展到导览牌和互动按钮。",
       },
       {
+        title: "路线卡动作",
+        label: "动作延展",
+        image: "./assets/ip/gaoqiao/action-1.jpg",
+        copy: "手持高桥路线图的探索姿态，适合放在路线卡、任务入口和新手引导里。",
+      },
+      {
+        title: "遛村出行",
+        label: "动作延展",
+        image: "./assets/ip/gaoqiao/action-2.jpg",
+        copy: "背包步行动作更贴合村内慢行、田野探索和宠物友好路线。",
+      },
+      {
         title: "出发动作",
         label: "动作延展",
         image: "./assets/ip/gaoqiao/action-3.jpg",
@@ -151,6 +164,13 @@ const ipShowcases = {
       { image: "./assets/ip/gaoqiao/emoji-pack-4.jpg", label: "高桥表情" },
       { image: "./assets/ip/gaoqiao/emoji-pack-5.jpg", label: "高桥表情" },
       { image: "./assets/ip/gaoqiao/emoji-pack-6.jpg", label: "高桥表情" },
+    ],
+    products: [
+      { image: "./assets/ip/gaoqiao/product-pet-stickers.jpg", title: "宠物友好贴纸组", type: "贴纸" },
+      { image: "./assets/ip/gaoqiao/product-route-card.jpg", title: "高桥遛村路线卡", type: "路线卡" },
+      { image: "./assets/ip/gaoqiao/product-shop-sign.jpg", title: "友好商户门贴", type: "门贴" },
+      { image: "./assets/ip/gaoqiao/product-summary-board.jpg", title: "高桥村三产品汇总板", type: "展板" },
+      { image: "./assets/ip/gaoqiao/product-theme-board.jpg", title: "高桥村主题展板", type: "主视觉" },
     ],
   },
   yaoli: {
@@ -190,6 +210,24 @@ const ipShowcases = {
         image: "./assets/ip/yaoli/action-8.jpg",
         copy: "对应滑下云坡、云朵书页和儿童任务完成瞬间。",
       },
+      {
+        title: "云朵引导动作",
+        label: "动作延展",
+        image: "./assets/ip/yaoli/action-1.jpg",
+        copy: "适合云朵书吧入口、亲子研学开场和第一枚护照盖章。",
+      },
+      {
+        title: "陶艺观察动作",
+        label: "动作延展",
+        image: "./assets/ip/yaoli/action-3.jpg",
+        copy: "把窑文化馆的观察、捏陶和手作课堂转换成更明确的角色反馈。",
+      },
+      {
+        title: "水乡奔跑动作",
+        label: "动作延展",
+        image: "./assets/ip/yaoli/action-5.jpg",
+        copy: "用于连接水漾路线、艺术空间和儿童任务完成后的轻快状态。",
+      },
     ],
     emojis: [
       { image: "./assets/ip/yaoli/emoji-pack-1.jpg", label: "窑里表情" },
@@ -214,8 +252,14 @@ const ipShowcases = {
         copy: "金色村落、茶园和银杏意象成为金星村的第一视觉锚点。",
       },
       {
-        title: "角色展板",
+        title: "角色三视图",
         label: "角色设定",
+        image: "./assets/ip/jinxing/threeview.jpg",
+        copy: "新的正侧背设定让女孩与金叶伙伴更适合延展到导览按钮、徽章和周边包装。",
+      },
+      {
+        title: "角色展板",
+        label: "主视觉",
         image: "./assets/ip/jinxing/board.jpg",
         copy: "女孩与小精灵形成亲近、明亮的村庄导览角色。",
       },
@@ -236,6 +280,12 @@ const ipShowcases = {
         label: "动作延展",
         image: "./assets/ip/jinxing/action-3.jpg",
         copy: "适合连接供销社、共富工坊和村民增收故事。",
+      },
+      {
+        title: "金星收集动作",
+        label: "动作延展",
+        image: "./assets/ip/jinxing/action-4.jpg",
+        copy: "把金叶、茶礼和研学物料整合成更有完成感的收集反馈。",
       },
     ],
     emojis: [
@@ -269,7 +319,7 @@ const villageMapGuides = {
         title: "猫岛人宠空间",
         label: "人宠共享",
         x: 18,
-        y: 62,
+        y: 60,
         icon: "🐾",
         action: "领取宠物友好贴纸",
         text: "从老旧甲鱼塘转化而来的宠物友好场景，适合做路线起点和第一枚打卡章。",
@@ -277,8 +327,8 @@ const villageMapGuides = {
       {
         title: "知物堂植物美学",
         label: "植物工坊",
-        x: 38,
-        y: 43,
+        x: 36,
+        y: 39,
         icon: "✿",
         action: "生成植物纹样卡",
         text: "把废弃厂房变成绿意流动的美学空间，观众可以采集叶形纹样。",
@@ -287,7 +337,7 @@ const villageMapGuides = {
         title: "青年市集口袋",
         label: "乡创摊位",
         x: 64,
-        y: 25,
+        y: 22,
         icon: "✦",
         action: "点亮青年摊位",
         text: "展示高桥村青年创业、宠物周边和乡村生活方式的轻量市集。",
@@ -295,8 +345,8 @@ const villageMapGuides = {
       {
         title: "田野慢行线",
         label: "遛村步道",
-        x: 70,
-        y: 56,
+        x: 73,
+        y: 52,
         icon: "↝",
         action: "开启慢行计步",
         text: "沿田埂和水线慢行，把城边生活与田野呼吸连接起来。",
@@ -305,7 +355,7 @@ const villageMapGuides = {
         title: "良渚记忆点",
         label: "文化锚点",
         x: 84,
-        y: 75,
+        y: 74,
         icon: "◆",
         action: "收集玉色碎片",
         text: "用玉色、纹样和故事卡提示高桥与良渚文化的地域联系。",
@@ -323,7 +373,7 @@ const villageMapGuides = {
       {
         title: "云朵书吧",
         label: "互动书屋",
-        x: 22,
+        x: 20,
         y: 58,
         icon: "☁",
         action: "翻开云朵书页",
@@ -332,8 +382,8 @@ const villageMapGuides = {
       {
         title: "等云坡",
         label: "草坡游乐",
-        x: 38,
-        y: 33,
+        x: 39,
+        y: 30,
         icon: "⛰",
         action: "滑下云坡",
         text: "草地、秋千和攀爬坡组成户外成长空间，适合亲子研学任务。",
@@ -341,8 +391,8 @@ const villageMapGuides = {
       {
         title: "窑文化馆",
         label: "陶艺体验",
-        x: 61,
-        y: 41,
+        x: 62,
+        y: 40,
         icon: "◒",
         action: "烧制陶泥徽章",
         text: "由旧空间微改造而来，陶艺制作、上色和烧制可以变成小游戏任务。",
@@ -350,8 +400,8 @@ const villageMapGuides = {
       {
         title: "云朵栖息地",
         label: "咖啡休憩",
-        x: 78,
-        y: 58,
+        x: 80,
+        y: 56,
         icon: "☕",
         action: "盖一枚云咖啡章",
         text: "咖啡、白墙黛瓦和云朵 IP 形成更轻松的停留点。",
@@ -359,8 +409,8 @@ const villageMapGuides = {
       {
         title: "云集艺术空间",
         label: "共创展览",
-        x: 56,
-        y: 77,
+        x: 54,
+        y: 78,
         icon: "✺",
         action: "拼一块艺术墙",
         text: "青年艺术家和孩子的创作可以变成可拖拽、可点亮的艺术碎片。",
@@ -379,7 +429,7 @@ const villageMapGuides = {
         title: "银杏古树",
         label: "金叶记忆",
         x: 18,
-        y: 68,
+        y: 66,
         icon: "🍂",
         action: "摇落金叶字卡",
         text: "一棵古树带出村庄年代感，也适合作为金色视觉纹样的核心来源。",
@@ -387,8 +437,8 @@ const villageMapGuides = {
       {
         title: "龙顶茶园",
         label: "茶乡体验",
-        x: 42,
-        y: 43,
+        x: 40,
+        y: 39,
         icon: "茶",
         action: "采一枚茶芽",
         text: "把茶芽、茶篓和包装样机做成可收集的村庄礼物。",
@@ -396,8 +446,8 @@ const villageMapGuides = {
       {
         title: "红色研学点",
         label: "红课堂",
-        x: 69,
-        y: 26,
+        x: 70,
+        y: 23,
         icon: "★",
         action: "点亮红课堂",
         text: "以党建和研学为入口，让共富故事有更清晰的叙事支点。",
@@ -405,8 +455,8 @@ const villageMapGuides = {
       {
         title: "民宿农家乐",
         label: "美丽经济",
-        x: 80,
-        y: 56,
+        x: 82,
+        y: 55,
         icon: "⌂",
         action: "预览一间民宿",
         text: "游客停留、餐饮和民宿共同构成金星村的美丽经济动线。",
@@ -414,8 +464,8 @@ const villageMapGuides = {
       {
         title: "共富工坊",
         label: "两有金星",
-        x: 56,
-        y: 81,
+        x: 55,
+        y: 79,
         icon: "✦",
         action: "合成共富徽章",
         text: "把“人人有事做，家家有收入”转化为可点击、可理解的互动节点。",
@@ -1662,8 +1712,8 @@ function materialCarouselPanel(village) {
       <div class="merch-orbit-head">
         <div>
           <p class="context-label">周边转轮盘</p>
-          <h2>金星村文创周边</h2>
-          <p>自动旋转浏览七件周边，点击任一物件进入对应大图详情。</p>
+          <h2>${village.name}文创周边</h2>
+          <p>自动旋转浏览${products.length}件周边，点击任一物件进入对应大图详情。</p>
         </div>
         <button class="merch-orbit-focus" data-product-open="0">查看大图</button>
       </div>
@@ -1705,9 +1755,9 @@ function materialCarouselPanel(village) {
 
 function materialsPanel(village) {
   const cards = village.materials;
-  const productOrbit = village.id === "jinxing" ? materialCarouselPanel(village) : "";
+  const productOrbit = (ipShowcases[village.id]?.products || []).length ? materialCarouselPanel(village) : "";
   const materialGrid =
-    village.id === "jinxing"
+    productOrbit
       ? ""
       : `
         <section class="material-grid masonry">
