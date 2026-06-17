@@ -1,12 +1,12 @@
 const villages = {
   gaoqiao: {
     id: "gaoqiao",
-    name: "???",
-    title: "???????",
-    subtitle: "????????",
-    type: "?????? / ?????",
-    location: "??? ? ???",
-    regionKey: "???",
+    name: "高桥村",
+    title: "带着宠物去村里",
+    subtitle: "城边友好生活地图",
+    type: "城郊未来乡村 / 宠物友好村",
+    location: "杭州市 · 余杭区",
+    regionKey: "杭州市",
     cover: "./assets/premium-gaoqiao.png",
     photos: [
       "./assets/real/gaoqiao-cafe.jpg",
@@ -16,31 +16,31 @@ const villages = {
     mapFocus: 2,
     color: "#5f9d66",
     map: { a: "#d8eadb", b: "#b8d6bb" },
-    tags: ["????", "????", "????"],
+    tags: ["宠物友好", "青年市集", "田野步道"],
     story:
-      "?????????????????????????????????????????????????????????????????????????",
+      "高桥村不是远方的景区，而是城市边缘正在生长的友好乡村。小程序把宠物休憩点、乡村咖啡、青年市集与良渚文化点串成一张可浏览、可打卡、可收藏的遛村地图。",
     nodes: [
-      ["?????", "????????????????"],
-      ["????", "????????????????"],
-      ["????", "???????????????"],
-      ["????", "????????????????"],
-      ["?????", "???????????????"],
+      ["宠物休憩点", "为带宠物来的观众保留友好停留点。"],
+      ["青年市集", "展示高桥村年轻、开放的乡创生活。"],
+      ["田野步道", "把城边生活与田野慢行连接起来。"],
+      ["友好商户", "扫码查看门贴、路线卡和服务说明。"],
+      ["良渚文化点", "作为高桥村地域记忆的文化锚点。"],
     ],
     materials: [
-      ["./assets/real/gaoqiao-cafe.jpg", "??????", "?????????????????????", "tall"],
-      ["./assets/real/gaoqiao-walk.jpg", "?????", "?????????????????????", "wide"],
-      ["./assets/premium-gaoqiao.png", "????", "?????????????????", "square"],
-      ["./assets/real/gaoqiao-cafe.jpg", "????????", "???????????????????", "tall"],
+      ["./assets/real/gaoqiao-cafe.jpg", "宠物友好贴纸", "贴在故事卡与导览牌上，成为高桥的轻量识别。", "tall"],
+      ["./assets/real/gaoqiao-walk.jpg", "遛村路线卡", "沿田野步道展开，把步行线路做成可收藏卡片。", "wide"],
+      ["./assets/premium-gaoqiao.png", "商户门贴", "咖啡、休憩点与友好商户的门口识别。", "square"],
+      ["./assets/real/gaoqiao-cafe.jpg", "带它去村里明信片", "把宠物友好的瞬间做成可带走的村庄记忆。", "tall"],
     ],
   },
   yaoli: {
     id: "yaoli",
-    name: "???",
-    title: "???????",
-    subtitle: "???????",
-    type: "??????? / ????",
-    location: "??? ? ???",
-    regionKey: "???",
+    name: "窑里村",
+    title: "向窑里，追云去",
+    subtitle: "儿童友好艺术村",
+    type: "儿童友好艺术村 / 亲子研学",
+    location: "湖州市 · 南浔区",
+    regionKey: "湖州市",
     cover: "./assets/premium-yaoli.png",
     photos: [
       "./assets/real/yaoli-workshop-1.jpg",
@@ -52,31 +52,31 @@ const villages = {
     mapFocus: 0,
     color: "#5d91c2",
     map: { a: "#dfeaf7", b: "#bfd7ef" },
-    tags: ["??", "??", "????"],
+    tags: ["云朵", "水乡", "亲子研学"],
     story:
-      "??????????????????????????????????????????????????????????????????????",
+      "窑里村从儿童视角重新绘制村庄。云朵、河流、草地、书吧和手作课堂成为地图上的故事节点，观众可以通过研学护照和任务卡完成一次小小的乡村艺术探索。",
     nodes: [
-      ["????", "??????????????"],
-      ["?????", "?????????????"],
-      ["?????", "???????????????"],
-      ["????", "?????????????"],
-      ["????", "????????????????"],
+      ["云朵书吧", "作为儿童友好视觉的温柔入口。"],
+      ["草地活动区", "承接亲子共创和任务卡互动。"],
+      ["艺术展览点", "让村庄从游览对象变成创作现场。"],
+      ["手作课堂", "对应研学护照里的打卡任务。"],
+      ["水漾路线", "把水乡气质转化成可走的地图线索。"],
     ],
     materials: [
-      ["./assets/real/yaoli-workshop-1.jpg", "??????", "?????????????????", "tall"],
-      ["./assets/real/yaoli-workshop-3.jpg", "?????", "??????????????????", "square"],
-      ["./assets/real/yaoli-workshop-2.jpg", "?????", "??????????????????", "wide"],
-      ["./assets/real/yaoli-wall.jpg", "??????", "??????????????????", "square"],
+      ["./assets/real/yaoli-workshop-1.jpg", "云朵研学护照", "记录亲子任务、陶艺体验与村庄发现。", "tall"],
+      ["./assets/real/yaoli-workshop-3.jpg", "儿童任务卡", "引导观众用手作、观察和涂画完成探索。", "square"],
+      ["./assets/real/yaoli-workshop-2.jpg", "云朵贴纸包", "适合共创墙、样本盒与展板旁的小互动。", "wide"],
+      ["./assets/real/yaoli-wall.jpg", "水漾窑里书签", "把水乡气质做成柔和、轻巧的可带走物。", "square"],
     ],
   },
   jinxing: {
     id: "jinxing",
-    name: "???",
-    title: "???????????",
-    subtitle: "??????",
-    type: "???????? / ???????",
-    location: "??? ? ???",
-    regionKey: "???",
+    name: "金星村",
+    title: "人人有事做，家家有收入",
+    subtitle: "共富金星地图",
+    type: "千万工程典型案例 / 共同富裕样板村",
+    location: "衢州市 · 开化县",
+    regionKey: "衢州市",
     cover: "./assets/ip/jinxing/poster.jpg",
     photos: [
       "./assets/ip/jinxing/poster.jpg",
@@ -89,351 +89,351 @@ const villages = {
     mapFocus: 4,
     color: "#d7a849",
     map: { a: "#f7e6ae", b: "#b9d989" },
-    tags: ["????", "???", "????"],
+    tags: ["共富工坊", "龙顶茶", "银杏古树"],
     story:
-      "???????????????????????????????????????????????????????????????????????????????????????",
+      "金星村把钱江源生态、银杏古树、龙顶茶、红色研学与共富工坊串联成一张可走、可听、可收集的共富地图。观众不只是在看乡村风景，也能看见村民增收、产业协作和山区村庄现代化的真实路径。",
     nodes: [
-      ["????", "????????????????????"],
-      ["????", "??????????????????"],
-      ["?????", "????????????????"],
-      ["?????", "???????????????????"],
-      ["????", "????????????????????????"],
+      ["银杏古树", "以金色叶脉作为村庄记忆和视觉纹样的起点。"],
+      ["龙顶茶园", "连接茶产业、包装样机和乡村增收故事。"],
+      ["红色研学点", "承接红课堂学习卡与现场研学路线。"],
+      ["金星供销社", "展示农产品、故事卡和可带走的村庄礼物。"],
+      ["共富工坊", "把人人参与、家家增收转化成可扫码理解的共富节点。"],
     ],
     materials: [
-      ["./assets/ip/jinxing/tea-box-1.jpg", "???????", "??????????????????????", "wide"],
-      ["./assets/ip/jinxing/postcard-1.jpg", "??????", "??????????????????", "square"],
-      ["./assets/ip/jinxing/sticker-1.jpg", "??????", "??????????????????", "square"],
-      ["./assets/ip/jinxing/badge-1.jpg", "??????", "??????????????????????", "tall"],
-      ["./assets/ip/jinxing/around-1.jpg", "??????", "??????????????????????", "square"],
-      ["./assets/ip/jinxing/around-2.jpg", "??????", "???????????????????", "square"],
+      ["./assets/ip/jinxing/tea-box-1.jpg", "金星龙顶茶包装", "把茶园、茶芽和共富叙事做成可陈列的包装样机。", "wide"],
+      ["./assets/ip/jinxing/postcard-1.jpg", "银杏故事书签", "用金色叶片记录村庄年代感和乡土记忆。", "square"],
+      ["./assets/ip/jinxing/sticker-1.jpg", "红课堂学习卡", "对应红色研学点，适合展板旁扫码领取。", "square"],
+      ["./assets/ip/jinxing/badge-1.jpg", "共富工坊徽章", "把村民协作、产业增收和共同富裕做成轻量识别。", "tall"],
+      ["./assets/ip/jinxing/around-1.jpg", "金星茶礼周边", "把金星龙顶茶、银杏角色和伴手礼做成完整陈列。", "square"],
+      ["./assets/ip/jinxing/around-2.jpg", "共富纪念周边", "适合在产品系列里继续查看细节与放大图。", "square"],
     ],
   },
 };
 
 const ipShowcases = {
   gaoqiao: {
-    kicker: "?????",
-    title: "??? IP ????",
-    copy: "???????????????????????????",
+    kicker: "人宠探索员",
+    title: "高桥村 IP 动作剧场",
+    copy: "把猫岛、田野步道和宠物友好路线收进一个会动的探索角色。",
     mark: "Paw Map",
     accent: "#74c783",
     panels: [
       {
-        title: "???????",
-        label: "???",
+        title: "人宠探索员展板",
+        label: "主视觉",
         image: "./assets/ip/gaoqiao/board.jpg",
-        copy: "???????????????????????????",
+        copy: "角色、路线和村内宠物友好节点被压进同一张高桥导览展板。",
       },
       {
-        title: "?????",
-        label: "????",
+        title: "三视图设定",
+        label: "角色设定",
         image: "./assets/ip/gaoqiao/threeview.jpg",
-        copy: "????????????????????????",
+        copy: "正侧背造型保持清爽，方便延展到导览牌和互动按钮。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "出发动作",
+        label: "动作延展",
         image: "./assets/ip/gaoqiao/action-3.jpg",
-        copy: "????????????????????????",
+        copy: "适合对应田野步道、宠物牵引和村口打卡的轻快状态。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "打卡动作",
+        label: "动作延展",
         image: "./assets/ip/gaoqiao/action-4.jpg",
-        copy: "?????????????????????",
+        copy: "用更明显的姿态回应市集、休憩点和友好商户。",
       },
     ],
     emojis: [
-      { image: "./assets/ip/gaoqiao/emoji-pack-1.jpg", label: "????" },
-      { image: "./assets/ip/gaoqiao/emoji-pack-2.jpg", label: "????" },
-      { image: "./assets/ip/gaoqiao/emoji-pack-3.jpg", label: "????" },
-      { image: "./assets/ip/gaoqiao/emoji-pack-4.jpg", label: "????" },
-      { image: "./assets/ip/gaoqiao/emoji-pack-5.jpg", label: "????" },
-      { image: "./assets/ip/gaoqiao/emoji-pack-6.jpg", label: "????" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-1.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-2.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-3.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-4.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-5.jpg", label: "高桥表情" },
+      { image: "./assets/ip/gaoqiao/emoji-pack-6.jpg", label: "高桥表情" },
     ],
   },
   yaoli: {
-    kicker: "?????",
-    title: "?????????",
-    copy: "??????????????????????????",
+    kicker: "云朵艺术村",
+    title: "窑里村云朵角色剧场",
+    copy: "把云朵书吧、草坡和陶艺体验做成轻盈的儿童艺术角色组。",
     mark: "Cloud Play",
     accent: "#7fb7f0",
     panels: [
       {
-        title: "????",
-        label: "????",
+        title: "云朵场景",
+        label: "场景插画",
         image: "./assets/ip/yaoli/scene-1.jpg",
-        copy: "?????????????????????????",
+        copy: "云朵、村路和儿童视角形成第一眼就能进入的窑里场景。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "水乡场景",
+        label: "场景插画",
         image: "./assets/ip/yaoli/scene-2.jpg",
-        copy: "???????????????????",
+        copy: "把水乡、白墙和柔软色彩接到研学动线里。",
       },
       {
-        title: "????",
-        label: "???",
+        title: "角色展板",
+        label: "主视觉",
         image: "./assets/ip/yaoli/board.jpg",
-        copy: "??????????????????????",
+        copy: "古风女孩和云朵小伙伴共同成为窑里故事的入口。",
       },
       {
-        title: "?????",
-        label: "????",
+        title: "角色三视图",
+        label: "角色设定",
         image: "./assets/ip/yaoli/threeview.jpg",
-        copy: "????????????????????",
+        copy: "适合继续扩展到地图按钮、贴纸和任务动画。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "云坡动作",
+        label: "动作延展",
         image: "./assets/ip/yaoli/action-8.jpg",
-        copy: "?????????????????????",
+        copy: "对应滑下云坡、云朵书页和儿童任务完成瞬间。",
       },
     ],
     emojis: [
-      { image: "./assets/ip/yaoli/emoji-pack-1.jpg", label: "????" },
-      { image: "./assets/ip/yaoli/emoji-pack-2.jpg", label: "????" },
-      { image: "./assets/ip/yaoli/emoji-pack-3.jpg", label: "????" },
-      { image: "./assets/ip/yaoli/emoji-pack-4.jpg", label: "????" },
-      { image: "./assets/ip/yaoli/emoji-pack-5.jpg", label: "????" },
-      { image: "./assets/ip/yaoli/emoji-pack-6.jpg", label: "????" },
+      { image: "./assets/ip/yaoli/emoji-pack-1.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-2.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-3.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-4.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-5.jpg", label: "窑里表情" },
+      { image: "./assets/ip/yaoli/emoji-pack-6.jpg", label: "窑里表情" },
     ],
   },
   jinxing: {
-    kicker: "????",
-    title: "??? IP ??????",
-    copy: "?????????????????????????????????",
+    kicker: "金叶茶礼",
+    title: "金星村 IP 与衍生品展台",
+    copy: "把银杏、龙顶茶和共富工坊变成可收藏、可带走、可互动的金色视觉系统。",
     mark: "Golden Set",
     accent: "#e8bb50",
     panels: [
       {
-        title: "?????",
-        label: "???",
+        title: "金星主海报",
+        label: "主视觉",
         image: "./assets/ip/jinxing/poster.jpg",
-        copy: "?????????????????????????",
+        copy: "金色村落、茶园和银杏意象成为金星村的第一视觉锚点。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "角色展板",
+        label: "角色设定",
         image: "./assets/ip/jinxing/board.jpg",
-        copy: "?????????????????????",
+        copy: "女孩与小精灵形成亲近、明亮的村庄导览角色。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "茶园动作",
+        label: "动作延展",
         image: "./assets/ip/jinxing/action-1.jpg",
-        copy: "????????????????????",
+        copy: "对应龙顶茶园、采茶和茶礼包装的互动节点。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "金叶动作",
+        label: "动作延展",
         image: "./assets/ip/jinxing/action-2.jpg",
-        copy: "?????????????????????",
+        copy: "银杏叶脉与共富礼物形成可被收集的动态反馈。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "工坊动作",
+        label: "动作延展",
         image: "./assets/ip/jinxing/action-3.jpg",
-        copy: "????????????????????",
+        copy: "适合连接供销社、共富工坊和村民增收故事。",
       },
     ],
     emojis: [
-      { image: "./assets/ip/jinxing/emoji-2.jpg", label: "????" },
-      { image: "./assets/ip/jinxing/emoji-3.jpg", label: "????" },
-      { image: "./assets/ip/jinxing/emoji-5.jpg", label: "???" },
-      { image: "./assets/ip/jinxing/action-2.jpg", label: "??" },
+      { image: "./assets/ip/jinxing/emoji-2.jpg", label: "金叶表情" },
+      { image: "./assets/ip/jinxing/emoji-3.jpg", label: "茶香表情" },
+      { image: "./assets/ip/jinxing/emoji-5.jpg", label: "小精灵" },
+      { image: "./assets/ip/jinxing/action-2.jpg", label: "金叶" },
     ],
     products: [
-      { image: "./assets/ip/jinxing/tea-box-1.jpg", title: "???? A", type: "??" },
-      { image: "./assets/ip/jinxing/tea-box-2.jpg", title: "???? B", type: "??" },
-      { image: "./assets/ip/jinxing/tea-box-3.jpg", title: "???? C", type: "??" },
-      { image: "./assets/ip/jinxing/tea-box-4.jpg", title: "???? D", type: "??" },
-      { image: "./assets/ip/jinxing/postcard-1.jpg", title: "????? A", type: "???" },
-      { image: "./assets/ip/jinxing/postcard-2.jpg", title: "????? B", type: "???" },
-      { image: "./assets/ip/jinxing/postcard-3.jpg", title: "????? C", type: "???" },
-      { image: "./assets/ip/jinxing/postcard-4.jpg", title: "????? D", type: "???" },
-      { image: "./assets/ip/jinxing/badge-1.jpg", title: "???? A", type: "??" },
-      { image: "./assets/ip/jinxing/badge-2.jpg", title: "???? B", type: "??" },
-      { image: "./assets/ip/jinxing/badge-3.jpg", title: "???? C", type: "??" },
-      { image: "./assets/ip/jinxing/badge-4.jpg", title: "???? D", type: "??" },
-      { image: "./assets/ip/jinxing/sticker-1.jpg", title: "???? A", type: "??" },
-      { image: "./assets/ip/jinxing/sticker-2.jpg", title: "???? B", type: "??" },
-      { image: "./assets/ip/jinxing/sticker-3.jpg", title: "???? C", type: "??" },
-      { image: "./assets/ip/jinxing/sticker-4.jpg", title: "???? D", type: "??" },
-      { image: "./assets/ip/jinxing/around-1.jpg", title: "???? A", type: "??" },
-      { image: "./assets/ip/jinxing/around-2.jpg", title: "???? B", type: "??" },
-      { image: "./assets/ip/jinxing/around-3.jpg", title: "???? C", type: "??" },
-      { image: "./assets/ip/jinxing/around-4.jpg", title: "???? D", type: "??" },
-      { image: "./assets/ip/jinxing/around-5.jpg", title: "???? E", type: "??" },
-      { image: "./assets/ip/jinxing/around-6.jpg", title: "???? F", type: "??" },
-      { image: "./assets/ip/jinxing/around-7.jpg", title: "???? G", type: "??" },
+      { image: "./assets/ip/jinxing/tea-box-1.jpg", title: "龙顶茶盒 A", type: "茶礼" },
+      { image: "./assets/ip/jinxing/tea-box-2.jpg", title: "龙顶茶盒 B", type: "茶礼" },
+      { image: "./assets/ip/jinxing/tea-box-3.jpg", title: "龙顶茶盒 C", type: "茶礼" },
+      { image: "./assets/ip/jinxing/tea-box-4.jpg", title: "龙顶茶盒 D", type: "茶礼" },
+      { image: "./assets/ip/jinxing/postcard-1.jpg", title: "金星明信片 A", type: "明信片" },
+      { image: "./assets/ip/jinxing/postcard-2.jpg", title: "金星明信片 B", type: "明信片" },
+      { image: "./assets/ip/jinxing/postcard-3.jpg", title: "金星明信片 C", type: "明信片" },
+      { image: "./assets/ip/jinxing/postcard-4.jpg", title: "金星明信片 D", type: "明信片" },
+      { image: "./assets/ip/jinxing/badge-1.jpg", title: "金叶徽章 A", type: "徽章" },
+      { image: "./assets/ip/jinxing/badge-2.jpg", title: "金叶徽章 B", type: "徽章" },
+      { image: "./assets/ip/jinxing/badge-3.jpg", title: "金叶徽章 C", type: "徽章" },
+      { image: "./assets/ip/jinxing/badge-4.jpg", title: "金叶徽章 D", type: "徽章" },
+      { image: "./assets/ip/jinxing/sticker-1.jpg", title: "金星贴纸 A", type: "贴纸" },
+      { image: "./assets/ip/jinxing/sticker-2.jpg", title: "金星贴纸 B", type: "贴纸" },
+      { image: "./assets/ip/jinxing/sticker-3.jpg", title: "金星贴纸 C", type: "贴纸" },
+      { image: "./assets/ip/jinxing/sticker-4.jpg", title: "金星贴纸 D", type: "贴纸" },
+      { image: "./assets/ip/jinxing/around-1.jpg", title: "金星周边 A", type: "周边" },
+      { image: "./assets/ip/jinxing/around-2.jpg", title: "金星周边 B", type: "周边" },
+      { image: "./assets/ip/jinxing/around-3.jpg", title: "金星周边 C", type: "周边" },
+      { image: "./assets/ip/jinxing/around-4.jpg", title: "金星周边 D", type: "周边" },
+      { image: "./assets/ip/jinxing/around-5.jpg", title: "金星周边 E", type: "周边" },
+      { image: "./assets/ip/jinxing/around-6.jpg", title: "金星周边 F", type: "周边" },
+      { image: "./assets/ip/jinxing/around-7.jpg", title: "金星周边 G", type: "周边" },
     ],
   },
 };
 
 const villageMapGuides = {
   gaoqiao: {
-    eyebrow: "????????",
-    title: "???????",
+    eyebrow: "宠物友好村落导览",
+    title: "带它去村里路线",
     route: "M9 70 C18 54 29 54 38 44 C47 34 51 20 65 24 C78 28 80 43 70 53 C61 62 55 72 66 80 C76 87 87 82 92 68",
-    terrain: "?????????????????????????????????????",
-    photoLabel: "?? / ??? / ????",
-    words: ["?", "?", "?", "?"],
+    terrain: "田野水网、猫岛、植物美学与良渚记忆被压进一张可遛、可停、可打卡的村内地图。",
+    photoLabel: "猫岛 / 知物堂 / 田野步道",
+    words: ["宠", "友", "田", "创"],
     points: [
       {
-        title: "??????",
-        label: "????",
+        title: "猫岛人宠空间",
+        label: "人宠共享",
         x: 18,
         y: 62,
-        icon: "??",
-        action: "????????",
-        text: "?????????????????????????????????",
+        icon: "🐾",
+        action: "领取宠物友好贴纸",
+        text: "从老旧甲鱼塘转化而来的宠物友好场景，适合做路线起点和第一枚打卡章。",
       },
       {
-        title: "???????",
-        label: "????",
+        title: "知物堂植物美学",
+        label: "植物工坊",
         x: 38,
         y: 43,
-        icon: "?",
-        action: "???????",
-        text: "????????????????????????????",
+        icon: "✿",
+        action: "生成植物纹样卡",
+        text: "把废弃厂房变成绿意流动的美学空间，观众可以采集叶形纹样。",
       },
       {
-        title: "??????",
-        label: "????",
+        title: "青年市集口袋",
+        label: "乡创摊位",
         x: 64,
         y: 25,
-        icon: "?",
-        action: "??????",
-        text: "???????????????????????????",
+        icon: "✦",
+        action: "点亮青年摊位",
+        text: "展示高桥村青年创业、宠物周边和乡村生活方式的轻量市集。",
       },
       {
-        title: "?????",
-        label: "????",
+        title: "田野慢行线",
+        label: "遛村步道",
         x: 70,
         y: 56,
-        icon: "?",
-        action: "??????",
-        text: "????????????????????????",
+        icon: "↝",
+        action: "开启慢行计步",
+        text: "沿田埂和水线慢行，把城边生活与田野呼吸连接起来。",
       },
       {
-        title: "?????",
-        label: "????",
+        title: "良渚记忆点",
+        label: "文化锚点",
         x: 84,
         y: 75,
-        icon: "?",
-        action: "??????",
-        text: "?????????????????????????",
+        icon: "◆",
+        action: "收集玉色碎片",
+        text: "用玉色、纹样和故事卡提示高桥与良渚文化的地域联系。",
       },
     ],
   },
   yaoli: {
-    eyebrow: "?????????",
-    title: "??????",
+    eyebrow: "儿童友好艺术村导览",
+    title: "追云研学路线",
     route: "M10 66 C19 44 31 47 37 31 C45 13 62 18 62 36 C62 48 74 42 84 50 C94 58 89 78 72 78 C56 78 49 67 36 75 C25 82 16 78 10 66",
-    terrain: "????????????????????????????????",
-    photoLabel: "???? / ??? / ????",
-    words: ["?", "?", "?", "?"],
+    terrain: "云朵书吧、等云坡、窑文化馆和艺术空间构成儿童视角的水乡探索地图。",
+    photoLabel: "云朵书吧 / 等云坡 / 窑文化馆",
+    words: ["云", "窑", "童", "艺"],
     points: [
       {
-        title: "????",
-        label: "????",
+        title: "云朵书吧",
+        label: "互动书屋",
         x: 22,
         y: 58,
-        icon: "?",
-        action: "??????",
-        text: "??????????????????????????",
+        icon: "☁",
+        action: "翻开云朵书页",
+        text: "点开后云朵字卡会飘起，像孩子在书屋里收集村庄关键词。",
       },
       {
-        title: "???",
-        label: "????",
+        title: "等云坡",
+        label: "草坡游乐",
         x: 38,
         y: 33,
-        icon: "?",
-        action: "????",
-        text: "???????????????????????????",
+        icon: "⛰",
+        action: "滑下云坡",
+        text: "草地、秋千和攀爬坡组成户外成长空间，适合亲子研学任务。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "窑文化馆",
+        label: "陶艺体验",
         x: 61,
         y: 41,
-        icon: "?",
-        action: "??????",
-        text: "??????????????????????????????",
+        icon: "◒",
+        action: "烧制陶泥徽章",
+        text: "由旧空间微改造而来，陶艺制作、上色和烧制可以变成小游戏任务。",
       },
       {
-        title: "?????",
-        label: "????",
+        title: "云朵栖息地",
+        label: "咖啡休憩",
         x: 78,
         y: 58,
-        icon: "?",
-        action: "???????",
-        text: "?????????? IP ??????????",
+        icon: "☕",
+        action: "盖一枚云咖啡章",
+        text: "咖啡、白墙黛瓦和云朵 IP 形成更轻松的停留点。",
       },
       {
-        title: "??????",
-        label: "????",
+        title: "云集艺术空间",
+        label: "共创展览",
         x: 56,
         y: 77,
-        icon: "?",
-        action: "??????",
-        text: "????????????????????????????",
+        icon: "✺",
+        action: "拼一块艺术墙",
+        text: "青年艺术家和孩子的创作可以变成可拖拽、可点亮的艺术碎片。",
       },
     ],
   },
   jinxing: {
-    eyebrow: "????????",
-    title: "???????",
+    eyebrow: "共富金星村落导览",
+    title: "金叶茶乡共富线",
     route: "M11 75 C22 62 26 43 41 42 C55 41 56 22 70 24 C83 26 90 40 82 53 C75 64 86 69 82 82 C76 93 57 86 45 80 C31 73 22 86 11 75",
-    terrain: "?????????????????????????????????????",
-    photoLabel: "??? / ??? / ????",
-    words: ["?", "?", "?", "?"],
+    terrain: "古银杏、龙顶茶、民宿农家乐与共富工坊串成一条从生态资源到村民增收的故事线。",
+    photoLabel: "古银杏 / 龙顶茶 / 共富工坊",
+    words: ["金", "茶", "富", "兴"],
     points: [
       {
-        title: "????",
-        label: "????",
+        title: "银杏古树",
+        label: "金叶记忆",
         x: 18,
         y: 68,
-        icon: "??",
-        action: "??????",
-        text: "?????????????????????????????",
+        icon: "🍂",
+        action: "摇落金叶字卡",
+        text: "一棵古树带出村庄年代感，也适合作为金色视觉纹样的核心来源。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "龙顶茶园",
+        label: "茶乡体验",
         x: 42,
         y: 43,
-        icon: "?",
-        action: "?????",
-        text: "??????????????????????",
+        icon: "茶",
+        action: "采一枚茶芽",
+        text: "把茶芽、茶篓和包装样机做成可收集的村庄礼物。",
       },
       {
-        title: "?????",
-        label: "???",
+        title: "红色研学点",
+        label: "红课堂",
         x: 69,
         y: 26,
-        icon: "?",
-        action: "?????",
-        text: "?????????????????????????",
+        icon: "★",
+        action: "点亮红课堂",
+        text: "以党建和研学为入口，让共富故事有更清晰的叙事支点。",
       },
       {
-        title: "?????",
-        label: "????",
+        title: "民宿农家乐",
+        label: "美丽经济",
         x: 80,
         y: 56,
-        icon: "?",
-        action: "??????",
-        text: "?????????????????????????",
+        icon: "⌂",
+        action: "预览一间民宿",
+        text: "游客停留、餐饮和民宿共同构成金星村的美丽经济动线。",
       },
       {
-        title: "????",
-        label: "????",
+        title: "共富工坊",
+        label: "两有金星",
         x: 56,
         y: 81,
-        icon: "?",
-        action: "??????",
-        text: "??????????????????????????????",
+        icon: "✦",
+        action: "合成共富徽章",
+        text: "把“人人有事做，家家有收入”转化为可点击、可理解的互动节点。",
       },
     ],
   },
@@ -445,24 +445,24 @@ const dockItems = Array.from(document.querySelectorAll(".dock-item"));
 const posterItems = [
   {
     id: "gaoqiao",
-    name: "???",
-    line: "????? / ????????",
+    name: "高桥村",
+    line: "宠物友好村 / 城边友好生活地图",
     accent: "Paw Route",
-    glyph: "?",
+    glyph: "✦",
   },
   {
     id: "yaoli",
-    name: "???",
-    line: "??????? / ???????",
+    name: "窑里村",
+    line: "儿童友好艺术村 / 向窑里，追云去",
     accent: "Cloud Trail",
-    glyph: "?",
+    glyph: "☁",
   },
   {
     id: "jinxing",
-    name: "???",
-    line: "?????? / ???????????",
+    name: "金星村",
+    line: "共富金星地图 / 人人有事做，家家有收入",
     accent: "Golden Co-op",
-    glyph: "?",
+    glyph: "✺",
   },
 ];
 
@@ -492,29 +492,29 @@ const gameOrder = ["gaoqiao", "yaoli", "jinxing"];
 
 const impressionDetails = {
   map: {
-    icon: "?",
-    title: "????",
-    subtitle: "?????????????",
-    text: "????????????????????????????????????????????????????????????????????????",
-    action: "???????",
+    icon: "✦",
+    title: "艺术地图",
+    subtitle: "把村庄变成可游览的视觉路线",
+    text: "三维扫描感地图把村口、书屋、茶园、工坊和展览点串成一条可点击的游览动线。观众不需要先读说明，只要点亮地图上的项目，就能进入对应故事和互动小游戏。",
+    action: "打开窑里村地图",
     route: "detail",
     tab: "map",
   },
   materials: {
-    icon: "?",
-    title: "????",
-    subtitle: "?????????????",
-    text: "??????????????????????????????????????????????????????????????????",
-    action: "??????",
+    icon: "▧",
+    title: "带走物料",
+    subtitle: "贴纸、卡片、书签与村庄记忆",
+    text: "物料区把实拍图、贴纸、卡片、书签、徽章和包装样机做成瀑布流展柜。它像一张可以翻动的样本桌，让观众看到每个村的视觉语言可以怎样被带走。",
+    action: "进入物料展柜",
     route: "detail",
     tab: "materials",
   },
   game: {
-    icon: "?",
-    title: "????",
-    subtitle: "?????????????",
-    text: "???????????????????????????????????????????????????????????",
-    action: "??????",
+    icon: "☁",
+    title: "互动收集",
+    subtitle: "让观众在触碰里完成一次探索",
+    text: "互动区不只是播放动画，而是让观众完成节点任务：点击步骤、触发场景、点亮进度，最后把每个村的五个项目合成为一枚村志徽章。",
+    action: "进入任务地图",
     route: "game",
     tab: "map",
   },
@@ -524,142 +524,142 @@ const nodePlayScenes = {
   gaoqiao: [
     {
       type: "paw",
-      title: "????",
-      verb: "??????",
-      hint: "?????????????????????????",
-      button: "??????",
-      steps: ["????", "????", "????"],
-      layers: ["????????", "??????", "???????"],
+      title: "友好足迹",
+      verb: "跟着足迹进村",
+      hint: "轻触开始，宠物脚印会沿着田野路线跑向第一个休憩点。",
+      button: "放出友好足迹",
+      steps: ["脚印出现", "穿过水线", "抵达猫岛"],
+      layers: ["高桥宠物友好入口", "田野水线亮起", "猫岛休憩点解锁"],
     },
     {
       type: "leaf",
-      title: "????",
-      verb: "?????",
-      hint: "????????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["???????", "??????", "???????"],
+      title: "植物纹样",
+      verb: "生成叶片卡",
+      hint: "叶片会在屏幕里展开，变成一张可以带走的植物纹样。",
+      button: "吹开叶片",
+      steps: ["采一片叶", "描出叶脉", "合成纹样"],
+      layers: ["知物堂叶片采集", "叶脉纹样描摹", "植物美学卡完成"],
     },
     {
       type: "market",
-      title: "????",
-      verb: "?????",
-      hint: "?????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["????????", "??????", "??????"],
+      title: "青年摊位",
+      verb: "点亮市集灯",
+      hint: "灯串会依次亮起，像傍晚的乡创市集慢慢开场。",
+      button: "点亮摊位",
+      steps: ["支起小摊", "亮起灯串", "出现徽章"],
+      layers: ["青年市集摊位展开", "高桥夜灯亮起", "乡创徽章出现"],
     },
     {
       type: "walk",
-      title: "????",
-      verb: "??????",
-      hint: "????????????????????????",
-      button: "????",
-      steps: ["?????", "????", "????"],
-      layers: ["??????", "??????", "??????"],
+      title: "田野慢行",
+      verb: "开启慢行计步",
+      hint: "一条发光路线会从脚下延伸，记录田埂上的慢行节奏。",
+      button: "开始慢行",
+      steps: ["迈出第一步", "经过田埂", "收集风声"],
+      layers: ["田野入口定位", "慢行路线延伸", "风声步数收集"],
     },
     {
       type: "jade",
-      title: "????",
-      verb: "??????",
-      hint: "?????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["??????", "??????", "??????"],
+      title: "良渚碎片",
+      verb: "拼合玉色纹样",
+      hint: "玉色碎片会旋转合拢，形成高桥的文化记忆章。",
+      button: "拼合碎片",
+      steps: ["找到碎片", "旋转对位", "点亮玉色"],
+      layers: ["良渚记忆碎片", "玉色纹样对位", "文化锚点点亮"],
     },
   ],
   yaoli: [
     {
       type: "book",
-      title: "????",
-      verb: "??????",
-      hint: "?????????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["????????", "? / ? / ? ????", "????????"],
+      title: "云朵书页",
+      verb: "翻开云朵书页",
+      hint: "书页翻动时，村里的关键词会像云一样从书屋里飘出来。",
+      button: "翻开书页",
+      steps: ["打开书屋", "云字浮起", "收进护照"],
+      layers: ["云朵书吧门牌出现", "云 / 童 / 艺 字卡飘出", "窑里研学护照盖章"],
     },
     {
       type: "slope",
-      title: "?????",
-      verb: "????",
-      hint: "?????????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["???????", "????????", "??????"],
+      title: "等云坡滑行",
+      verb: "滑下云坡",
+      hint: "小小的云朵滑板会沿着草坡下滑，经过光点后冲到终点。",
+      button: "开始滑坡",
+      steps: ["站上云坡", "顺坡滑下", "冲过云门"],
+      layers: ["等云坡坡顶准备", "草坡滑行轨迹亮起", "云门终点打卡"],
     },
     {
       type: "clay",
-      title: "????",
-      verb: "??????",
-      hint: "????????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["???????", "????????", "??????"],
+      title: "陶泥徽章",
+      verb: "烧制陶泥徽章",
+      hint: "陶泥会被压印、旋转、上色，最后烧成一枚窑里徽章。",
+      button: "开始烧制",
+      steps: ["揉开陶泥", "压下印章", "窑火上色"],
+      layers: ["窑文化馆陶泥坯", "窑里云纹印章压下", "陶艺徽章烧成"],
     },
     {
       type: "coffee",
-      title: "????",
-      verb: "???????",
-      hint: "??????????????????????",
-      button: "?????",
-      steps: ["????", "????", "????"],
-      layers: ["????????", "????????", "??????"],
+      title: "云咖啡章",
+      verb: "盖一枚云咖啡章",
+      hint: "杯口升起云朵热气，最后落成一枚柔软的咖啡章。",
+      button: "盖下咖啡章",
+      steps: ["热气升起", "云朵成形", "盖章完成"],
+      layers: ["云朵栖息地咖啡杯", "白墙水乡热气成云", "云咖啡章落下"],
     },
     {
       type: "mosaic",
-      title: "?????",
-      verb: "??????",
-      hint: "???????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["????????", "???????", "??????"],
+      title: "艺术碎片墙",
+      verb: "拼一块艺术墙",
+      hint: "散落的色块会聚拢成一面共创墙，点亮孩子的作品。",
+      button: "拼合色块",
+      steps: ["拾起色块", "贴上墙面", "展墙发光"],
+      layers: ["云集艺术空间色块", "儿童共创墙拼贴", "艺术展墙点亮"],
     },
   ],
   jinxing: [
     {
       type: "ginkgo",
-      title: "????",
-      verb: "??????",
-      hint: "??????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["??????", "??????", "??????"],
+      title: "金叶字卡",
+      verb: "摇落金叶字卡",
+      hint: "银杏叶会从树冠落下，收集成金星村的金色记忆。",
+      button: "摇落金叶",
+      steps: ["叶片落下", "金光聚拢", "字卡出现"],
+      layers: ["金星银杏古树", "金叶光点聚拢", "金叶记忆字卡"],
     },
     {
       type: "tea",
-      title: "????",
-      verb: "?????",
-      hint: "??????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["????????", "???????", "???????"],
+      title: "龙顶茶芽",
+      verb: "采一枚茶芽",
+      hint: "茶芽从山线里冒出，被轻轻采下后装进茶乡礼盒。",
+      button: "采下茶芽",
+      steps: ["山线苏醒", "茶芽生长", "装入礼盒"],
+      layers: ["龙顶茶园山线苏醒", "茶芽从垄间冒出", "龙顶茶礼盒装入"],
     },
     {
       type: "star",
-      title: "?????",
-      verb: "?????",
-      hint: "????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["???????", "???????", "????????"],
+      title: "红课堂星火",
+      verb: "点亮红课堂",
+      hint: "星火从讲台亮起，沿着研学路线传到下一站。",
+      button: "点亮星火",
+      steps: ["星火点燃", "路线发光", "课堂开启"],
+      layers: ["红色研学点讲台", "星火沿路线传递", "红课堂学习卡开启"],
     },
     {
       type: "home",
-      title: "????",
-      verb: "??????",
-      hint: "??????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["??????", "??????", "???????"],
+      title: "民宿灯窗",
+      verb: "预览一间民宿",
+      hint: "小屋的窗灯会一格格亮起，展示游客停留的夜晚。",
+      button: "亮起窗灯",
+      steps: ["推开院门", "窗灯亮起", "夜色停留"],
+      layers: ["金星民宿院门", "窗灯逐格亮起", "农家乐夜晚停留"],
     },
     {
       type: "workshop",
-      title: "????",
-      verb: "??????",
-      hint: "????????????????????????",
-      button: "????",
-      steps: ["????", "????", "????"],
-      layers: ["????????", "???????", "????????"],
+      title: "共富徽章",
+      verb: "合成共富徽章",
+      hint: "工坊里的齿轮、茶叶和金色叶片会合成一枚共富徽章。",
+      button: "合成徽章",
+      steps: ["工坊运转", "产业合流", "徽章完成"],
+      layers: ["共富工坊开始运转", "茶叶与金叶合流", "两有金星徽章完成"],
     },
   ],
 };
@@ -833,7 +833,7 @@ function getGameCollection(villageId) {
 
 function villageCardCover(village) {
   const show = ipShowcases[village.id];
-  const heroPanel = show?.panels?.find((panel) => panel.label === "???") || show?.panels?.[0];
+  const heroPanel = show?.panels?.find((panel) => panel.label === "主视觉") || show?.panels?.[0];
   return heroPanel?.image || village.cover;
 }
 
@@ -870,7 +870,7 @@ function shell(content) {
 function realMapFeatures(activeVillageId) {
   const data = window.realMapData;
   if (!data?.features?.length) return "";
-  const highlight = villages[activeVillageId]?.regionKey || "???";
+  const highlight = villages[activeVillageId]?.regionKey || "杭州市";
   return data.features
     .map(
       (feature) => `
@@ -898,7 +898,7 @@ function realMapPins(activeVillageId) {
           style="left:${(pin.x / 320) * 100}%; top:${(pin.y / 430) * 100}%; --pin:${village.color}"
           aria-label="${village.name}"
         >
-          <span class="pin-core">?</span>
+          <span class="pin-core">✦</span>
           <span class="pin-label">${village.name}</span>
         </button>
       `;
@@ -911,56 +911,56 @@ function homeView() {
   return shell(`
     <section class="hero">
       <div class="hero-decor" aria-hidden="true">
-        <span>?</span><span>?</span><span>?</span><span>?</span>
+        <span>✦</span><span>◇</span><span>✺</span><span>☁</span>
       </div>
       ${scenicRibbon(homeVillage)}
       <div class="hero-content">
         <div>
-          <p class="eyebrow">????????</p>
-          <h1>?????????</h1>
-          <p>??????????????????????????????</p>
+          <p class="eyebrow">浙江乡村艺术体验</p>
+          <h1>向村行·浙里三村志</h1>
+          <p>把真实村庄的气味、材质、路线和记忆压进一个会流动的数字展厅。</p>
         </div>
         <div class="hero-stats">
-          <div class="hero-stat"><strong>3</strong><span>????</span></div>
-          <div class="hero-stat"><strong>15</strong><span>????</span></div>
-          <div class="hero-stat"><strong>?</strong><span>????</span></div>
+          <div class="hero-stat"><strong>3</strong><span>乡村样本</span></div>
+          <div class="hero-stat"><strong>15</strong><span>故事节点</span></div>
+          <div class="hero-stat"><strong>∞</strong><span>记忆收藏</span></div>
         </div>
       </div>
     </section>
 
     <section class="quick-grid">
       <button class="glass-card pressable quick-action" data-shortcut="map" data-village="${homeVillage.id}">
-        <div class="orb-icon">?</div>
+        <div class="orb-icon">⟡</div>
         <div class="quick-copy">
-          <h3>????</h3>
-          <p>?????????????????????</p>
+          <h3>艺术地图</h3>
+          <p>直接进入窑里村的立体地图，点位会实时响应。</p>
         </div>
-        <span class="quick-arrow">?</span>
+        <span class="quick-arrow">↗</span>
       </button>
       <button class="glass-card pressable quick-action" data-shortcut="materials" data-village="${homeVillage.id}">
-        <div class="orb-icon" style="background:linear-gradient(145deg,#6f4cc9,#d7a849)">?</div>
+        <div class="orb-icon" style="background:linear-gradient(145deg,#6f4cc9,#d7a849)">✺</div>
         <div class="quick-copy">
-          <h3>????</h3>
-          <p>??????????????????????</p>
+          <h3>带走物料</h3>
+          <p>打开三村实拍瀑布流，像翻一本会发光的样本册。</p>
         </div>
-        <span class="quick-arrow">?</span>
+        <span class="quick-arrow">↗</span>
       </button>
       <button class="glass-card pressable quick-action feature-wide" data-shortcut="game">
-        <div class="orb-icon" style="background:linear-gradient(145deg,#1f2f3a,#69a0c7)">?</div>
+        <div class="orb-icon" style="background:linear-gradient(145deg,#1f2f3a,#69a0c7)">✦</div>
         <div class="quick-copy">
-          <h3>????</h3>
-          <p>???????????????????</p>
+          <h3>互动收集</h3>
+          <p>点亮记忆碎片，完成一段轻快的乡村探索。</p>
         </div>
-        <span class="quick-arrow">?</span>
+        <span class="quick-arrow">↗</span>
       </button>
     </section>
 
     <section class="section-head">
       <div>
-        <h2>????</h2>
-        <p>????????????????????????????</p>
+        <h2>三村样本</h2>
+        <p>高桥的友好、窑里的云、金星的共富故事，在一条旅线里展开。</p>
       </div>
-      <span class="mini-pill">${state.discovered.size}/3 ???</span>
+      <span class="mini-pill">${state.discovered.size}/3 已收集</span>
     </section>
 
     <section class="village-strip" data-drag-strip>
@@ -968,14 +968,14 @@ function homeView() {
         .map(
           (v, index) => `
             <button class="village-card" data-village="${v.id}" style="background-image:url('${villageCardCover(v)}')">
-              <span class="card-glyph" aria-hidden="true">${posterItems[index]?.glyph || "?"}</span>
+              <span class="card-glyph" aria-hidden="true">${posterItems[index]?.glyph || "✦"}</span>
               <div>
                 <p class="eyebrow">${v.type}</p>
                 <h3>${v.name}<br />${v.title}</h3>
                 <p>${v.subtitle}</p>
                 <div class="tag-row">${villageTagList(v)}</div>
               </div>
-              <span class="glass-button" data-village-profile="${v.id}">????</span>
+              <span class="glass-button" data-village-profile="${v.id}">村志详情</span>
             </button>
           `,
         )
@@ -984,8 +984,8 @@ function homeView() {
 
     <section class="section-head">
       <div>
-        <h2>????</h2>
-        <p>?????????????????????????????????</p>
+        <h2>现场印象</h2>
+        <p>项目把村庄背景、场地氛围、展陈物料和观众互动连成一套乡村体验叙事。</p>
       </div>
     </section>
 
@@ -1007,9 +1007,9 @@ function villagesView() {
   return shell(`
     <section class="page-title">
       <div>
-        <p>????</p>
-        <h1>????</h1>
-        <p>???????????????????????????????</p>
+        <p>三村索引</p>
+        <h1>三村村志</h1>
+        <p>每一张卡片都是一个村庄的入口：故事、地图、材料与可带走的记忆。</p>
       </div>
     </section>
     <section class="village-strip" data-drag-strip>
@@ -1017,14 +1017,14 @@ function villagesView() {
         .map(
           (v, index) => `
             <button class="village-card" data-village="${v.id}" style="background-image:url('${villageCardCover(v)}')">
-              <span class="card-glyph" aria-hidden="true">${posterItems[index]?.glyph || "?"}</span>
+              <span class="card-glyph" aria-hidden="true">${posterItems[index]?.glyph || "✦"}</span>
               <div>
                 <p class="eyebrow">${v.type}</p>
                 <h3>${v.name}<br />${v.title}</h3>
                 <p>${v.subtitle}</p>
                 <div class="tag-row">${villageTagList(v)}</div>
               </div>
-              <span class="glass-button">????</span>
+              <span class="glass-button">打开地图</span>
             </button>
           `,
         )
@@ -1039,24 +1039,24 @@ function profileView() {
   return shell(`
     <section class="profile-hero" style="--village:${village.color}; background-image:url('${village.cover}')">
       <div class="top-row">
-        <button class="back" data-go="villages">?</button>
-        <span class="mini-pill">????</span>
+        <button class="back" data-go="villages">‹</button>
+        <span class="mini-pill">村志详情</span>
       </div>
       <div class="profile-title">
         <p>${village.type}</p>
         <h1>${village.name}</h1>
-        <span>${village.location} ? ${village.subtitle}</span>
+        <span>${village.location} · ${village.subtitle}</span>
       </div>
     </section>
 
     <section class="profile-story-card" style="--village:${village.color}">
-      <p class="context-label">????</p>
+      <p class="context-label">村志概览</p>
       <h2>${village.title}</h2>
       <p>${village.story}</p>
       <div class="profile-actions">
-        <button data-profile-open="map">??????</button>
-        <button data-profile-open="story">??????</button>
-        <button data-profile-open="materials">??????</button>
+        <button data-profile-open="map">打开村落地图</button>
+        <button data-profile-open="story">查看故事节点</button>
+        <button data-profile-open="materials">浏览带走物料</button>
       </div>
     </section>
 
@@ -1081,10 +1081,10 @@ function impressionView() {
   const activeVillage = villages[state.village] || villages.yaoli;
   return shell(`
     <section class="impression-hero" style="--village:${activeVillage.color}">
-      <button class="back" data-go="home">?</button>
+      <button class="back" data-go="home">‹</button>
       <div>
         <span>${item.icon}</span>
-        <p>????</p>
+        <p>现场印象</p>
         <h1>${item.title}</h1>
         <small>${item.subtitle}</small>
       </div>
@@ -1117,30 +1117,30 @@ function impressionView() {
 function detailView() {
   const village = villages[state.village] || villages.yaoli;
   const tabs = [
-    ["story", "??"],
-    ["map", "??"],
-    ["materials", "??"],
+    ["story", "故事"],
+    ["map", "地图"],
+    ["materials", "周边"],
   ];
   const hero =
     state.tab === "map"
       ? `<section class="detail-map-head">
-          <button class="back" data-go="villages">?</button>
+          <button class="back" data-go="villages">‹</button>
           <div>
             <p class="eyebrow">${village.type}</p>
-            <h1>${village.name}??</h1>
-            <p>${village.title} ? ${village.subtitle}</p>
+            <h1>${village.name}地图</h1>
+            <p>${village.title} · ${village.subtitle}</p>
           </div>
-          <span class="mini-pill">????</span>
+          <span class="mini-pill">村落导览</span>
         </section>`
       : `<section class="detail-hero" style="background-image:url('${village.cover}')">
           <div class="top-row">
-            <button class="back" data-go="villages">?</button>
-            <span class="mini-pill">????</span>
+            <button class="back" data-go="villages">‹</button>
+            <span class="mini-pill">村志详情</span>
           </div>
           <div>
             <p class="eyebrow">${village.type}</p>
             <h1>${village.name}</h1>
-            <p>${village.title} ? ${village.subtitle}</p>
+            <p>${village.title} · ${village.subtitle}</p>
           </div>
         </section>`;
   return shell(`
@@ -1181,9 +1181,9 @@ function storyPanel(village) {
     </section>
     <section class="context-panel">
       <div class="context-copy">
-        <p class="context-label">????</p>
-        <h3>?????????????????????????????????????</h3>
-        <p>????????????????????????????????????????????</p>
+        <p class="context-label">项目背景</p>
+        <h3>不是把村庄做成海报，而是把在地生活翻译成一套可被看见、可被触碰的体验语言。</h3>
+        <p>观众进入页面的第一眼，应该先感受到村庄的空气、步行路线和人情味，再读懂它背后的叙事逻辑。</p>
       </div>
       <div class="context-tiles">
         ${village.photos
@@ -1197,8 +1197,8 @@ function storyPanel(village) {
     </section>
     <section class="section-head">
       <div>
-        <h2>????</h2>
-        <p>??????????????????????</p>
+        <h2>故事节点</h2>
+        <p>这些节点会同时出现在展板、二维码和小游戏里。</p>
       </div>
     </section>
     <section class="node-grid">
@@ -1216,10 +1216,10 @@ function storyPanel(village) {
 
     <section class="story-detail-panel" style="--village:${village.color}">
       <figure class="story-detail-photo" style="background-image:url('${activePhoto}')">
-        <span>${activePoint?.label || "????"}</span>
+        <span>${activePoint?.label || "故事现场"}</span>
       </figure>
       <div class="story-detail-copy">
-        <p class="context-label">?? ${activeIndex + 1}</p>
+        <p class="context-label">节点 ${activeIndex + 1}</p>
         <h3>${activePoint?.title || activeNode[0]}</h3>
         <p>${activePoint?.text || activeNode[1]}</p>
         <div class="story-detail-tags">
@@ -1231,12 +1231,12 @@ function storyPanel(village) {
       </div>
       <div class="story-detail-actions">
         <button class="story-action dark" data-story-open-map="${activeIndex}">
-          <span>????</span>
-          <strong>???????</strong>
+          <span>地图定位</span>
+          <strong>看这个点在哪里</strong>
         </button>
         <button class="story-action ${collected ? "is-done" : ""}" data-story-open-game="${activeIndex}">
-          <span>${collected ? "???" : "????"}</span>
-          <strong>${activePoint?.action || "?????"}</strong>
+          <span>${collected ? "已收集" : "互动任务"}</span>
+          <strong>${activePoint?.action || "进入小游戏"}</strong>
         </button>
       </div>
     </section>
@@ -1253,9 +1253,9 @@ function mapPanel(village) {
     <section class="map-stage">
       <div class="map-stage-head">
         <div>
-          <p class="context-label">${guide?.eyebrow || "??????"}</p>
-          <h2>${guide?.title || `${village.name}????`}</h2>
-          <p class="map-caption">${guide?.terrain || "???????????????????????"}</p>
+          <p class="context-label">${guide?.eyebrow || "村落导览地图"}</p>
+          <h2>${guide?.title || `${village.name}导览路线`}</h2>
+          <p class="map-caption">${guide?.terrain || "点击地图上的游玩项目，查看对应故事与互动任务。"}</p>
         </div>
         <span class="mini-pill">${activeIndex + 1}/${guide?.points?.length || village.nodes.length}</span>
       </div>
@@ -1303,21 +1303,21 @@ function mapPanel(village) {
 
         <div class="village-active-card">
           <div>
-            <em>${activePoint?.label || "????"}</em>
+            <em>${activePoint?.label || "游玩项目"}</em>
             <strong>${activePoint?.title || village.nodes[0][0]}</strong>
             <span>${activePoint?.text || village.nodes[0][1]}</span>
           </div>
-          <button data-map-play="${activeIndex}" aria-label="??${activePoint?.title || "??"}???">?</button>
+          <button data-map-play="${activeIndex}" aria-label="进入${activePoint?.title || "互动"}小游戏">✦</button>
         </div>
 
         <div class="map-action-dock">
           <button class="map-action-primary" data-map-play="${activeIndex}">
-            <span>????</span>
-            <strong>${activePoint?.action || "??????"}</strong>
+            <span>开始互动</span>
+            <strong>${activePoint?.action || "点亮这个点位"}</strong>
           </button>
           <button class="map-action-secondary" data-map-node-go="materials">
-            <span>????</span>
-            <strong>???????</strong>
+            <span>关联物料</span>
+            <strong>查看可带走设计</strong>
           </button>
         </div>
       </section>
@@ -1340,8 +1340,8 @@ function mapPanel(village) {
 
       <section class="word-play-panel">
         <div>
-          <p class="context-label">????</p>
-          <h3>???????${village.name}????</h3>
+          <p class="context-label">村字收集</p>
+          <h3>点击字卡，拼出${village.name}的记忆词</h3>
         </div>
         <div class="word-cloud" style="--village:${village.color}">
           ${guide.words
@@ -1356,12 +1356,12 @@ function mapPanel(village) {
 
       <section class="map-actions">
         <button class="map-action-card" data-map-node-go="story">
-          <strong>????????</strong>
-          <span>???????????????????</span>
+          <strong>看这个点位的故事</strong>
+          <span>把热区切到故事模式，适合讲解村庄背景。</span>
         </button>
         <button class="map-action-card" data-map-node-go="materials">
-          <strong>?????</strong>
-          <span>??????????????????????</span>
+          <strong>看关联物料</strong>
+          <span>进入物料展示，查看这个点位能延展出的带走物。</span>
         </button>
       </section>
     </section>
@@ -1376,8 +1376,8 @@ function ipShowcasePanel(village) {
     ...(show.emojis?.length
       ? [
           {
-            title: "???",
-            label: "???",
+            title: "表情包",
+            label: "表情包",
             image: show.emojis[0].image,
             copy: "",
             emoji: true,
@@ -1516,9 +1516,9 @@ function productDetailView() {
   return shell(`
     <section class="product-detail" style="--village:${village.color}">
       <div class="product-detail-top">
-        <button class="back" data-go-product-back>?</button>
+        <button class="back" data-go-product-back>‹</button>
         <div>
-          <p class="context-label">${village.name}??</p>
+          <p class="context-label">${village.name}周边</p>
           <h1>${product.title}</h1>
         </div>
         <span class="mini-pill">${product.type}</span>
@@ -1551,9 +1551,9 @@ function materialsPanel(village) {
   return `
     <section class="material-intro">
       <div>
-        <p class="context-label">????</p>
-        <h2>IP ????</h2>
-        <p>???????????????????????????????????????</p>
+        <p class="context-label">物料展陈</p>
+        <h2>IP 物料剧场</h2>
+        <p>角色、表情包、贴纸和村落物料在这里一起流动，形成可以停留、切换和收集的展示面。</p>
       </div>
     </section>
     ${ipShowcasePanel(village)}
@@ -1563,7 +1563,7 @@ function materialsPanel(village) {
           const productIndex = productIndexForMaterial(village, photo);
           const isProduct = productIndex >= 0;
           const tag = isProduct ? "button" : "article";
-          const action = isProduct ? `data-material-product-open="${productIndex}" aria-label="??${title}"` : "";
+          const action = isProduct ? `data-material-product-open="${productIndex}" aria-label="查看${title}"` : "";
           return `
             <${tag} class="material-card material-card-${size || "square"} ${photo.includes("/ip/") ? "material-card-product" : ""} ${isProduct ? "is-clickable" : ""}" ${action}>
               <figure class="material-photo" style="background-image:url('${photo}')"></figure>
@@ -1605,14 +1605,14 @@ function gameView() {
   return shell(`
     <section class="page-title game-title">
       <div>
-        <p>?????</p>
-        <h1>${village.name}????</h1>
-        <p>???????????????????????????????</p>
+        <p>互动小游戏</p>
+        <h1>${village.name}任务地图</h1>
+        <p>沿着村内路线寻找线索，点亮每个游玩项目，合成一枚专属村志徽章。</p>
       </div>
       <span class="mini-pill">${collection.size}/${guide.points.length}</span>
     </section>
 
-    <section class="game-village-switch" aria-label="????">
+    <section class="game-village-switch" aria-label="选择村落">
       ${Object.values(villages)
         .map(
           (v) => `
@@ -1628,7 +1628,7 @@ function gameView() {
     <section class="game-panel mission-game" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
       <div class="score-card mission-score">
         <div>
-          <span>????</span>
+          <span>探索进度</span>
           <strong>${progress}%</strong>
         </div>
         <div class="progress-track"><div class="progress-fill" style="--progress:${progress}%"></div></div>
@@ -1644,7 +1644,7 @@ function gameView() {
         ${stageTokens}
         ${
           complete
-            ? `<div class="game-complete"><strong>${village.name}???????</strong><span>??????????????????????</span></div>`
+            ? `<div class="game-complete"><strong>${village.name}村志徽章已合成</strong><span>所有节点都已点亮，可以回到地图查看完整路线。</span></div>`
             : ""
         }
       </div>
@@ -1655,7 +1655,7 @@ function gameView() {
           <h2>${activePoint.title}</h2>
           <p>${activePoint.text}</p>
           <button class="mission-collect ${collection.has(activeIndex) ? "is-collected" : ""}" data-game-collect="${activeIndex}">
-            ${collection.has(activeIndex) ? "???????" : activePoint.action}
+            ${collection.has(activeIndex) ? "已点亮这个节点" : activePoint.action}
           </button>
         </div>
         <div class="inventory-grid">
@@ -1673,8 +1673,8 @@ function gameView() {
       </section>
 
       <div class="game-final-actions">
-        <button data-game-reset>????</button>
-        <button data-game-open-map>??????</button>
+        <button data-game-reset>重新探索</button>
+        <button data-game-open-map>回到村落地图</button>
       </div>
     </section>
   `);
@@ -1708,27 +1708,27 @@ function playSceneMarkup(scene, point, village) {
     slope: `
       ${common}
       <div class="slope-hill"></div>
-      <div class="slope-cloud">?</div>
-      <div class="slope-rider">?</div>
-      <div class="slope-gate">??</div>
+      <div class="slope-cloud">☁</div>
+      <div class="slope-rider">✦</div>
+      <div class="slope-gate">云门</div>
       <span class="trail-dot d1"></span><span class="trail-dot d2"></span><span class="trail-dot d3"></span>
     `,
     clay: `
       ${common}
       <div class="clay-wheel"></div>
-      <div class="clay-disc">?</div>
-      <div class="clay-stamp">?</div>
+      <div class="clay-disc">窑</div>
+      <div class="clay-stamp">印</div>
       <div class="kiln-fire"><span></span><span></span><span></span></div>
     `,
     book: `
       ${common}
       <div class="magic-book"><span></span><span></span></div>
-      <span class="floating-word w1">?</span><span class="floating-word w2">?</span><span class="floating-word w3">?</span>
+      <span class="floating-word w1">云</span><span class="floating-word w2">童</span><span class="floating-word w3">艺</span>
     `,
     coffee: `
       ${common}
       <div class="coffee-cup"></div>
-      <span class="steam st1">?</span><span class="steam st2">?</span><span class="stamp-ring">?</span>
+      <span class="steam st1">☁</span><span class="steam st2">☁</span><span class="stamp-ring">章</span>
     `,
     mosaic: `
       ${common}
@@ -1736,13 +1736,13 @@ function playSceneMarkup(scene, point, village) {
     `,
     paw: `
       ${common}
-      <div class="paw-path">${["??", "??", "??", "??"].map((paw, i) => `<i style="--i:${i}">${paw}</i>`).join("")}</div>
-      <div class="rest-island">??</div>
+      <div class="paw-path">${["🐾", "🐾", "🐾", "🐾"].map((paw, i) => `<i style="--i:${i}">${paw}</i>`).join("")}</div>
+      <div class="rest-island">猫岛</div>
     `,
     leaf: `
       ${common}
       <div class="leaf-card"><i></i><i></i><i></i></div>
-      <span class="leaf-float l1">?</span><span class="leaf-float l2">?</span>
+      <span class="leaf-float l1">叶</span><span class="leaf-float l2">纹</span>
     `,
     market: `
       ${common}
@@ -1752,41 +1752,41 @@ function playSceneMarkup(scene, point, village) {
     walk: `
       ${common}
       <div class="walk-route"></div>
-      <div class="walker">?</div>
+      <div class="walker">走</div>
       <span class="wind-line wl1"></span><span class="wind-line wl2"></span>
     `,
     jade: `
       ${common}
-      <div class="jade-pieces">${["?", "?", "?", "?"].map((piece, i) => `<span style="--i:${i}">${piece}</span>`).join("")}</div>
-      <div class="jade-core">?</div>
+      <div class="jade-pieces">${["◆", "◇", "◆", "◇"].map((piece, i) => `<span style="--i:${i}">${piece}</span>`).join("")}</div>
+      <div class="jade-core">玉</div>
     `,
     ginkgo: `
       ${common}
       <div class="ginkgo-tree"></div>
-      ${["?", "?", "?", "?"].map((leaf, i) => `<span class="ginkgo-leaf" style="--i:${i}">${leaf}</span>`).join("")}
+      ${["金", "叶", "兴", "富"].map((leaf, i) => `<span class="ginkgo-leaf" style="--i:${i}">${leaf}</span>`).join("")}
     `,
     tea: `
       ${common}
       <div class="tea-mountain"></div>
-      <div class="tea-sprout">?</div>
-      <div class="tea-box">??</div>
+      <div class="tea-sprout">茶</div>
+      <div class="tea-box">龙顶</div>
     `,
     star: `
       ${common}
       <div class="star-classroom"></div>
-      <span class="star-burst">?</span>
+      <span class="star-burst">★</span>
       <span class="star-path p1"></span><span class="star-path p2"></span>
     `,
     home: `
       ${common}
       <div class="homestay-house">${["", "", "", ""].map((_, i) => `<i style="--i:${i}"></i>`).join("")}</div>
-      <span class="moon-dot">?</span>
+      <span class="moon-dot">月</span>
     `,
     workshop: `
       ${common}
-      <div class="workshop-gear">?</div>
-      <div class="workshop-badge">?</div>
-      <span class="workshop-part a">?</span><span class="workshop-part b">?</span><span class="workshop-part c">?</span>
+      <div class="workshop-gear">⚙</div>
+      <div class="workshop-badge">富</div>
+      <span class="workshop-part a">茶</span><span class="workshop-part b">叶</span><span class="workshop-part c">工</span>
     `,
   };
   return variants[scene.type] || variants.slope;
@@ -1795,16 +1795,16 @@ function playSceneMarkup(scene, point, village) {
 function scanView() {
   return shell(`
     <section class="scan-panel">
-      <p class="eyebrow" style="color:rgba(17,31,26,.6)">????</p>
-      <h1 class="scan-title">??????</h1>
-      <div class="qr-wrap"><div class="qr" aria-label="?????"></div></div>
+      <p class="eyebrow" style="color:rgba(17,31,26,.6)">扫码入口</p>
+      <h1 class="scan-title">扫码开启村志</h1>
+      <div class="qr-wrap"><div class="qr" aria-label="二维码占位"></div></div>
       <div class="scan-list">
         ${Object.values(villages)
           .map(
             (v, index) => `
               <button class="scan-item" data-village="${v.id}">
                 <div>
-                  <strong>${v.name}?????</strong>
+                  <strong>${v.name}故事二维码</strong>
                   <span>${v.title} / ${v.subtitle}</span>
                 </div>
                 <span class="scan-code" style="background:${v.color}">0${index + 1}</span>
@@ -1814,8 +1814,8 @@ function scanView() {
           .join("")}
         <button class="scan-item" data-go="exhibit">
           <div>
-            <strong>???????</strong>
-            <span>???????????????</span>
+            <strong>展板巡游二维码</strong>
+            <span>三张展板交替播放，打开现场导览</span>
           </div>
           <span class="scan-code" style="background:#2a3b33">04</span>
         </button>
@@ -1833,15 +1833,15 @@ function exhibitView() {
   return shell(`
     <section class="page-title">
       <div>
-        <p>????</p>
-        <h1>????</h1>
-        <p>??????????????????????????</p>
+        <p>展览巡游</p>
+        <h1>三张展板</h1>
+        <p>三村内容像展厅灯光一样轮流亮起，形成连续的视觉冲击。</p>
       </div>
     </section>
 
     <section class="poster-carousel">
-      <button class="carousel-nav prev" data-poster-nav="-1" aria-label="???">?</button>
-      <button class="carousel-nav next" data-poster-nav="1" aria-label="???">?</button>
+      <button class="carousel-nav prev" data-poster-nav="-1" aria-label="上一张">‹</button>
+      <button class="carousel-nav next" data-poster-nav="1" aria-label="下一张">›</button>
       <div class="poster-side poster-left" style="background-image:url('${villages[prevPoster.id].cover}')"></div>
       <div class="poster-side poster-right" style="background-image:url('${villages[nextPosterItem.id].cover}')"></div>
       <div class="poster-frame" data-poster-swipe style="background-image:url('${village.cover}')">
@@ -1857,30 +1857,30 @@ function exhibitView() {
       </div>
       <div class="poster-dots">
         ${[0, 1, 2]
-          .map((i) => `<button class="poster-dot ${i === posterIndex ? "is-active" : ""}" data-poster-dot="${i}" aria-label="?? ${i + 1}"></button>`)
+          .map((i) => `<button class="poster-dot ${i === posterIndex ? "is-active" : ""}" data-poster-dot="${i}" aria-label="展板 ${i + 1}"></button>`)
           .join("")}
       </div>
     </section>
 
     <section class="section-head">
       <div>
-        <h2>????</h2>
-        <p>??????????????????????????</p>
+        <h2>体验组件</h2>
+        <p>展板、桌面样本、循环影像和扫码入口共同构成现场记忆。</p>
       </div>
     </section>
 
     <section class="exhibit-steps">
       ${[
-        ["????", "??????????????????????"],
-        ["????", "?????????????????????"],
-        ["????", "????????????????????"],
-        ["????", "????????????????????"],
-        ["????", "????????????????"],
+        ["三张展板", "高桥、窑里、金星轮流出现，形成连续视觉冲击。"],
+        ["桌面样本", "卡片、贴纸、路线卡、周边和二维码集中陈列。"],
+        ["循环视频", "画面可以离线播放，适合展厅角落持续运行。"],
+        ["互动白板", "观众可以把自己最想带走的乡村体验贴出来。"],
+        ["扫码入口", "扫码后能直接跳转到对应村志页面。"],
       ]
         .map(
           ([title, text]) => `
             <article class="exhibit-step">
-              <span class="check">?</span>
+              <span class="check">✓</span>
               <div><strong>${title}</strong><span>${text}</span></div>
             </article>
           `,
@@ -2198,7 +2198,7 @@ function attachHandlers() {
   app.querySelectorAll("[data-word-chip]").forEach((button) => {
     button.addEventListener("click", () => {
       button.classList.toggle("is-collected");
-      showToast(`????${button.dataset.wordChip}??`);
+      showToast(`收集到「${button.dataset.wordChip}」字`);
       vibrate(14);
     });
   });
@@ -2411,7 +2411,7 @@ function attachHandlers() {
       const index = guide.points[state.gameActiveNode] ? state.gameActiveNode : 0;
       const scene = nodePlayScenes[village.id]?.[index] || nodePlayScenes.yaoli[1];
       state.playSteps.add(step);
-      showToast(`${scene.steps[step]} ???`);
+      showToast(`${scene.steps[step]} 已触发`);
       render();
       vibrate(12);
     });
@@ -2424,7 +2424,7 @@ function attachHandlers() {
       const index = Number(button.dataset.playComplete);
       const scene = nodePlayScenes[village.id]?.[index] || nodePlayScenes.yaoli[1];
       if (state.playSteps.size < scene.steps.length && !getGameCollection(village.id).has(index)) {
-        showToast(`????? ${scene.steps.length - state.playSteps.size} ?????`);
+        showToast(`还需要点亮 ${scene.steps.length - state.playSteps.size} 个互动步骤`);
         button.classList.add("needs-steps");
         setTimeout(() => button.classList.remove("needs-steps"), 520);
         vibrate(18);
@@ -2436,7 +2436,7 @@ function attachHandlers() {
         state.discovered.add(village.id);
         state.score = state.discovered.size;
       }
-      showToast(`${scene.verb || guide.points[index]?.action || "??"}??`);
+      showToast(`${scene.verb || guide.points[index]?.action || "节点"}完成`);
       button.classList.add("just-completed");
       setTimeout(() => {
         setRoute("game", {
@@ -2468,7 +2468,7 @@ function attachHandlers() {
       state.discovered.delete(villageId);
       state.score = state.discovered.size;
       state.gameActiveNode = villages[villageId]?.mapFocus ?? 0;
-      showToast("???????");
+      showToast("已重新开始探索");
       render();
     });
   });
@@ -2491,7 +2491,7 @@ function attachHandlers() {
         state.discovered.add(token);
         state.score = state.discovered.size;
         button.classList.add("collected");
-        showToast(`?? ${villages[token].name}`);
+        showToast(`解锁 ${villages[token].name}`);
         vibrate(18);
         const fill = app.querySelector(".progress-fill");
         const score = app.querySelector(".score-num");
@@ -2501,7 +2501,7 @@ function attachHandlers() {
           setTimeout(() => render(), 520);
         }
       } else {
-        showToast(`${villages[token].name} ???`);
+        showToast(`${villages[token].name} 已解锁`);
       }
     });
   });

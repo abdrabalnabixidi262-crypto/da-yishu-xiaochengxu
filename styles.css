@@ -3169,7 +3169,7 @@ p {
 }
 
 .material-card.is-clickable::before {
-  content: "????";
+  content: "查看大图";
   position: absolute;
   right: 14px;
   top: 14px;
@@ -4770,7 +4770,7 @@ p {
 }
 
 .star-classroom::before {
-  content: "???";
+  content: "红课堂";
   position: absolute;
   left: 50%;
   top: 42px;
