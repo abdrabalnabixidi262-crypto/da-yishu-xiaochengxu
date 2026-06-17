@@ -14,8 +14,8 @@ const villages = {
       "./assets/premium-gaoqiao.png",
     ],
     mapFocus: 2,
-    color: "#5f9d66",
-    map: { a: "#d8eadb", b: "#b8d6bb" },
+    color: "#789262",
+    map: { a: "#e5ead5", b: "#b8c9a5" },
     tags: ["宠物友好", "青年市集", "田野步道"],
     story:
       "高桥村不是远方的景区，而是城市边缘正在生长的友好乡村。小程序把宠物休憩点、乡村咖啡、青年市集与良渚文化点串成一张可浏览、可打卡、可收藏的遛村地图。",
@@ -50,8 +50,8 @@ const villages = {
       "./assets/premium-yaoli.png",
     ],
     mapFocus: 0,
-    color: "#5d91c2",
-    map: { a: "#dfeaf7", b: "#bfd7ef" },
+    color: "#425066",
+    map: { a: "#d6ecf0", b: "#9fb8c3" },
     tags: ["云朵", "水乡", "亲子研学"],
     story:
       "窑里村从儿童视角重新绘制村庄。云朵、河流、草地、书吧和手作课堂成为地图上的故事节点，观众可以通过研学护照和任务卡完成一次小小的乡村艺术探索。",
@@ -87,8 +87,8 @@ const villages = {
       "./assets/ip/jinxing/around-1.jpg",
     ],
     mapFocus: 4,
-    color: "#d7a849",
-    map: { a: "#f7e6ae", b: "#b9d989" },
+    color: "#c89b40",
+    map: { a: "#f2ecde", b: "#bce672" },
     tags: ["共富工坊", "龙顶茶", "银杏古树"],
     story:
       "金星村把钱江源生态、银杏古树、龙顶茶、红色研学与共富工坊串联成一张可走、可听、可收集的共富地图。观众不只是在看乡村风景，也能看见村民增收、产业协作和山区村庄现代化的真实路径。",
@@ -116,7 +116,7 @@ const ipShowcases = {
     title: "高桥村 IP 动作剧场",
     copy: "把猫岛、田野步道和宠物友好路线收进一个会动的探索角色。",
     mark: "Paw Map",
-    accent: "#74c783",
+    accent: "#789262",
     panels: [
       {
         title: "人宠探索员展板",
@@ -157,7 +157,7 @@ const ipShowcases = {
     title: "窑里村云朵角色剧场",
     copy: "把云朵书吧、草坡和陶艺体验做成轻盈的儿童艺术角色组。",
     mark: "Cloud Play",
-    accent: "#7fb7f0",
+    accent: "#425066",
     panels: [
       {
         title: "云朵场景",
@@ -204,7 +204,7 @@ const ipShowcases = {
     title: "金星村 IP 与衍生品展台",
     copy: "把银杏、龙顶茶和共富工坊变成可收藏、可带走、可互动的金色视觉系统。",
     mark: "Golden Set",
-    accent: "#e8bb50",
+    accent: "#c89b40",
     panels: [
       {
         title: "金星主海报",
