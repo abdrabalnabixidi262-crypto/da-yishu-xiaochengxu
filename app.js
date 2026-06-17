@@ -80,11 +80,11 @@ const villages = {
     cover: "./assets/ip/jinxing/poster.jpg",
     photos: [
       "./assets/ip/jinxing/poster.jpg",
-      "./assets/ip/jinxing/tea-box-1.jpg",
-      "./assets/ip/jinxing/postcard-1.jpg",
-      "./assets/ip/jinxing/sticker-1.jpg",
-      "./assets/ip/jinxing/badge-1.jpg",
-      "./assets/ip/jinxing/around-1.jpg",
+      "./assets/ip/jinxing/merch-longding-tea.png",
+      "./assets/ip/jinxing/merch-ginkgo-bookmark.png",
+      "./assets/ip/jinxing/merch-supply-stickers.png",
+      "./assets/ip/jinxing/merch-workshop-badge.png",
+      "./assets/ip/jinxing/merch-study-passport.png",
     ],
     mapFocus: 4,
     color: "#c89b40",
@@ -100,12 +100,13 @@ const villages = {
       ["共富工坊", "把人人参与、家家增收转化成可扫码理解的共富节点。"],
     ],
     materials: [
-      ["./assets/ip/jinxing/tea-box-1.jpg", "金星龙顶茶包装", "把茶园、茶芽和共富叙事做成可陈列的包装样机。", "wide"],
-      ["./assets/ip/jinxing/postcard-1.jpg", "银杏故事书签", "用金色叶片记录村庄年代感和乡土记忆。", "square"],
-      ["./assets/ip/jinxing/sticker-1.jpg", "红课堂学习卡", "对应红色研学点，适合展板旁扫码领取。", "square"],
-      ["./assets/ip/jinxing/badge-1.jpg", "共富工坊徽章", "把村民协作、产业增收和共同富裕做成轻量识别。", "tall"],
-      ["./assets/ip/jinxing/around-1.jpg", "金星茶礼周边", "把金星龙顶茶、银杏角色和伴手礼做成完整陈列。", "square"],
-      ["./assets/ip/jinxing/around-2.jpg", "共富纪念周边", "适合在产品系列里继续查看细节与放大图。", "square"],
+      ["./assets/ip/jinxing/merch-longding-tea.png", "金星龙顶茶", "龙顶茶礼盒把茶园、银杏与共富叙事做成可陈列的主推茶礼。", "wide"],
+      ["./assets/ip/jinxing/merch-ginkgo-bookmark.png", "银杏故事书签", "用金色叶片和江滨村落记录金星村的乡土记忆。", "square"],
+      ["./assets/ip/jinxing/merch-red-class-card.png", "红课堂学习卡", "对应红色研学点，适合展板旁扫码领取和任务打卡。", "square"],
+      ["./assets/ip/jinxing/merch-workshop-badge.png", "共富工坊徽章", "把村民协作、茶香工坊和共同富裕做成可佩戴纪念。", "tall"],
+      ["./assets/ip/jinxing/merch-supply-stickers.png", "金星供销社贴纸", "把角色、供销社、银杏和村落风景做成一整张贴纸套装。", "square"],
+      ["./assets/ip/jinxing/merch-riverside-postcard.png", "江滨长廊明信片", "把江滨风光、金星村落与人文共富做成可寄出的风景。", "wide"],
+      ["./assets/ip/jinxing/merch-study-passport.png", "乡村研学护照", "用打卡地图、研学记录和收集印章串起金星村游线。", "square"],
     ],
   },
 };
@@ -244,29 +245,13 @@ const ipShowcases = {
       { image: "./assets/ip/jinxing/action-2.jpg", label: "金叶" },
     ],
     products: [
-      { image: "./assets/ip/jinxing/tea-box-1.jpg", title: "龙顶茶盒 A", type: "茶礼" },
-      { image: "./assets/ip/jinxing/tea-box-2.jpg", title: "龙顶茶盒 B", type: "茶礼" },
-      { image: "./assets/ip/jinxing/tea-box-3.jpg", title: "龙顶茶盒 C", type: "茶礼" },
-      { image: "./assets/ip/jinxing/tea-box-4.jpg", title: "龙顶茶盒 D", type: "茶礼" },
-      { image: "./assets/ip/jinxing/postcard-1.jpg", title: "金星明信片 A", type: "明信片" },
-      { image: "./assets/ip/jinxing/postcard-2.jpg", title: "金星明信片 B", type: "明信片" },
-      { image: "./assets/ip/jinxing/postcard-3.jpg", title: "金星明信片 C", type: "明信片" },
-      { image: "./assets/ip/jinxing/postcard-4.jpg", title: "金星明信片 D", type: "明信片" },
-      { image: "./assets/ip/jinxing/badge-1.jpg", title: "金叶徽章 A", type: "徽章" },
-      { image: "./assets/ip/jinxing/badge-2.jpg", title: "金叶徽章 B", type: "徽章" },
-      { image: "./assets/ip/jinxing/badge-3.jpg", title: "金叶徽章 C", type: "徽章" },
-      { image: "./assets/ip/jinxing/badge-4.jpg", title: "金叶徽章 D", type: "徽章" },
-      { image: "./assets/ip/jinxing/sticker-1.jpg", title: "金星贴纸 A", type: "贴纸" },
-      { image: "./assets/ip/jinxing/sticker-2.jpg", title: "金星贴纸 B", type: "贴纸" },
-      { image: "./assets/ip/jinxing/sticker-3.jpg", title: "金星贴纸 C", type: "贴纸" },
-      { image: "./assets/ip/jinxing/sticker-4.jpg", title: "金星贴纸 D", type: "贴纸" },
-      { image: "./assets/ip/jinxing/around-1.jpg", title: "金星周边 A", type: "周边" },
-      { image: "./assets/ip/jinxing/around-2.jpg", title: "金星周边 B", type: "周边" },
-      { image: "./assets/ip/jinxing/around-3.jpg", title: "金星周边 C", type: "周边" },
-      { image: "./assets/ip/jinxing/around-4.jpg", title: "金星周边 D", type: "周边" },
-      { image: "./assets/ip/jinxing/around-5.jpg", title: "金星周边 E", type: "周边" },
-      { image: "./assets/ip/jinxing/around-6.jpg", title: "金星周边 F", type: "周边" },
-      { image: "./assets/ip/jinxing/around-7.jpg", title: "金星周边 G", type: "周边" },
+      { image: "./assets/ip/jinxing/merch-longding-tea.png", title: "金星龙顶茶", type: "茶礼" },
+      { image: "./assets/ip/jinxing/merch-ginkgo-bookmark.png", title: "银杏故事书签", type: "书签" },
+      { image: "./assets/ip/jinxing/merch-red-class-card.png", title: "红课堂学习卡", type: "研学卡" },
+      { image: "./assets/ip/jinxing/merch-workshop-badge.png", title: "共富工坊徽章", type: "徽章" },
+      { image: "./assets/ip/jinxing/merch-supply-stickers.png", title: "金星供销社贴纸", type: "贴纸" },
+      { image: "./assets/ip/jinxing/merch-riverside-postcard.png", title: "江滨长廊明信片", type: "明信片" },
+      { image: "./assets/ip/jinxing/merch-study-passport.png", title: "乡村研学护照", type: "护照" },
     ],
   },
 };
@@ -1552,8 +1537,83 @@ function productDetailView() {
   `);
 }
 
+function materialCarouselPanel(village) {
+  const products = ipShowcases[village.id]?.products || [];
+  if (!products.length) return "";
+  const first = products[0];
+  return `
+    <section class="merch-orbit" style="--village:${village.color}; --count:${products.length}">
+      <div class="merch-orbit-head">
+        <div>
+          <p class="context-label">周边转轮盘</p>
+          <h2>金星村文创周边</h2>
+          <p>自动旋转浏览七件周边，点击任一物件进入对应大图详情。</p>
+        </div>
+        <button class="merch-orbit-focus" data-product-open="0">查看大图</button>
+      </div>
+
+      <div class="merch-orbit-stage" data-merch-orbit>
+        <button
+          class="merch-orbit-main"
+          data-product-open="0"
+          data-merch-main
+        >
+          <img src="${first.image}" alt="${first.title}" data-merch-main-image loading="eager">
+          <span data-merch-main-type>${first.type}</span>
+          <strong data-merch-main-title>${first.title}</strong>
+        </button>
+        <div class="merch-orbit-ring">
+          ${products
+            .map(
+              (product, index) => `
+                <button
+                  class="merch-orbit-item ${index === 0 ? "is-active" : ""}"
+                  style="--i:${index}"
+                  data-merch-select="${index}"
+                  data-product-image="${product.image}"
+                  data-product-title="${product.title}"
+                  data-product-type="${product.type}"
+                  aria-label="查看${product.title}"
+                >
+                  <img src="${product.image}" alt="${product.title}" loading="eager">
+                  <span>${product.title}</span>
+                </button>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function materialsPanel(village) {
   const cards = village.materials;
+  const productOrbit = village.id === "jinxing" ? materialCarouselPanel(village) : "";
+  const materialGrid =
+    village.id === "jinxing"
+      ? ""
+      : `
+        <section class="material-grid masonry">
+          ${cards
+            .map(([photo, title, text, size], index) => {
+              const productIndex = productIndexForMaterial(village, photo);
+              const isProduct = productIndex >= 0;
+              const tag = isProduct ? "button" : "article";
+              const action = isProduct ? `data-material-product-open="${productIndex}" aria-label="查看${title}"` : "";
+              return `
+                <${tag} class="material-card material-card-${size || "square"} ${photo.includes("/ip/") ? "material-card-product" : ""} ${isProduct ? "is-clickable" : ""}" ${action}>
+                  <figure class="material-photo" style="background-image:url('${photo}')"></figure>
+                  <div class="material-copy">
+                    <strong>${title}</strong>
+                    <span>${text}</span>
+                  </div>
+                </${tag}>
+              `;
+            })
+            .join("")}
+        </section>
+      `;
   return `
     <section class="material-intro">
       <div>
@@ -1563,25 +1623,8 @@ function materialsPanel(village) {
       </div>
     </section>
     ${ipShowcasePanel(village)}
-    <section class="material-grid masonry">
-      ${cards
-        .map(([photo, title, text, size], index) => {
-          const productIndex = productIndexForMaterial(village, photo);
-          const isProduct = productIndex >= 0;
-          const tag = isProduct ? "button" : "article";
-          const action = isProduct ? `data-material-product-open="${productIndex}" aria-label="查看${title}"` : "";
-          return `
-            <${tag} class="material-card material-card-${size || "square"} ${photo.includes("/ip/") ? "material-card-product" : ""} ${isProduct ? "is-clickable" : ""}" ${action}>
-              <figure class="material-photo" style="background-image:url('${photo}')"></figure>
-              <div class="material-copy">
-                <strong>${title}</strong>
-                <span>${text}</span>
-              </div>
-            </${tag}>
-          `;
-        })
-        .join("")}
-    </section>
+    ${productOrbit}
+    ${materialGrid}
   `;
 }
 
@@ -2023,10 +2066,42 @@ function attachPosterSwipe() {
   });
 }
 
+function syncMerchOrbit(orbit, index) {
+  const buttons = [...orbit.querySelectorAll("[data-merch-select]")];
+  const button = buttons[index];
+  const main = orbit.querySelector("[data-merch-main]");
+  const mainImage = orbit.querySelector("[data-merch-main-image]");
+  if (!button || !main || !mainImage) return;
+  mainImage.classList.remove("is-switching");
+  void mainImage.offsetWidth;
+  mainImage.classList.add("is-switching");
+  main.dataset.productOpen = String(index);
+  mainImage.src = button.dataset.productImage;
+  mainImage.alt = button.dataset.productTitle || "";
+  orbit.querySelector("[data-merch-main-title]").textContent = button.dataset.productTitle || "";
+  orbit.querySelector("[data-merch-main-type]").textContent = button.dataset.productType || "";
+  buttons.forEach((next) => next.classList.toggle("is-active", next === button));
+  window.setTimeout(() => mainImage.classList.remove("is-switching"), 520);
+}
+
+function attachMerchOrbitAuto() {
+  app.querySelectorAll("[data-merch-orbit]").forEach((orbit) => {
+    const buttons = [...orbit.querySelectorAll("[data-merch-select]")];
+    if (!buttons.length) return;
+    let index = 0;
+    window.setInterval(() => {
+      if (!document.body.contains(orbit) || state.route !== "detail" || state.tab !== "materials") return;
+      index = (index + 1) % buttons.length;
+      syncMerchOrbit(orbit, index);
+    }, 2600);
+  });
+}
+
 function attachHandlers() {
   attachTapEffects();
   attachDragStrips();
   attachPosterSwipe();
+  attachMerchOrbitAuto();
 
   app.querySelectorAll("[data-go]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -2262,6 +2337,23 @@ function attachHandlers() {
         village: state.village,
         productIndex: Number.isFinite(productIndex) ? productIndex : 0,
       });
+    });
+  });
+
+  app.querySelectorAll("[data-merch-select]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const index = Number(button.dataset.merchSelect);
+      const orbit = button.closest("[data-merch-orbit]");
+      if (!orbit) return;
+      syncMerchOrbit(orbit, index);
+      vibrate(10);
+      window.setTimeout(() => {
+        setRoute("product", {
+          village: state.village,
+          productIndex: Number.isFinite(index) ? index : 0,
+        });
+      }, 150);
     });
   });
 
