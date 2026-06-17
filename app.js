@@ -427,7 +427,45 @@ const villageMapGuides = {
 const app = document.querySelector("#app");
 const dockItems = Array.from(document.querySelectorAll(".dock-item"));
 
+const villageIcons = {
+  gaoqiao: "./assets/ui/village-gaoqiao.png",
+  yaoli: "./assets/ui/village-yaoli.png",
+  jinxing: "./assets/ui/village-jinxing.png",
+};
+
+const impressionIcons = {
+  map: "./assets/ui/impression-map.png",
+  materials: "./assets/ui/impression-materials.png",
+  game: "./assets/ui/impression-game.png",
+};
+
+const villagePointIcons = {
+  gaoqiao: [
+    "./assets/ui/point-gaoqiao-pet.png",
+    "./assets/ui/point-gaoqiao-plant.png",
+    "./assets/ui/point-gaoqiao-market.png",
+    "./assets/ui/point-gaoqiao-walk.png",
+    "./assets/ui/point-gaoqiao-jade.png",
+  ],
+  yaoli: [
+    "./assets/ui/point-yaoli-book.png",
+    "./assets/ui/point-yaoli-slope.png",
+    "./assets/ui/point-yaoli-pottery.png",
+    "./assets/ui/point-yaoli-cafe.png",
+    "./assets/ui/point-yaoli-art.png",
+  ],
+  jinxing: [
+    "./assets/ui/node-ginkgo-tree.png",
+    "./assets/ui/node-longding-tea.png",
+    "./assets/ui/node-red-class.png",
+    "./assets/ui/point-jinxing-homestay.png",
+    "./assets/ui/node-workshop.png",
+  ],
+};
+
 const storyNodeIcons = {
+  gaoqiao: villagePointIcons.gaoqiao,
+  yaoli: villagePointIcons.yaoli,
   jinxing: [
     "./assets/ui/node-ginkgo-tree.png",
     "./assets/ui/node-longding-tea.png",
@@ -438,6 +476,18 @@ const storyNodeIcons = {
 };
 
 const wordChipIcons = {
+  gaoqiao: {
+    宠: "./assets/ui/word-chong.png",
+    友: "./assets/ui/word-you.png",
+    田: "./assets/ui/word-tian.png",
+    创: "./assets/ui/word-chuang.png",
+  },
+  yaoli: {
+    云: "./assets/ui/word-yun.png",
+    窑: "./assets/ui/word-yao.png",
+    童: "./assets/ui/word-tong.png",
+    艺: "./assets/ui/word-yi.png",
+  },
   jinxing: {
     金: "./assets/ui/word-jin.png",
     茶: "./assets/ui/word-cha.png",
@@ -445,6 +495,23 @@ const wordChipIcons = {
     兴: "./assets/ui/word-xing.png",
   },
 };
+
+function imageIcon(src, label, className) {
+  if (!src) return "";
+  return `<img class="${className}" src="${src}" alt="${label}" loading="eager" />`;
+}
+
+function villageIconMarkup(villageId, label, className = "village-icon-img") {
+  return imageIcon(villageIcons[villageId], label, className);
+}
+
+function impressionIconMarkup(key, label, className = "impression-icon-img") {
+  return imageIcon(impressionIcons[key], label, className);
+}
+
+function pointIconMarkup(village, index, label, className = "point-icon-img") {
+  return imageIcon(villagePointIcons[village.id]?.[index], label, className);
+}
 
 function storyNodeIconMarkup(village, index) {
   const icon = storyNodeIcons[village.id]?.[index];
@@ -463,6 +530,14 @@ function wordChipContent(village, word) {
   const icon = wordChipIcons[village.id]?.[word];
   if (!icon) return word;
   return `<img src="${icon}" alt="${word}" loading="eager" /><span class="sr-only">${word}</span>`;
+}
+
+function storyTagMarkup(village, word, index) {
+  const icon = wordChipIcons[village.id]?.[word];
+  if (!icon) {
+    return `<span style="animation-delay:${index * 70}ms">${word}</span>`;
+  }
+  return `<span class="story-tag-icon" style="animation-delay:${index * 70}ms">${imageIcon(icon, word, "story-tag-img")}</span>`;
 }
 
 const posterItems = [
@@ -921,7 +996,7 @@ function realMapPins(activeVillageId) {
           style="left:${(pin.x / 320) * 100}%; top:${(pin.y / 430) * 100}%; --pin:${village.color}"
           aria-label="${village.name}"
         >
-          <span class="pin-core">✦</span>
+          <span class="pin-core">${villageIconMarkup(pin.id, village.name, "geo-pin-icon-img")}</span>
           <span class="pin-label">${village.name}</span>
         </button>
       `;
@@ -934,7 +1009,10 @@ function homeView() {
   return shell(`
     <section class="hero">
       <div class="hero-decor" aria-hidden="true">
-        <span>✦</span><span>◇</span><span>✺</span><span>☁</span>
+        <span>${villageIconMarkup("gaoqiao", "高桥村", "hero-decor-img")}</span>
+        <span>${villageIconMarkup("yaoli", "窑里村", "hero-decor-img")}</span>
+        <span>${villageIconMarkup("jinxing", "金星村", "hero-decor-img")}</span>
+        <span>${impressionIconMarkup("game", "互动收集", "hero-decor-img")}</span>
       </div>
       ${scenicRibbon(homeVillage)}
       <div class="hero-content">
@@ -997,7 +1075,7 @@ function homeView() {
         .map(
           (v, index) => `
             <button class="village-card" data-village="${v.id}" style="background-image:url('${villageCardCover(v)}')">
-              <span class="card-glyph" aria-hidden="true">${posterItems[index]?.glyph || "✦"}</span>
+              <span class="card-glyph" aria-hidden="true">${villageIconMarkup(v.id, v.name, "card-glyph-img")}</span>
               <div>
                 <p class="eyebrow">${v.type}</p>
                 <h3>${v.name}<br />${v.title}</h3>
@@ -1023,7 +1101,7 @@ function homeView() {
         .map(
           ([key, item]) => `
             <button class="memory-ribbon-item" data-impression="${key}">
-              <span>${item.icon}</span><strong>${item.title}</strong><small>${item.subtitle}</small>
+              <span>${impressionIconMarkup(key, item.title, "memory-icon-img")}</span><strong>${item.title}</strong><small>${item.subtitle}</small>
             </button>
           `,
         )
@@ -1046,7 +1124,7 @@ function villagesView() {
         .map(
           (v, index) => `
             <button class="village-card" data-village="${v.id}" style="background-image:url('${villageCardCover(v)}')">
-              <span class="card-glyph" aria-hidden="true">${posterItems[index]?.glyph || "✦"}</span>
+              <span class="card-glyph" aria-hidden="true">${villageIconMarkup(v.id, v.name, "card-glyph-img")}</span>
               <div>
                 <p class="eyebrow">${v.type}</p>
                 <h3>${v.name}<br />${v.title}</h3>
@@ -1094,7 +1172,7 @@ function profileView() {
         .map(
           (point, index) => `
             <button class="profile-node-card" data-profile-node="${index}" style="--village:${village.color}; background-image:url('${village.photos[index % village.photos.length]}')">
-              <span>${point.icon}</span>
+              <span>${pointIconMarkup(village, index, point.title, "profile-node-icon-img")}</span>
               <strong>${point.title}</strong>
               <small>${nodePlayScenes[village.id]?.[index]?.verb || point.action}</small>
             </button>
@@ -1112,7 +1190,7 @@ function impressionView() {
     <section class="impression-hero" style="--village:${activeVillage.color}">
       <button class="back" data-go="home">‹</button>
       <div>
-        <span>${item.icon}</span>
+        <span>${impressionIconMarkup(state.impression, item.title, "impression-hero-icon-img")}</span>
         <p>现场印象</p>
         <h1>${item.title}</h1>
         <small>${item.subtitle}</small>
@@ -1134,7 +1212,7 @@ function impressionView() {
         .map(
           ([key, next]) => `
             <button class="${state.impression === key ? "is-active" : ""}" data-impression="${key}">
-              <span>${next.icon}</span>${next.title}
+              <span>${impressionIconMarkup(key, next.title, "impression-tab-icon-img")}</span>${next.title}
             </button>
           `,
         )
@@ -1254,7 +1332,7 @@ function storyPanel(village) {
         <div class="story-detail-tags">
           ${(guide?.words || village.tags)
             .slice(0, 4)
-            .map((word, index) => `<span style="animation-delay:${index * 70}ms">${word}</span>`)
+            .map((word, index) => storyTagMarkup(village, word, index))
             .join("")}
         </div>
       </div>
@@ -1318,7 +1396,7 @@ function mapPanel(village) {
                   data-map-node="${index}"
                   style="left:${point.x}%; top:${point.y}%; background:linear-gradient(145deg, ${village.color}, #13231d); animation-delay:${index * 70}ms"
                 >
-                  <strong>${point.icon}</strong>
+                  <strong>${pointIconMarkup(village, index, point.title, "map-dot-icon-img")}</strong>
                   <span>${point.title}</span>
                 </button>
               `,
@@ -1336,7 +1414,7 @@ function mapPanel(village) {
             <strong>${activePoint?.title || village.nodes[0][0]}</strong>
             <span>${activePoint?.text || village.nodes[0][1]}</span>
           </div>
-          <button data-map-play="${activeIndex}" aria-label="进入${activePoint?.title || "互动"}小游戏">✦</button>
+          <button data-map-play="${activeIndex}" aria-label="进入${activePoint?.title || "互动"}小游戏">${pointIconMarkup(village, activeIndex, activePoint?.title || "互动", "active-card-play-icon-img")}</button>
         </div>
 
         <div class="map-action-dock">
@@ -1683,7 +1761,7 @@ function gameView() {
           data-game-node="${index}"
           style="left:${point.x}%; top:${point.y}%; background:linear-gradient(145deg, ${village.color}, #14231e)"
         >
-          <span class="token-number">${point.icon}</span>
+          <span class="token-number">${pointIconMarkup(village, index, point.title, "token-icon-img")}</span>
           <span class="token-name">${point.title}</span>
         </button>
       `;
@@ -1704,7 +1782,7 @@ function gameView() {
         .map(
           (v) => `
             <button class="${v.id === village.id ? "is-active" : ""}" data-game-village="${v.id}" style="--village:${v.color}">
-              <span>${v.name.slice(0, 2)}</span>
+              <span>${villageIconMarkup(v.id, v.name, "game-village-icon-img")}</span>
               <strong>${v.name}</strong>
             </button>
           `,
@@ -1750,7 +1828,7 @@ function gameView() {
             .map(
               (point, index) => `
                 <button class="inventory-slot ${collection.has(index) ? "is-filled" : ""}" data-game-node="${index}">
-                  <span>${collection.has(index) ? point.icon : index + 1}</span>
+                  <span>${collection.has(index) ? pointIconMarkup(village, index, point.label, "inventory-icon-img") : index + 1}</span>
                   <strong>${point.label}</strong>
                 </button>
               `,
@@ -1784,7 +1862,7 @@ function playSceneMarkup(scene, point, village) {
   const layers = (scene.layers || scene.steps).map((layer, index) => `<span class="stage-layer layer-${index + 1}">${layer}</span>`).join("");
   const common = `
     <span class="scene-glow"></span>
-    <span class="scene-label">${point.icon}</span>
+    <span class="scene-label">${pointIconMarkup(village, state.gameActiveNode, point.title, "scene-label-icon-img")}</span>
     <div class="village-scene-context">
       <strong>${village.name}</strong>
       <span>${point.title}</span>
@@ -1795,8 +1873,8 @@ function playSceneMarkup(scene, point, village) {
     slope: `
       ${common}
       <div class="slope-hill"></div>
-      <div class="slope-cloud">☁</div>
-      <div class="slope-rider">✦</div>
+      <div class="slope-cloud"></div>
+      <div class="slope-rider">${impressionIconMarkup("game", "滑下云坡", "scene-mini-icon-img")}</div>
       <div class="slope-gate">云门</div>
       <span class="trail-dot d1"></span><span class="trail-dot d2"></span><span class="trail-dot d3"></span>
     `,
@@ -1815,7 +1893,7 @@ function playSceneMarkup(scene, point, village) {
     coffee: `
       ${common}
       <div class="coffee-cup"></div>
-      <span class="steam st1">☁</span><span class="steam st2">☁</span><span class="stamp-ring">章</span>
+      <span class="steam st1"></span><span class="steam st2"></span><span class="stamp-ring">章</span>
     `,
     mosaic: `
       ${common}
@@ -1823,7 +1901,7 @@ function playSceneMarkup(scene, point, village) {
     `,
     paw: `
       ${common}
-      <div class="paw-path">${["🐾", "🐾", "🐾", "🐾"].map((paw, i) => `<i style="--i:${i}">${paw}</i>`).join("")}</div>
+      <div class="paw-path">${[0, 1, 2, 3].map((_, i) => `<i style="--i:${i}"></i>`).join("")}</div>
       <div class="rest-island">猫岛</div>
     `,
     leaf: `
@@ -1844,7 +1922,7 @@ function playSceneMarkup(scene, point, village) {
     `,
     jade: `
       ${common}
-      <div class="jade-pieces">${["◆", "◇", "◆", "◇"].map((piece, i) => `<span style="--i:${i}">${piece}</span>`).join("")}</div>
+      <div class="jade-pieces">${[0, 1, 2, 3].map((_, i) => `<span style="--i:${i}"></span>`).join("")}</div>
       <div class="jade-core">玉</div>
     `,
     ginkgo: `
@@ -1861,7 +1939,7 @@ function playSceneMarkup(scene, point, village) {
     star: `
       ${common}
       <div class="star-classroom"></div>
-      <span class="star-burst">★</span>
+      <span class="star-burst"></span>
       <span class="star-path p1"></span><span class="star-path p2"></span>
     `,
     home: `
@@ -1935,7 +2013,7 @@ function exhibitView() {
         <div class="poster-backdrop" style="--poster:${village.color}"></div>
         <div class="poster-sheen"></div>
         <div class="poster-badge">${posterIndex + 1}/3</div>
-        <div class="poster-mark" aria-hidden="true">${poster.glyph}</div>
+        <div class="poster-mark" aria-hidden="true">${villageIconMarkup(poster.id, poster.name, "poster-mark-img")}</div>
         <div class="poster-copy">
           <p class="eyebrow">${poster.accent}</p>
           <h2>${poster.name}</h2>
