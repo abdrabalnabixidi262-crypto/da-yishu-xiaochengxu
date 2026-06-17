@@ -427,6 +427,44 @@ const villageMapGuides = {
 const app = document.querySelector("#app");
 const dockItems = Array.from(document.querySelectorAll(".dock-item"));
 
+const storyNodeIcons = {
+  jinxing: [
+    "./assets/ui/node-ginkgo-tree.png",
+    "./assets/ui/node-longding-tea.png",
+    "./assets/ui/node-red-class.png",
+    "./assets/ui/node-supply-coop.png",
+    "./assets/ui/node-workshop.png",
+  ],
+};
+
+const wordChipIcons = {
+  jinxing: {
+    金: "./assets/ui/word-jin.png",
+    茶: "./assets/ui/word-cha.png",
+    富: "./assets/ui/word-fu.png",
+    兴: "./assets/ui/word-xing.png",
+  },
+};
+
+function storyNodeIconMarkup(village, index) {
+  const icon = storyNodeIcons[village.id]?.[index];
+  if (!icon) {
+    return `<span class="node-index" style="background:${village.color}">${index + 1}</span>`;
+  }
+  const label = village.nodes[index]?.[0] || `节点 ${index + 1}`;
+  return `
+    <span class="node-index node-icon" style="background:${village.color}">
+      <img src="${icon}" alt="${label}" loading="eager" />
+    </span>
+  `;
+}
+
+function wordChipContent(village, word) {
+  const icon = wordChipIcons[village.id]?.[word];
+  if (!icon) return word;
+  return `<img src="${icon}" alt="${word}" loading="eager" /><span class="sr-only">${word}</span>`;
+}
+
 const posterItems = [
   {
     id: "gaoqiao",
@@ -1196,8 +1234,8 @@ function storyPanel(village) {
       ${village.nodes
         .map(
           ([title, text], index) => `
-            <button class="node-card ${activeIndex === index ? "is-active" : ""}" data-story-node="${index}">
-              <span class="node-index" style="background:${village.color}">${index + 1}</span>
+            <button class="node-card ${storyNodeIcons[village.id]?.[index] ? "has-node-icon" : ""} ${activeIndex === index ? "is-active" : ""}" data-story-node="${index}">
+              ${storyNodeIconMarkup(village, index)}
               <div><strong>${title}</strong><span>${text}</span></div>
             </button>
           `,
@@ -1338,7 +1376,7 @@ function mapPanel(village) {
           ${guide.words
             .map(
               (word, index) => `
-                <button class="word-chip" data-word-chip="${word}" style="animation-delay:${index * 110}ms">${word}</button>
+                <button class="word-chip ${wordChipIcons[village.id]?.[word] ? "has-icon" : ""}" data-word-chip="${word}" style="animation-delay:${index * 110}ms">${wordChipContent(village, word)}</button>
               `,
             )
             .join("")}
