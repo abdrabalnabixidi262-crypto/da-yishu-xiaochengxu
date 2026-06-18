@@ -638,6 +638,82 @@ const state = {
 
 const gameOrder = ["gaoqiao", "yaoli", "jinxing"];
 
+const lazyScripts = new Map();
+
+function loadScriptOnce(src) {
+  if (lazyScripts.has(src)) return lazyScripts.get(src);
+  const promise = new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      existing.addEventListener("load", resolve, { once: true });
+      existing.addEventListener("error", reject, { once: true });
+      if (existing.dataset.loaded === "true") resolve();
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.onload = () => {
+      script.dataset.loaded = "true";
+      resolve();
+    };
+    script.onerror = reject;
+    document.body.append(script);
+  });
+  lazyScripts.set(src, promise);
+  return promise;
+}
+
+function loadMapData() {
+  if (window.realMapData) return Promise.resolve();
+  return loadScriptOnce("./map-data.js");
+}
+
+function loadPlay3d() {
+  return loadScriptOnce("./assets/vendor/three.min.js").then(() => loadScriptOnce("./play-3d.js"));
+}
+
+function requestIdleTask(callback, delay = 700) {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(callback, { timeout: delay + 900 });
+  } else {
+    window.setTimeout(callback, delay);
+  }
+}
+
+function preloadImage(src) {
+  if (!src) return;
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "image";
+  link.href = src;
+  document.head.append(link);
+}
+
+function loadDecorativeFonts() {
+  if (document.getElementById("decorative-fonts")) return;
+  const style = document.createElement("style");
+  style.id = "decorative-fonts";
+  style.textContent = `
+    @font-face {
+      font-family: "ZCOOL KuaiLe Local";
+      src: url("./assets/fonts/ZCOOLKuaiLe.ttf") format("truetype");
+      font-display: optional;
+    }
+    @font-face {
+      font-family: "Ma Shan Zheng Local";
+      src: url("./assets/fonts/MaShanZheng.ttf") format("truetype");
+      font-display: optional;
+    }
+  `;
+  document.head.append(style);
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(() => document.documentElement.classList.add("fonts-ready"));
+  } else {
+    window.setTimeout(() => document.documentElement.classList.add("fonts-ready"), 1200);
+  }
+}
+
 const publicBaseUrl = "https://abdrabalnabixidi262-crypto.github.io/da-yishu-xiaochengxu/";
 const qrEntries = [
   {
@@ -2176,9 +2252,20 @@ function render() {
   app.innerHTML = views[state.route]() ;
   attachHandlers();
   if (state.route === "play") {
-    window.play3d?.mount?.();
+    loadPlay3d()
+      .then(() => window.play3d?.mount?.())
+      .catch(() => showToast("3D 场景加载失败，请稍后重试"));
   } else {
     window.play3d?.dispose?.();
+    if (state.route === "home" && !window.realMapData) {
+      requestIdleTask(() => {
+        loadMapData()
+          .then(() => {
+            if (state.route === "home") render();
+          })
+          .catch(() => {});
+      }, 900);
+    }
   }
 }
 
@@ -2845,6 +2932,9 @@ dockItems.forEach((button) => {
 
 const initial = readRoute();
 Object.assign(state, initial);
+if (state.village && villages[state.village]) {
+  preloadImage(villages[state.village].cover);
+}
 
 Object.assign(window, {
   villages,
@@ -2862,6 +2952,8 @@ if (window.location.hash === "#all") {
 }
 
 render();
+
+window.setTimeout(loadDecorativeFonts, 6500);
 
 setInterval(() => {
   if (state.route === "exhibit") {
