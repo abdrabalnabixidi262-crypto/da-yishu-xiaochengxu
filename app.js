@@ -870,6 +870,17 @@ const impressionDetails = {
   },
 };
 
+const nodeFrameSlugs = {
+  gaoqiao: ["paw", "leaf", "market", "walk", "jade"],
+  yaoli: ["book", "slope", "clay", "coffee", "mosaic"],
+  jinxing: ["ginkgo", "tea", "star", "home", "workshop"],
+};
+
+function nodeFrameImage(villageId, nodeIndex, frame = 0) {
+  const slug = nodeFrameSlugs[villageId]?.[nodeIndex] || "slope";
+  return `./assets/anim/${villageId}/${String(nodeIndex + 1).padStart(2, "0")}-${slug}/frame-${String(frame).padStart(2, "0")}.jpg`;
+}
+
 const nodePlayScenes = {
   gaoqiao: [
     {
@@ -1440,6 +1451,28 @@ function profileView() {
 function impressionView() {
   const item = impressionDetails[state.impression] || impressionDetails.map;
   const activeVillage = villages[state.village] || villages.yaoli;
+  const guide = villageMapGuides[activeVillage.id] || villageMapGuides.yaoli;
+  const previewCards = {
+    map: (guide.points || []).slice(0, 3).map((point, index) => ({
+      image: villageMapImage(activeVillage),
+      icon: pointIconMarkup(activeVillage, index, point.title, "impression-preview-icon-img"),
+      title: point.title,
+      text: point.label,
+    })),
+    materials: (activeVillage.materials || []).slice(0, 3).map(([image, title, text]) => ({
+      image,
+      icon: villageIconMarkup(activeVillage.id, activeVillage.name, "impression-preview-icon-img"),
+      title,
+      text,
+    })),
+    game: (guide.points || []).slice(0, 3).map((point, index) => ({
+      image: nodeFrameImage(activeVillage.id, index, index * 5),
+      icon: pointIconMarkup(activeVillage, index, point.title, "impression-preview-icon-img"),
+      title: nodePlayScenes[activeVillage.id]?.[index]?.title || point.title,
+      text: nodePlayScenes[activeVillage.id]?.[index]?.steps?.[index] || point.action,
+    })),
+  };
+  const preview = previewCards[state.impression] || previewCards.map;
   return shell(`
     <section class="impression-hero" style="--village:${activeVillage.color}">
       <button class="back" data-go="home">‹</button>
@@ -1453,8 +1486,21 @@ function impressionView() {
 
     <section class="impression-detail" style="--village:${activeVillage.color}">
       <p>${item.text}</p>
-      <div class="impression-preview">
-        <span></span><span></span><span></span>
+      <div class="impression-preview impression-preview-${state.impression}">
+        ${preview
+          .map(
+            (card, index) => `
+              <figure class="impression-preview-card ${index === 1 ? "is-wide" : ""}">
+                <img src="${card.image}" alt="${card.title}" loading="lazy" />
+                <figcaption>
+                  <span>${card.icon}</span>
+                  <strong>${card.title}</strong>
+                  <small>${card.text}</small>
+                </figcaption>
+              </figure>
+            `,
+          )
+          .join("")}
       </div>
       <button class="impression-action" data-impression-action="${state.impression}">
         ${item.action}
