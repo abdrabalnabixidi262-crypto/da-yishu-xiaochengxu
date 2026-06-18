@@ -61,6 +61,10 @@
     return `${frameBase(villageId, nodeIndex)}frame-${String(frame).padStart(2, "0")}.jpg`;
   }
 
+  function stepGifUrl(villageId, nodeIndex, stepIndex) {
+    return `${frameBase(villageId, nodeIndex)}step-${String(stepIndex + 1).padStart(2, "0")}.gif`;
+  }
+
   const palette = {
     gaoqiao: {
       sky: 0xd7ebe3,
@@ -1228,7 +1232,7 @@
               .map(
                 (step, index) => `
                   <button class="play-3d-step ${stage.step >= index + 1 ? "is-done" : ""}" type="button" data-play-3d-step="${index + 1}">
-                    <img src="${frameUrl(context.village.id, context.nodeIndex, index * 5)}" alt="" loading="eager" />
+                    <img src="${stepGifUrl(context.village.id, context.nodeIndex, index)}" alt="" loading="eager" />
                     <em>${index + 1}</em>
                     <span>${step}</span>
                   </button>

@@ -4557,12 +4557,14 @@ p {
 
 .play-3d-step img {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
   object-fit: cover;
   opacity: 0.82;
   filter: saturate(1.04) contrast(1.02);
+  animation: stepGifSway 5.8s ease-in-out infinite;
+  transform-origin: 50% 60%;
 }
 
 .play-3d-step::after {
@@ -4611,7 +4613,7 @@ p {
 }
 
 .play-3d-step.is-current {
-  animation: gentleSway 2.8s ease-in-out infinite;
+  animation: gentleSway 5.8s ease-in-out infinite;
 }
 
 .play-3d-complete {
@@ -6656,7 +6658,17 @@ p {
     transform: rotate(0deg) translateY(0);
   }
   50% {
-    transform: rotate(0.9deg) translateY(-2px);
+    transform: rotate(0.35deg) translateY(-0.8px);
+  }
+}
+
+@keyframes stepGifSway {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1.01);
+  }
+  50% {
+    transform: rotate(0.45deg) scale(1.015);
   }
 }
 
