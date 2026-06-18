@@ -57,6 +57,10 @@
     return `./assets/anim/${villageId}/${String(nodeIndex + 1).padStart(2, "0")}-${slug}/`;
   }
 
+  function frameUrl(villageId, nodeIndex, frame) {
+    return `${frameBase(villageId, nodeIndex)}frame-${String(frame).padStart(2, "0")}.jpg`;
+  }
+
   const palette = {
     gaoqiao: {
       sky: 0xd7ebe3,
@@ -1202,7 +1206,7 @@
         <button class="play-3d-tap-layer" type="button" data-play-3d-tap aria-label="推进互动步骤"></button>
         <div class="play-3d-sheen" aria-hidden="true"></div>
         <figure class="play-frame-anim" data-frame-anim data-base="${frameBase(context.village.id, context.nodeIndex)}" aria-hidden="true">
-          <img src="${frameBase(context.village.id, context.nodeIndex)}frame-00.jpg" alt="" data-frame-img loading="eager" />
+          <img src="${frameUrl(context.village.id, context.nodeIndex, 0)}" alt="" data-frame-img loading="eager" />
         </figure>
         <header class="play-3d-head" style="--village:${context.village.color}">
           <button class="back" type="button" data-play-3d-back aria-label="返回">‹</button>
@@ -1224,6 +1228,7 @@
               .map(
                 (step, index) => `
                   <button class="play-3d-step ${stage.step >= index + 1 ? "is-done" : ""}" type="button" data-play-3d-step="${index + 1}">
+                    <img src="${frameUrl(context.village.id, context.nodeIndex, index * 5)}" alt="" loading="eager" />
                     <em>${index + 1}</em>
                     <span>${step}</span>
                   </button>
@@ -1240,6 +1245,7 @@
               (node, index) => `
                 <button class="${index === context.nodeIndex ? "is-active" : ""}" type="button" data-play-3d-node="${index}" style="--village:${context.village.color}">
                   <i>${node.icon || "✦"}</i>
+                  <img src="${frameUrl(context.village.id, index, 8)}" alt="" loading="lazy" />
                   <span>${window.nodePlayScenes?.[context.village.id]?.[index]?.title || node.label || node.title}</span>
                 </button>
               `,

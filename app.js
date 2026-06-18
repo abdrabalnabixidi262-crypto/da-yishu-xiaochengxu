@@ -478,14 +478,17 @@ const userVillageMaps = {
   gaoqiao: {
     map: "./assets/maps/gaoqiao-user-map.jpg",
     profile: "./assets/maps/gaoqiao-profile-map.jpg",
+    ratio: "976 / 708",
   },
   yaoli: {
     map: "./assets/maps/yaoli-user-map.jpg",
     profile: "./assets/maps/yaoli-profile-map.jpg",
+    ratio: "1332 / 1197",
   },
   jinxing: {
     map: "./assets/maps/jinxing-user-map.jpg",
     profile: "./assets/maps/jinxing-profile-map.jpg",
+    ratio: "1327 / 1077",
   },
 };
 
@@ -542,6 +545,7 @@ Object.entries(userVillageMaps).forEach(([id, media]) => {
   if (!villages[id]) return;
   villages[id].mapImage = media.map;
   villages[id].profileMap = media.profile;
+  villages[id].mapRatio = media.ratio;
   villages[id].photos = [media.profile, media.map, ...villages[id].photos];
 });
 
@@ -1619,7 +1623,7 @@ function mapPanel(village) {
         <span class="mini-pill">${activeIndex + 1}/${guide?.points?.length || village.nodes.length}</span>
       </div>
 
-      <section class="village-map-shell" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}; --user-map:url('${villageMapImage(village)}')">
+      <section class="village-map-shell" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}; --user-map:url('${villageMapImage(village)}'); --map-ratio:${village.mapRatio || "4 / 3"}">
         <div class="village-scan-top">
           <span>${village.name}</span>
           <strong>${activePoint?.label || village.subtitle}</strong>
@@ -2050,7 +2054,7 @@ function gameView() {
         .join("")}
     </section>
 
-    <section class="game-panel mission-game" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}; --user-map:url('${villageMapImage(village)}')">
+    <section class="game-panel mission-game" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}; --user-map:url('${villageMapImage(village)}'); --map-ratio:${village.mapRatio || "4 / 3"}">
       <div class="score-card mission-score">
         <div>
           <span>探索进度</span>
