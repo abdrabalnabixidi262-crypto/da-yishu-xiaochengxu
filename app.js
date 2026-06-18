@@ -474,6 +474,93 @@ const villageMapGuides = {
   },
 };
 
+const userVillageMaps = {
+  gaoqiao: {
+    map: "./assets/maps/gaoqiao-user-map.jpg",
+    profile: "./assets/maps/gaoqiao-profile-map.jpg",
+  },
+  yaoli: {
+    map: "./assets/maps/yaoli-user-map.jpg",
+    profile: "./assets/maps/yaoli-profile-map.jpg",
+  },
+  jinxing: {
+    map: "./assets/maps/jinxing-user-map.jpg",
+    profile: "./assets/maps/jinxing-profile-map.jpg",
+  },
+};
+
+const userVillageProducts = {
+  gaoqiao: [
+    ["./assets/ip/gaoqiao/product-pet-stickers-user.jpg", "宠物友好贴纸组", "以宠物友好标识、村内休憩点和路线记忆组成高桥轻量识别。", "wide", "贴纸"],
+    ["./assets/ip/gaoqiao/product-route-card-user.jpg", "高桥遛村路线卡", "把高桥遛村路径做成可阅读、可收藏、可打卡的路线卡。", "wide", "路线卡"],
+    ["./assets/ip/gaoqiao/product-shop-sign-user.jpg", "友好商户门贴", "对应友好商户、休憩补给与宠物友好服务的门口提示。", "wide", "门贴"],
+    ["./assets/ip/gaoqiao/product-summary-board-user.jpg", "高桥村三产品汇总板", "将贴纸组、路线卡和商户门贴汇总成完整周边展示板。", "wide", "展板"],
+    ["./assets/ip/gaoqiao/product-guide-back-user.jpg", "高桥遛村指南背面", "作为路线说明和现场导览的辅助页，适合扫码后快速查看。", "wide", "指南"],
+  ],
+  yaoli: [
+    ["./assets/ip/yaoli/merch-postcard-user.jpg", "窑里云朵明信片", "把云朵书吧、亲子场景和村庄色彩压进可寄出的纪念卡。", "tall", "明信片"],
+    ["./assets/ip/yaoli/merch-task-card-user.jpg", "儿童任务卡", "引导观众用阅读、运动、陶艺和观察完成窑里探索。", "tall", "任务卡"],
+    ["./assets/ip/yaoli/merch-sticker-user.jpg", "云朵贴纸", "适合贴在护照、任务卡和共创墙上的窑里视觉符号。", "square", "贴纸"],
+    ["./assets/ip/yaoli/merch-paper-bag-user.jpg", "云朵纸袋", "把窑里周边收纳成可带走的柔和纸袋包装。", "square", "纸袋"],
+  ],
+  jinxing: [
+    ["./assets/ip/jinxing/merch-longding-tea-user.jpg", "金星龙顶茶", "龙顶茶礼盒把茶园、银杏与共富叙事做成主推茶礼。", "wide", "茶礼"],
+    ["./assets/ip/jinxing/merch-ginkgo-bookmark-user.jpg", "银杏故事书签", "用金色叶片和江滨村落记录金星村的乡土记忆。", "square", "书签"],
+    ["./assets/ip/jinxing/merch-red-class-card-user.jpg", "红课堂学习卡", "对应红色研学点，适合展板扫码领取和任务打卡。", "square", "研学卡"],
+    ["./assets/ip/jinxing/merch-workshop-badge-user.jpg", "共富工坊徽章", "把村民协作、茶香工坊和共同富裕做成可佩戴纪念。", "tall", "徽章"],
+    ["./assets/ip/jinxing/merch-supply-stickers-user.jpg", "金星供销社贴纸", "把角色、供销社、银杏和村落风景做成整张贴纸套装。", "square", "贴纸"],
+    ["./assets/ip/jinxing/merch-riverside-postcard-user.jpg", "江滨长廊明信片", "把江滨风光、金星村落与人文共富做成可寄出的风景。", "wide", "明信片"],
+    ["./assets/ip/jinxing/merch-study-passport-user.jpg", "乡村研学护照", "用打卡地图、研学记录和收集印章串起金星村游线。", "square", "护照"],
+  ],
+};
+
+const userMapPointPositions = {
+  gaoqiao: [
+    [18, 19],
+    [57, 12],
+    [84, 36],
+    [18, 58],
+    [55, 82],
+  ],
+  yaoli: [
+    [70, 80],
+    [25, 26],
+    [57, 28],
+    [82, 41],
+    [50, 57],
+  ],
+  jinxing: [
+    [19, 52],
+    [54, 18],
+    [82, 39],
+    [58, 56],
+    [25, 20],
+  ],
+};
+
+Object.entries(userVillageMaps).forEach(([id, media]) => {
+  if (!villages[id]) return;
+  villages[id].mapImage = media.map;
+  villages[id].profileMap = media.profile;
+  villages[id].photos = [media.profile, media.map, ...villages[id].photos];
+});
+
+Object.entries(userVillageProducts).forEach(([id, products]) => {
+  if (!villages[id]) return;
+  villages[id].materials = products.map(([image, title, text, size]) => [image, title, text, size]);
+  if (!ipShowcases[id]) return;
+  ipShowcases[id].products = products.map(([image, title, , , type]) => ({ image, title, type }));
+});
+
+Object.entries(userMapPointPositions).forEach(([id, positions]) => {
+  const points = villageMapGuides[id]?.points || [];
+  positions.forEach(([x, y], index) => {
+    if (!points[index]) return;
+    points[index].x = x;
+    points[index].y = y;
+  });
+});
+
 const app = document.querySelector("#app");
 const dockItems = Array.from(document.querySelectorAll(".dock-item"));
 
@@ -563,6 +650,15 @@ function pointIconMarkup(village, index, label, className = "point-icon-img") {
   return imageIcon(villagePointIcons[village.id]?.[index], label, className);
 }
 
+function villageMapImage(village, variant = "map") {
+  if (!village) return "";
+  return variant === "profile" ? village.profileMap || village.mapImage || village.cover : village.mapImage || village.profileMap || village.cover;
+}
+
+function mapPointPhoto(village, index) {
+  return village.photos[index % village.photos.length] || villageMapImage(village);
+}
+
 function storyNodeIconMarkup(village, index) {
   const icon = storyNodeIcons[village.id]?.[index];
   if (!icon) {
@@ -626,6 +722,7 @@ const state = {
   gameVillage: "yaoli",
   gameActiveNode: 0,
   productIndex: 0,
+  mapPhotoOpen: false,
   playSteps: new Set(),
   gameCollected: {
     gaoqiao: new Set(),
@@ -670,7 +767,7 @@ function loadMapData() {
 }
 
 function loadPlay3d() {
-  return loadScriptOnce("./assets/vendor/three.min.js").then(() => loadScriptOnce("./play-3d.js"));
+  return loadScriptOnce("./play-3d.js");
 }
 
 function requestIdleTask(callback, delay = 700) {
@@ -1015,6 +1112,7 @@ function setRoute(route, extras = {}) {
   if (extras.gameVillage) state.gameVillage = extras.gameVillage;
   if (typeof extras.gameActiveNode === "number") state.gameActiveNode = extras.gameActiveNode;
   if (typeof extras.productIndex === "number") state.productIndex = extras.productIndex;
+  if (typeof extras.mapPhotoOpen === "boolean") state.mapPhotoOpen = extras.mapPhotoOpen;
   if (route === "detail") {
     const village = villages[state.village] || villages.yaoli;
     state.tab = extras.tab || "map";
@@ -1022,6 +1120,7 @@ function setRoute(route, extras = {}) {
       typeof extras.selectedMapNode === "number" ? extras.selectedMapNode : village.mapFocus ?? 0;
     state.selectedStoryNode =
       typeof extras.selectedStoryNode === "number" ? extras.selectedStoryNode : state.selectedMapNode;
+    if (state.tab !== "map" || typeof extras.mapPhotoOpen !== "boolean") state.mapPhotoOpen = false;
   }
   if (route === "game") {
     state.gameVillage = extras.gameVillage || extras.village || state.gameVillage || state.village || "yaoli";
@@ -1295,7 +1394,7 @@ function profileView() {
   const village = villages[state.village] || villages.yaoli;
   const guide = villageMapGuides[village.id];
   return shell(`
-    <section class="profile-hero" style="--village:${village.color}; background-image:url('${village.cover}')">
+    <section class="profile-hero profile-hero-map" style="--village:${village.color}; background-image:url('${villageMapImage(village, "profile")}')">
       <div class="top-row">
         <button class="back" data-go="villages">‹</button>
         <span class="mini-pill">村志详情</span>
@@ -1390,7 +1489,7 @@ function detailView() {
           </div>
           <span class="mini-pill">村落导览</span>
         </section>`
-      : `<section class="detail-hero" style="background-image:url('${village.cover}')">
+      : `<section class="detail-hero detail-hero-map" style="--village:${village.color}; background-image:url('${villageMapImage(village, "profile")}')">
           <div class="top-row">
             <button class="back" data-go="villages">‹</button>
             <span class="mini-pill">村志详情</span>
@@ -1506,6 +1605,8 @@ function mapPanel(village) {
   const focusIndex = village.mapFocus ?? 0;
   const activeIndex = guide?.points?.[state.selectedMapNode] ? state.selectedMapNode : focusIndex;
   const activePoint = guide?.points?.[activeIndex] || guide?.points?.[0];
+  const activePhoto = mapPointPhoto(village, activeIndex);
+  const mapPhotoOpen = Boolean(state.mapPhotoOpen);
   const routeD = guide?.route || "M12 70 C28 45 45 43 58 30 C72 17 91 36 78 54 C69 68 83 77 65 84 C48 91 32 70 12 70";
   return `
     <section class="map-stage">
@@ -1518,12 +1619,12 @@ function mapPanel(village) {
         <span class="mini-pill">${activeIndex + 1}/${guide?.points?.length || village.nodes.length}</span>
       </div>
 
-      <section class="village-map-shell" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
+      <section class="village-map-shell" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}; --user-map:url('${villageMapImage(village)}')">
         <div class="village-scan-top">
           <span>${village.name}</span>
           <strong>${activePoint?.label || village.subtitle}</strong>
         </div>
-        <div class="art-map village-map" data-village-map="${village.id}">
+        <div class="art-map village-map user-map-bg" data-village-map="${village.id}">
           <div class="terrain-grid"></div>
           <div class="terrain-fog"></div>
           <div class="scan-beam"></div>
@@ -1545,6 +1646,7 @@ function mapPanel(village) {
                 <button
                   class="map-dot village-map-dot ${activeIndex === index ? "is-active" : ""}"
                   data-map-node="${index}"
+                  data-map-photo-open="${index}"
                   style="left:${point.x}%; top:${point.y}%; background:linear-gradient(145deg, ${village.color}, #13231d); animation-delay:${index * 70}ms"
                 >
                   <strong>${pointIconMarkup(village, index, point.title, "map-dot-icon-img")}</strong>
@@ -1553,10 +1655,19 @@ function mapPanel(village) {
               `,
             )
             .join("")}
-          <div class="map-photo-panel">
-            <figure class="map-photo" style="background-image:url('${village.photos[activeIndex % village.photos.length]}')"></figure>
+          <div class="map-photo-panel ${mapPhotoOpen ? "is-open" : ""}">
+            <figure class="map-photo" style="background-image:url('${activePhoto}')"></figure>
             <span>${guide.photoLabel}</span>
           </div>
+          ${
+            mapPhotoOpen
+              ? `<button class="map-photo-splash" type="button" data-map-photo-close aria-label="关闭点位大图">
+                  <i></i><i></i><i></i><i></i>
+                  <figure style="background-image:url('${activePhoto}')"></figure>
+                  <span>${activePoint?.title || guide.photoLabel}</span>
+                </button>`
+              : ""
+          }
         </div>
 
         <div class="village-active-card">
@@ -1858,9 +1969,7 @@ function materialsPanel(village) {
   const cards = village.materials;
   const productOrbit = (ipShowcases[village.id]?.products || []).length ? materialCarouselPanel(village) : "";
   const materialGrid =
-    productOrbit
-      ? ""
-      : `
+    `
         <section class="material-grid masonry">
           ${cards
             .map(([photo, title, text, size], index) => {
@@ -1941,7 +2050,7 @@ function gameView() {
         .join("")}
     </section>
 
-    <section class="game-panel mission-game" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}">
+    <section class="game-panel mission-game" style="--village:${village.color}; --mapA:${village.map.a}; --mapB:${village.map.b}; --user-map:url('${villageMapImage(village)}')">
       <div class="score-card mission-score">
         <div>
           <span>探索进度</span>
@@ -1950,7 +2059,7 @@ function gameView() {
         <div class="progress-track"><div class="progress-fill" style="--progress:${progress}%"></div></div>
       </div>
 
-      <div class="game-stage mission-stage">
+      <div class="game-stage mission-stage user-map-bg">
         <svg class="game-route-svg" viewBox="0 0 100 100" aria-hidden="true">
           <path d="${guide.route}"></path>
         </svg>
@@ -2556,7 +2665,16 @@ function attachHandlers() {
         tab: "map",
         selectedMapNode: Number(button.dataset.mapNode),
         selectedStoryNode: Number(button.dataset.mapNode),
+        mapPhotoOpen: button.hasAttribute("data-map-photo-open"),
       });
+    });
+  });
+
+  app.querySelectorAll("[data-map-photo-close]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.mapPhotoOpen = false;
+      render();
+      vibrate(8);
     });
   });
 

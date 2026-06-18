@@ -1,7 +1,28 @@
 (() => {
-  if (!window.THREE) return;
-
-  const THREE = window.THREE;
+  const THREE = window.THREE || null;
+  const vector = (x, y, z) =>
+    THREE
+      ? new THREE.Vector3(x, y, z)
+      : {
+          x,
+          y,
+          z,
+          set(nx, ny, nz) {
+            this.x = nx;
+            this.y = ny;
+            this.z = nz;
+            return this;
+          },
+          copy(next) {
+            this.x = next.x;
+            this.y = next.y;
+            this.z = next.z;
+            return this;
+          },
+          lerp() {
+            return this;
+          },
+        };
   const stage = {
     root: null,
     wrap: null,
@@ -17,12 +38,24 @@
     sceneType: "slope",
     rotationX: -0.1,
     rotationY: -0.34,
-    cameraGoal: new THREE.Vector3(0, 4.8, 8.8),
-    lookAt: new THREE.Vector3(0, 0.1, 0),
+    cameraGoal: vector(0, 4.8, 8.8),
+    lookAt: vector(0, 0.1, 0),
     animators: [],
     resize: null,
     drag: null,
+    frameTimer: 0,
   };
+
+  const frameSlugs = {
+    gaoqiao: ["paw", "leaf", "market", "walk", "jade"],
+    yaoli: ["book", "slope", "clay", "coffee", "mosaic"],
+    jinxing: ["ginkgo", "tea", "star", "home", "workshop"],
+  };
+
+  function frameBase(villageId, nodeIndex) {
+    const slug = frameSlugs[villageId]?.[nodeIndex] || "slope";
+    return `./assets/anim/${villageId}/${String(nodeIndex + 1).padStart(2, "0")}-${slug}/`;
+  }
 
   const palette = {
     gaoqiao: {
@@ -1112,13 +1145,34 @@
       appState.playSteps = new Set();
       for (let i = 0; i < stage.step; i += 1) appState.playSteps.add(i);
     }
-    buildScene();
+    if (stage.scene) buildScene();
+    else syncPanel(ctx());
+    if (stage.root) startFrameLoop(stage.root);
     if (source !== "silent") {
       const context = ctx();
       const label = context.sceneInfo.steps?.[stage.step - 1] || "互动阶段";
       window.showToast?.(stage.step > 0 ? `已点亮：${label}` : "回到初始场景");
       navigator.vibrate?.(stage.step >= 3 ? 18 : 10);
     }
+  }
+
+  function startFrameLoop(root) {
+    if (stage.frameTimer) window.clearInterval(stage.frameTimer);
+    const img = root.querySelector("[data-frame-img]");
+    const host = root.querySelector("[data-frame-anim]");
+    const base = host?.dataset.frameAnim || host?.dataset.base;
+    if (!img || !base) return;
+    let frame = Math.max(0, stage.step - 1) * 4;
+    img.src = `${base}frame-${String(frame % 16).padStart(2, "0")}.jpg`;
+    stage.frameTimer = window.setInterval(() => {
+      if (!document.body.contains(root)) {
+        window.clearInterval(stage.frameTimer);
+        stage.frameTimer = 0;
+        return;
+      }
+      frame = (frame + 1) % 16;
+      img.src = `${base}frame-${String(frame).padStart(2, "0")}.jpg`;
+    }, 62.5);
   }
 
   function completeNode() {
@@ -1144,9 +1198,12 @@
     const steps = context.sceneInfo.steps || ["搭建场景", "触发运动", "完成打卡"];
     const nodes = context.guide.points || [];
     root.innerHTML = `
-      <div class="play-3d-shell" data-step="${stage.step}">
-        <div class="play-3d-canvas-wrap" data-play-3d-canvas-wrap></div>
+        <div class="play-3d-shell" data-step="${stage.step}">
+        <button class="play-3d-tap-layer" type="button" data-play-3d-tap aria-label="推进互动步骤"></button>
         <div class="play-3d-sheen" aria-hidden="true"></div>
+        <figure class="play-frame-anim" data-frame-anim data-base="${frameBase(context.village.id, context.nodeIndex)}" aria-hidden="true">
+          <img src="${frameBase(context.village.id, context.nodeIndex)}frame-00.jpg" alt="" data-frame-img loading="eager" />
+        </figure>
         <header class="play-3d-head" style="--village:${context.village.color}">
           <button class="back" type="button" data-play-3d-back aria-label="返回">‹</button>
           <div>
@@ -1239,13 +1296,17 @@
 
   function attachEvents(root) {
     root.addEventListener("click", (event) => {
-      const target = event.target.closest("[data-play-3d-step], [data-play-3d-complete], [data-play-3d-back], [data-play-3d-map], [data-play-3d-node]");
+      const target = event.target.closest("[data-play-3d-step], [data-play-3d-complete], [data-play-3d-back], [data-play-3d-map], [data-play-3d-node], [data-play-3d-tap]");
       if (!target) return;
       event.preventDefault();
       event.stopPropagation();
       const context = ctx();
       if (target.matches("[data-play-3d-step]")) {
         setStep(numberAttr(target, "data-play-3d-step"));
+        return;
+      }
+      if (target.matches("[data-play-3d-tap]")) {
+        setStep(stage.step >= 3 ? 0 : stage.step + 1);
         return;
       }
       if (target.matches("[data-play-3d-complete]")) {
@@ -1330,6 +1391,8 @@
   function dispose() {
     if (stage.raf) cancelAnimationFrame(stage.raf);
     stage.raf = 0;
+    if (stage.frameTimer) window.clearInterval(stage.frameTimer);
+    stage.frameTimer = 0;
     if (stage.resize) window.removeEventListener("resize", stage.resize);
     stage.resize = null;
     if (stage.world) disposeObject(stage.world);
@@ -1358,11 +1421,9 @@
     stage.nodeIndex = context.nodeIndex;
     stage.villageId = context.village.id;
     renderShell(root, context);
-    stage.wrap = root.querySelector("[data-play-3d-canvas-wrap]");
-    initThree(stage.wrap);
     attachEvents(root);
-    buildScene();
-    animate();
+    syncPanel(context);
+    startFrameLoop(root);
   }
 
   window.play3d = {
