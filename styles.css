@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Ma Shan Zheng Fast";
+  src: url("./assets/fonts/MaShanZheng-subset.woff2") format("woff2");
+  font-display: swap;
+}
+
 :root {
   --bg: #f2ecde;
   --paper: #fffbf0;
@@ -16,11 +22,7 @@
   --shadow: 0 24px 60px rgba(52, 60, 45, 0.2);
   --soft-shadow: 0 12px 32px rgba(52, 60, 45, 0.11);
   --font-brand: "SF Pro Display", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei UI", system-ui, sans-serif;
-  --font-title: "YouYuan", "STHupo", "PingFang SC", "Microsoft YaHei UI", system-ui, sans-serif;
-}
-
-.fonts-ready {
-  --font-title: "ZCOOL KuaiLe Local", "Ma Shan Zheng Local", "YouYuan", "STHupo", "PingFang SC", "Microsoft YaHei UI", system-ui, sans-serif;
+  --font-title: "Ma Shan Zheng Fast", "YouYuan", "STHupo", "PingFang SC", "Microsoft YaHei UI", system-ui, sans-serif;
 }
 
 * {

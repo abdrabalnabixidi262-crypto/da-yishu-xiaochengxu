@@ -690,30 +690,6 @@ function preloadImage(src) {
   document.head.append(link);
 }
 
-function loadDecorativeFonts() {
-  if (document.getElementById("decorative-fonts")) return;
-  const style = document.createElement("style");
-  style.id = "decorative-fonts";
-  style.textContent = `
-    @font-face {
-      font-family: "ZCOOL KuaiLe Local";
-      src: url("./assets/fonts/ZCOOLKuaiLe.ttf") format("truetype");
-      font-display: optional;
-    }
-    @font-face {
-      font-family: "Ma Shan Zheng Local";
-      src: url("./assets/fonts/MaShanZheng.ttf") format("truetype");
-      font-display: optional;
-    }
-  `;
-  document.head.append(style);
-  if (document.fonts?.ready) {
-    document.fonts.ready.then(() => document.documentElement.classList.add("fonts-ready"));
-  } else {
-    window.setTimeout(() => document.documentElement.classList.add("fonts-ready"), 1200);
-  }
-}
-
 const publicBaseUrl = "https://abdrabalnabixidi262-crypto.github.io/da-yishu-xiaochengxu/";
 const qrEntries = [
   {
@@ -2952,8 +2928,6 @@ if (window.location.hash === "#all") {
 }
 
 render();
-
-window.setTimeout(loadDecorativeFonts, 6500);
 
 setInterval(() => {
   if (state.route === "exhibit") {
