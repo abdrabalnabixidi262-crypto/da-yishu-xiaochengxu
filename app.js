@@ -638,6 +638,55 @@ const state = {
 
 const gameOrder = ["gaoqiao", "yaoli", "jinxing"];
 
+const publicBaseUrl = "https://abdrabalnabixidi262-crypto.github.io/da-yishu-xiaochengxu/";
+const qrEntries = [
+  {
+    id: "home",
+    label: "总入口二维码",
+    title: "浙里三村志总入口",
+    subtitle: "打开今日首页，进入完整小程序前身",
+    image: "./assets/qr/entry-home.png",
+    color: "#102018",
+    url: publicBaseUrl,
+  },
+  {
+    id: "gaoqiao",
+    label: "高桥村故事二维码",
+    title: "高桥村故事二维码",
+    subtitle: "带着宠物去村里 / 城边友好生活地图",
+    image: "./assets/qr/entry-gaoqiao.png",
+    color: "#789262",
+    url: `${publicBaseUrl}?route=profile&village=gaoqiao`,
+  },
+  {
+    id: "yaoli",
+    label: "窑里村故事二维码",
+    title: "窑里村故事二维码",
+    subtitle: "向窑里，追云去 / 儿童友好艺术村",
+    image: "./assets/qr/entry-yaoli.png",
+    color: "#425066",
+    url: `${publicBaseUrl}?route=profile&village=yaoli`,
+  },
+  {
+    id: "jinxing",
+    label: "金星村故事二维码",
+    title: "金星村故事二维码",
+    subtitle: "人人有事做，家家有收入 / 共富金星地图",
+    image: "./assets/qr/entry-jinxing.png",
+    color: "#c89b40",
+    url: `${publicBaseUrl}?route=profile&village=jinxing`,
+  },
+  {
+    id: "exhibit",
+    label: "展板巡游二维码",
+    title: "展板巡游二维码",
+    subtitle: "三张展板交替播放，打开现场导览",
+    image: "./assets/qr/entry-exhibit.png",
+    color: "#2a3b33",
+    url: `${publicBaseUrl}?route=exhibit`,
+  },
+];
+
 const impressionDetails = {
   map: {
     icon: "✦",
@@ -2008,32 +2057,36 @@ function playSceneMarkup(scene, point, village) {
 }
 
 function scanView() {
+  const mainQr = qrEntries[0];
+  const visibleEntries = qrEntries.slice(1);
   return shell(`
     <section class="scan-panel">
       <p class="eyebrow" style="color:rgba(17,31,26,.6)">扫码入口</p>
       <h1 class="scan-title">扫码开启村志</h1>
-      <div class="qr-wrap"><div class="qr" aria-label="二维码占位"></div></div>
+      <div class="qr-wrap">
+        <img class="qr" src="${mainQr.image}" alt="${mainQr.label}" data-qr-main>
+      </div>
+      <div class="qr-caption">
+        <strong data-qr-title>${mainQr.title}</strong>
+        <span data-qr-url>${mainQr.url}</span>
+      </div>
       <div class="scan-list">
-        ${Object.values(villages)
+        ${visibleEntries
           .map(
-            (v, index) => `
-              <button class="scan-item" data-village="${v.id}">
+            (entry, index) => `
+              <button class="scan-item" data-qr-select="${entry.id}" data-qr-image="${entry.image}" data-qr-title="${entry.title}" data-qr-url="${entry.url}">
                 <div>
-                  <strong>${v.name}故事二维码</strong>
-                  <span>${v.title} / ${v.subtitle}</span>
+                  <strong>${entry.title}</strong>
+                  <span>${entry.subtitle}</span>
                 </div>
-                <span class="scan-code" style="background:${v.color}">0${index + 1}</span>
+                <span class="scan-thumb">
+                  <img src="${entry.image}" alt="${entry.label}">
+                  <i style="background:${entry.color}">0${index + 1}</i>
+                </span>
               </button>
             `,
           )
           .join("")}
-        <button class="scan-item" data-go="exhibit">
-          <div>
-            <strong>展板巡游二维码</strong>
-            <span>三张展板交替播放，打开现场导览</span>
-          </div>
-          <span class="scan-code" style="background:#2a3b33">04</span>
-        </button>
       </div>
     </section>
   `);
@@ -2275,6 +2328,21 @@ function attachHandlers() {
       if (dest === "home" || dest === "villages" || dest === "scan" || dest === "game" || dest === "exhibit") {
         setRoute(dest);
       }
+    });
+  });
+
+  app.querySelectorAll("[data-qr-select]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const main = app.querySelector("[data-qr-main]");
+      const title = app.querySelector("[data-qr-title]");
+      const url = app.querySelector("[data-qr-url]");
+      if (!main || !title || !url) return;
+      main.src = button.dataset.qrImage;
+      main.alt = button.dataset.qrTitle || "";
+      title.textContent = button.dataset.qrTitle || "";
+      url.textContent = button.dataset.qrUrl || "";
+      app.querySelectorAll("[data-qr-select]").forEach((item) => item.classList.toggle("is-active", item === button));
+      vibrate(10);
     });
   });
 

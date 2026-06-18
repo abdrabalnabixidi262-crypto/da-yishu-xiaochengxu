@@ -3486,12 +3486,32 @@ p {
 .qr {
   width: 100%;
   height: 100%;
-  border-radius: 16px;
-  background:
-    linear-gradient(90deg, #101b17 12px, transparent 12px) 0 0/24px 24px,
-    linear-gradient(#101b17 12px, transparent 12px) 0 0/24px 24px,
-    conic-gradient(from 90deg, #101b17 25%, transparent 0 50%, #101b17 0 75%, transparent 0) 0 0/36px 36px,
-    #fff;
+  display: block;
+  border-radius: 12px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: #fff;
+}
+
+.qr-caption {
+  margin: -8px 0 14px;
+  text-align: center;
+}
+
+.qr-caption strong {
+  display: block;
+  font-size: 14px;
+}
+
+.qr-caption span {
+  display: block;
+  max-width: 100%;
+  margin-top: 4px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .scan-list {
@@ -3503,7 +3523,7 @@ p {
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 42px;
+  grid-template-columns: 1fr 64px;
   gap: 12px;
   align-items: center;
   padding: 13px;
@@ -3531,6 +3551,41 @@ p {
   border-radius: 16px;
   color: #fff;
   font-weight: 900;
+}
+
+.scan-thumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(22, 34, 29, 0.08);
+}
+
+.scan-thumb img {
+  width: 52px;
+  height: 52px;
+  display: block;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.scan-thumb i {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+  box-shadow: 0 6px 14px rgba(22, 34, 29, 0.18);
 }
 
 .game-title {
