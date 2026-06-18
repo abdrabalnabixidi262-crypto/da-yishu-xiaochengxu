@@ -517,6 +517,30 @@ const userVillageProducts = {
   ],
 };
 
+const villageStoryImages = {
+  gaoqiao: [
+    "./assets/story/gaoqiao/node-01.jpg",
+    "./assets/story/gaoqiao/node-02.jpg",
+    "./assets/story/gaoqiao/node-03.jpg",
+    "./assets/story/gaoqiao/node-04.jpg",
+    "./assets/story/gaoqiao/node-05.jpg",
+  ],
+  yaoli: [
+    "./assets/story/yaoli/node-01.jpg",
+    "./assets/story/yaoli/node-02.jpg",
+    "./assets/story/yaoli/node-03.jpg",
+    "./assets/story/yaoli/node-04.jpg",
+    "./assets/story/yaoli/node-05.jpg",
+  ],
+  jinxing: [
+    "./assets/story/jinxing/node-01.jpg",
+    "./assets/story/jinxing/node-02.jpg",
+    "./assets/story/jinxing/node-03.jpg",
+    "./assets/story/jinxing/node-04.jpg",
+    "./assets/story/jinxing/node-05.jpg",
+  ],
+};
+
 const userMapPointPositions = {
   gaoqiao: [
     [18, 19],
@@ -554,6 +578,12 @@ Object.entries(userVillageProducts).forEach(([id, products]) => {
   villages[id].materials = products.map(([image, title, text, size]) => [image, title, text, size]);
   if (!ipShowcases[id]) return;
   ipShowcases[id].products = products.map(([image, title, , , type]) => ({ image, title, type }));
+});
+
+Object.entries(villageStoryImages).forEach(([id, images]) => {
+  if (!villages[id]) return;
+  villages[id].storyImages = images;
+  villages[id].photos = images;
 });
 
 Object.entries(userMapPointPositions).forEach(([id, positions]) => {
