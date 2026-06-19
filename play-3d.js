@@ -69,6 +69,10 @@
     return `${frameBase(villageId, nodeIndex)}step-card-${String(stepIndex + 1).padStart(2, "0")}.jpg`;
   }
 
+  function stepHeroUrl(villageId, nodeIndex, stepIndex) {
+    return `${frameBase(villageId, nodeIndex)}step-hero-${String(stepIndex + 1).padStart(2, "0")}.jpg`;
+  }
+
   const palette = {
     gaoqiao: {
       sky: 0xd7ebe3,
@@ -1175,7 +1179,11 @@
     const host = root.querySelector("[data-frame-anim]");
     const base = host?.dataset.frameAnim || host?.dataset.base;
     if (!img || !base) return;
-    img.src = `${base}frame-00.jpg`;
+    const stepIndex = clamp(stage.step, 0, 3) - 1;
+    img.src =
+      stepIndex >= 0
+        ? stepHeroUrl(stage.villageId, stage.nodeIndex, stepIndex)
+        : `${base}frame-00.jpg`;
   }
 
   function completeNode() {

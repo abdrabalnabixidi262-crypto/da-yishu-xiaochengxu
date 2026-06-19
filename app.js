@@ -1236,7 +1236,8 @@ function productIndexForMaterial(village, photo) {
 }
 
 function scenicRibbon(village) {
-  const slides = [...village.photos, ...village.photos];
+  const photos = village?.photos?.length ? village.photos : [];
+  const slides = [...photos, ...photos];
   return `
     <div class="hero-ribbon">
       <div class="hero-track">
@@ -1250,6 +1251,16 @@ function scenicRibbon(village) {
       </div>
     </div>
   `;
+}
+
+function homeIpRibbon() {
+  return scenicRibbon({
+    photos: [
+      "./assets/ip/gaoqiao/threeview.jpg",
+      "./assets/ip/yaoli/threeview.jpg",
+      "./assets/ip/jinxing/threeview.jpg",
+    ],
+  });
 }
 
 function iconShape(name) {
@@ -1309,7 +1320,7 @@ function homeView() {
         <span>${villageIconMarkup("jinxing", "金星村", "hero-decor-img")}</span>
         <span>${impressionIconMarkup("game", "互动收集", "hero-decor-img")}</span>
       </div>
-      ${scenicRibbon(homeVillage)}
+      ${homeIpRibbon()}
       <div class="hero-content">
         <div>
           <p class="eyebrow">浙江乡村艺术体验</p>
@@ -1759,8 +1770,7 @@ function mapPanel(village) {
               (point, index) => `
                 <button
                   class="map-dot village-map-dot ${activeIndex === index ? "is-active" : ""}"
-                  data-map-node="${index}"
-                  data-map-photo-open="${index}"
+                  data-map-play="${index}"
                   style="left:${point.x}%; top:${point.y}%; background:linear-gradient(145deg, ${village.color}, #13231d); animation-delay:${index * 70}ms"
                 >
                   <strong>${pointIconMarkup(village, index, point.title, "map-dot-icon-img")}</strong>
