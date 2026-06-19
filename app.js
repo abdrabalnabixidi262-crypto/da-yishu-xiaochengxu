@@ -1406,6 +1406,7 @@ function homeView() {
 }
 
 function villagesView() {
+  const villageList = Object.values(villages);
   return shell(`
     <section class="page-title">
       <div>
@@ -1415,7 +1416,7 @@ function villagesView() {
       </div>
     </section>
     <section class="village-strip" data-drag-strip>
-      ${Object.values(villages)
+      ${villageList
         .map(
           (v, index) => `
             <button class="village-card" data-village="${v.id}" style="background-image:url('${villageCardCover(v)}')">
@@ -1431,6 +1432,39 @@ function villagesView() {
           `,
         )
         .join("")}
+    </section>
+    <section class="village-index-module">
+      <div class="index-module-head">
+        <div>
+          <p class="context-label">村志动线</p>
+          <h2>从一张卡进入一座村</h2>
+        </div>
+        <span class="mini-pill">3 村 / 15 节点</span>
+      </div>
+      <div class="index-flow-grid">
+        ${villageList
+          .map((v, index) => {
+            const guide = villageMapGuides[v.id];
+            const focus = guide?.points?.[v.mapFocus || 0] || guide?.points?.[0];
+            return `
+              <button class="index-flow-card" data-village="${v.id}" style="--village:${v.color}">
+                <span>${villageIconMarkup(v.id, v.name, "index-flow-icon-img")}</span>
+                <strong>${v.name}</strong>
+                <small>${focus?.title || v.subtitle}</small>
+                <i>${String(index + 1).padStart(2, "0")}</i>
+              </button>
+            `;
+          })
+          .join("")}
+      </div>
+      <div class="index-trail-card">
+        <span class="trail-node"></span>
+        <span class="trail-line"></span>
+        <span class="trail-node"></span>
+        <span class="trail-line"></span>
+        <span class="trail-node"></span>
+        <p>故事、地图、周边、互动会在每个村里串成一条完整游线。</p>
+      </div>
     </section>
   `);
 }
