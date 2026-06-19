@@ -1170,21 +1170,12 @@
 
   function startFrameLoop(root) {
     if (stage.frameTimer) window.clearInterval(stage.frameTimer);
+    stage.frameTimer = 0;
     const img = root.querySelector("[data-frame-img]");
     const host = root.querySelector("[data-frame-anim]");
     const base = host?.dataset.frameAnim || host?.dataset.base;
     if (!img || !base) return;
-    let frame = Math.max(0, stage.step - 1) * 4;
-    img.src = `${base}frame-${String(frame % 16).padStart(2, "0")}.jpg`;
-    stage.frameTimer = window.setInterval(() => {
-      if (!document.body.contains(root)) {
-        window.clearInterval(stage.frameTimer);
-        stage.frameTimer = 0;
-        return;
-      }
-      frame = (frame + 1) % 16;
-      img.src = `${base}frame-${String(frame).padStart(2, "0")}.jpg`;
-    }, 62.5);
+    img.src = `${base}frame-00.jpg`;
   }
 
   function completeNode() {
@@ -1253,7 +1244,7 @@
               (node, index) => `
                 <button class="${index === context.nodeIndex ? "is-active" : ""}" type="button" data-play-3d-node="${index}" style="--village:${context.village.color}">
                   <i>${node.icon || "✦"}</i>
-                  <img src="${frameUrl(context.village.id, index, 8)}" alt="" loading="lazy" />
+                  <img src="${frameUrl(context.village.id, index, 0)}" alt="" loading="lazy" />
                   <span>${window.nodePlayScenes?.[context.village.id]?.[index]?.title || node.label || node.title}</span>
                 </button>
               `,

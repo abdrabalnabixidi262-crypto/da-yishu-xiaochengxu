@@ -906,9 +906,9 @@ const nodeFrameSlugs = {
   jinxing: ["ginkgo", "tea", "star", "home", "workshop"],
 };
 
-function nodeFrameImage(villageId, nodeIndex, frame = 0) {
+function nodeFrameImage(villageId, nodeIndex) {
   const slug = nodeFrameSlugs[villageId]?.[nodeIndex] || "slope";
-  return `./assets/anim/${villageId}/${String(nodeIndex + 1).padStart(2, "0")}-${slug}/frame-${String(frame).padStart(2, "0")}.jpg`;
+  return `./assets/anim/${villageId}/${String(nodeIndex + 1).padStart(2, "0")}-${slug}/frame-00.jpg`;
 }
 
 const nodePlayScenes = {
